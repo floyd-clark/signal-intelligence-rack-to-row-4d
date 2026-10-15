@@ -10,4 +10,10 @@ Native Chrome verification of the actual public URL passed: HTTP 200; ten decode
 
 The public link opens the catalogue directly. The root URL without `?catalogue=1` opens the original lab. Source, offline distribution, provenance, acceptance gaps, local screenshots and test results remain available in the repository. Public hosting adds no account requirement, telemetry service or equipment connection to the application.
 
+## L1–L12 restoration deployed and verified
+
+Source commit `2dece2a`; static Pages commit `4de34c19ec26ee414b372e0bd7178bf35a3156ee`. GitHub reports this build as **built**. Native Chrome verified the actual public site on October 15: all ten direct L1–L12 entries, twelve stage controls per pane, independent architecture levels, active-incident blocking and clearing, earned L1 signoff and return to the original lab. No uncaught exceptions or failed HTTP responses were recorded. [Live stage comparison](evidence/catalogue-v2/public-lifecycle.png), [DGX L2 power preview](evidence/catalogue-v2/public-DGX-L2-power.png), [verification JSON](evidence/catalogue-v2/public-verification.json), [complete lifecycle test report](evidence/catalogue-v2/lifecycle/test-results.json).
+
+Existing open tabs may need a hard refresh (Ctrl+Shift+R) to load the new application bundle. All later documentation-only commits preserve this deployed static build.
+
 To republish a later tested distribution, commit its source/build and push the source branch, then split `signal-intelligence-rack-to-row-4d/dist` with `git subtree split` and push that commit to `gh-pages` without force. GitHub Pages serves the branch root; `.nojekyll` and repository-relative asset paths are included. `node scripts/github-pages.mjs status` checks deployment status using existing Git credential-manager authentication without logging credentials; `node scripts/verify-public.mjs` repeats the live verification.

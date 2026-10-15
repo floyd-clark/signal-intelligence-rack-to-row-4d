@@ -1,4 +1,6 @@
 {
+  "scope": "Initial catalogue publication; current L1-L12 restoration results are in lifecycle/test-results.json",
+  "lifecycleRestorationReport": "lifecycle/test-results.json",
   "build": "npm run build passed",
   "unit": {
     "command": "npm test",
@@ -32,8 +34,8 @@
   "publicDeployment": {
     "url": "https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1",
     "githubPagesBuild": "built",
-    "sourceCommit": "2dcde2a19d10d16555e82eba9751707872954060",
-    "staticCommit": "32c574abe4df791fef2568bd83c9f959fc5f5ac7",
+    "sourceCommit": "2dece2a",
+    "staticCommit": "4de34c19ec26ee414b372e0bd7178bf35a3156ee",
     "verification": "public-verification.json",
     "passed": true
   },

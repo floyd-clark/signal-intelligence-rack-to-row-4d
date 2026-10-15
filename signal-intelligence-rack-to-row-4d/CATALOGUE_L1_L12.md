@@ -17,3 +17,5 @@ Each architecture and modelled generation keeps its own preview level, check res
 These are educational synthetic fixtures, not measured physical qualification, program-specific vendor instructions or real engineering approvals. Original diagnostic, simulation, source, offline and model-import functionality remains intact.
 
 Validation and screenshots are recorded under `evidence/catalogue-v2/lifecycle/`. The unit suite checks every family's twelve definitions, sequential prerequisites, explicit N/A handling, fault blocking, generation isolation, storage parsing and actual staged geometry ownership. Browser coverage checks all ten card entry points, all 120 stage previews, all 118 applicable signoffs, persistence, A/B/Rubin isolation, failed fixtures, downstream invalidation and evidence export, alongside the original workflows.
+
+[Actual public A/B stage screenshot](evidence/catalogue-v2/public-lifecycle.png) · [Ten-family stage results](evidence/catalogue-v2/lifecycle/family-stages.json) · [118 gate signoffs](evidence/catalogue-v2/lifecycle/gate-signoffs.json) · [Tests and resolved findings](evidence/catalogue-v2/lifecycle/test-results.json)
