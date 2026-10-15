@@ -1,6 +1,6 @@
 # Signal Intelligence | Rack-to-Row 4D Digital Twin
 
-Working local React/TypeScript/WebGL educational application. No account, API key, cloud service, live facility connection or equipment control.
+Working local React/TypeScript/WebGL educational application. Rack Catalogue 2.0 adds ten registered architecture families and synchronized A/B hardware comparison. The user reports ≥90/100 visual fidelity for all ten base families; engineering qualification limits remain documented. No account, API key, cloud service, live facility connection or equipment control.
 
 ## Run on Windows
 
@@ -76,3 +76,22 @@ Ironwood inspection: choose **Google Ironwood cube**, drill into a compute tray,
 ## Signal Intelligence branding
 
 The top-left symbol and browser icon use the supplied Signal Intelligence image, stored locally and unchanged. Near-black surfaces, silver typography and blue accents carry the brand through controls, charts and selection outlines. See [BRAND_GUIDE.md](BRAND_GUIDE.md) for palette/asset conventions and `evidence/v2/brand-desktop.png` for the running application.
+
+## Rack Catalogue 2.0
+
+Refresh the local app and choose **Rack Catalogue 2.0**. The existing 4D lab remains available through **Return to 4D lab**, with simulation state, diagnostics, imports and L1–L12 retained. The catalogue provides ten distinct original 3D models, front/rear/deep/exploded/topology/row views, linked orbit and time, independent or linked overlays, corresponding component inspection, 20 family-specific faults, replay/evidence export, qualitative fit comparisons, 60-second tours and adapted NPI fixtures. Generation A/B exposes a separate Vera Rubin geometry/power/tray delta.
+
+The gallery previews are actual local Chromium renders. Use Performance/Balanced/Detail, collapse the engineering panel, select 2D fallback, or export a separate 3840×2160 hardware image. Published enclosure scale is available only when both families have cited dimensions; all others use normalized conceptual height.
+
+- [Catalogue index and screenshots](CATALOGUE_INDEX.md)
+- [Truthful acceptance matrix / remaining qualification gaps](CATALOGUE_ACCEPTANCE.md)
+- [Measured performance](PERFORMANCE.md)
+- [Complete change summary](CATALOGUE_CHANGE_SUMMARY.md)
+- [Baseline audit](CATALOGUE_BASELINE.md)
+- [Source, asset and engineering provenance](CATALOGUE_PROVENANCE.md)
+- `src/catalogue/`: typed registry, source register, geometry builders, physical/communication graphs, synthetic scenarios and synchronized UI.
+- `evidence/catalogue-v2/`: actual screenshots, per-family native metrics, scenario and picking outputs, baseline and 4K export.
+
+With the production server running, `node scripts/capture-catalogue-qa.mjs` reproduces the ten-family evidence; `node scripts/verify-catalogue.mjs` runs catalogue unit checks. Native captures request ANGLE D3D11; the actual adapter is recorded. Browser tests force SwiftShader for reproducibility and are not performance benchmarks. No new runtime dependencies, vendor artwork or remote models were added.
+
+![GB300 / Helios synchronized comparison](evidence/catalogue-v2/compare-CAT-04-CAT-05.png)

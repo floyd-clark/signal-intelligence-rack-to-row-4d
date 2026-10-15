@@ -37,11 +37,22 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
     .click();
   await page.waitForTimeout(1500);
   await page.screenshot({
-    path: "evidence/v2/regression-07-imported-model.png",
+    path: "evidence/catalogue-v2/legacy-07-imported-model.png",
     fullPage: true,
   });
   const box = (await page.locator("canvas").boundingBox())!;
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(page.locator(".inspector h2")).toContainText("cpu");
+  await page
+    .getByRole("button", { name: "Rack Catalogue 2.0", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Return to 4D lab" }).click();
+  await page.waitForTimeout(500);
+  const restored = (await page.locator("canvas").boundingBox())!;
+  await page.mouse.click(
+    restored.x + restored.width / 2,
+    restored.y + restored.height / 2,
+  );
   await expect(page.locator(".inspector h2")).toContainText("cpu");
   await page
     .getByRole("button", { name: "Settings / Import Better Rack Model" })
@@ -62,10 +73,10 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
     .getByRole("button", { name: "Export replay", exact: true })
     .click();
   const download = await downloaded;
-  await download.saveAs("evidence/roundtrip-scenario.json");
+  await download.saveAs("evidence/catalogue-v2/legacy-roundtrip-scenario.json");
   await page
     .getByLabel("Import replay")
-    .setInputFiles("evidence/roundtrip-scenario.json");
+    .setInputFiles("evidence/catalogue-v2/legacy-roundtrip-scenario.json");
   await page.getByLabel("Time scrubber").fill("300");
   expect(await page.locator(".metrics").innerText()).toBe(before);
   await page.getByRole("button", { name: "▶ 6-minute tour" }).click();
@@ -83,7 +94,7 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
   await page.getByRole("button", { name: "Next chapter" }).click();
   await expect(page.locator(".demo")).toContainText("Tour complete");
   await page.screenshot({
-    path: "evidence/v2/regression-08-tour.png",
+    path: "evidence/catalogue-v2/legacy-08-tour.png",
     fullPage: true,
   });
   expect(errors).toEqual([]);

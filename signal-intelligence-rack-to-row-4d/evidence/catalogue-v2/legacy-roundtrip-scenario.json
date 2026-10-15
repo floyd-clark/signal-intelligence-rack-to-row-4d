@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "seed": 42,
+  "profile": "FS_CONCEPT",
+  "racks": 8,
+  "events": [
+    {
+      "time": 0,
+      "kind": "inject",
+      "incidentId": "INC-14",
+      "target": "FS_CONCEPT/R1/hbm-1.1.1"
+    }
+  ]
+}

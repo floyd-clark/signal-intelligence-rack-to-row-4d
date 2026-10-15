@@ -1,0 +1,36 @@
+{
+  "build": "npm run build passed",
+  "unit": {
+    "command": "npm test",
+    "passed": 39,
+    "failed": 0,
+    "files": 3
+  },
+  "browser": {
+    "command": "npm run test:e2e",
+    "passed": 9,
+    "failed": 0,
+    "duration": "3.6 minutes",
+    "rendering": "SwiftShader; regression only, not GPU benchmark"
+  },
+  "finalCatalogueBrowserRerun": {
+    "command": "npm run test:e2e -- tests/e2e/catalogue.spec.ts",
+    "passed": 4,
+    "failed": 0,
+    "duration": "1.0 minute",
+    "scope": "Final representative concept mapping, row ownership and human review metadata; original five legacy workflows unchanged since the nine-workflow full pass"
+  },
+  "catalogueVerification": "15 catalogue tests passed within final npm test; node scripts/verify-catalogue.mjs reruns the same test file",
+  "preserved": [
+    "Original 80 types / 3266 concept nodes / stable IDs",
+    "36 legacy incidents, deterministic simulation and replay",
+    "L1-L12 and original row propagation",
+    "GLB binding and actual picking across catalogue roundtrip",
+    "Offline loopback production distribution"
+  ],
+  "humanVisualAcceptance": "User reports >=90/100 for all ten base families; lower bound recorded in human-review.json; Rubin unscored",
+  "notes": [
+    "Windows file lock encountered when overwriting historical screenshot; final tests write separate catalogue evidence paths and all nine pass",
+    "Final row-context ownership is covered by an additional unit check and native runtime captures"
+  ]
+}

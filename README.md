@@ -1,22 +1,16 @@
-# Signal Intelligence — Rack-to-Row 4D Digital Twin
+# Signal Intelligence — Rack-to-Row 4D and Rack Catalogue 2.0
 
-A working local-first AI infrastructure learning and simulation application, built with React, TypeScript and Three.js. Includes rack/row exploration, 80 component types, 3,266 authored concept nodes, three distinct architecture profiles, L1–L12 gates, 36 investigation presets, deterministic telemetry replay and a local model adapter.
+Local-first interactive hardware, simulation and diagnostic education. The catalogue adds ten distinct architecture families, synchronized true-3D A/B comparison, twenty synthetic fault cases, source provenance and actual Chromium evidence. The user's visual review reports ≥90/100 for each base family. Engineering limitations remain documented; geometry is original source-informed illustration.
 
-**Visual refinement is the next priority.** The current geometry is schematic and many parts remain boxes. See the [visual feedback brief](signal-intelligence-rack-to-row-4d/VISUAL_FEEDBACK_BRIEF.md) for specific review questions and contribution constraints.
+![Architecture comparison](signal-intelligence-rack-to-row-4d/evidence/catalogue-v2/compare-CAT-04-CAT-05.png)
 
-![Current procedural rack](signal-intelligence-rack-to-row-4d/evidence/01-rack.png)
-
-- [Run locally / application README](signal-intelligence-rack-to-row-4d/README.md)
-- [Acceptance matrix: 18 green, 6 partial](signal-intelligence-rack-to-row-4d/ACCEPTANCE_MATRIX.md)
-- [Assumptions and provenance](signal-intelligence-rack-to-row-4d/ASSUMPTIONS_AND_PROVENANCE.md)
-- [3D scene source](signal-intelligence-rack-to-row-4d/src/scene/Scene.tsx)
-- [Procedural inventory and stable IDs](signal-intelligence-rack-to-row-4d/src/data/model.ts)
+- [Run / application README](signal-intelligence-rack-to-row-4d/README.md)
+- [Catalogue index](signal-intelligence-rack-to-row-4d/CATALOGUE_INDEX.md)
+- [Acceptance and remaining gaps](signal-intelligence-rack-to-row-4d/CATALOGUE_ACCEPTANCE.md)
+- [Sources and engineering provenance](signal-intelligence-rack-to-row-4d/CATALOGUE_PROVENANCE.md)
 
 ```powershell
-cd signal-intelligence-rack-to-row-4d
-.\scripts\start.ps1
+& 'C:\Users\floyd\Documents\ChatGPT\Rack Models\signal-intelligence-rack-to-row-4d\scripts\start.ps1'
 ```
 
-Node.js 22.12+ required. Included production dist runs on 127.0.0.1:4173 without runtime internet or npm dependencies. For source development: npm ci, npm run build, npm test. E2E instructions are in the application README.
-
-This is an educational/illustrative AI-infrastructure digital twin and not an official Fluidstack mechanical design or deployment record. Reference-profile facts and illustrative geometry are explicitly distinguished. No actual equipment controls or live facility connections.
+Open http://127.0.0.1:4173/ and choose Rack Catalogue 2.0. Node.js 22.12+ required. The included dist runs offline without node_modules or equipment connections. Original concept, diagnostics, simulation, stable IDs, GLB adapter and L1–L12 remain available. No Fluidstack deployment or vendor endorsement is asserted.

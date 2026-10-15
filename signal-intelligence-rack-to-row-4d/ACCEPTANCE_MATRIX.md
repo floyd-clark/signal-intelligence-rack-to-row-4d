@@ -60,3 +60,7 @@ The historical matrix above is retained; its six yellow items remain yellow. See
 | Vendor-dimensional/photographic fidelity | Partial by design | Original procedural engineering illustration; reviewer acceptance and licensed dimensional CAD remain future inputs |
 
 All requested named screenshot subjects have files under evidence/v2. Visual rubric scores are developer estimates, not independent acceptance.
+
+## Rack Catalogue 2.0
+
+The original matrix above remains historical and its yellow items are preserved. The new ten-family review build has a separate [acceptance ledger](CATALOGUE_ACCEPTANCE.md), [baseline](CATALOGUE_BASELINE.md), [index](CATALOGUE_INDEX.md) and [provenance](CATALOGUE_PROVENANCE.md). Do not infer human ≥90/≥80 fidelity acceptance from automated checks; those scores remain unvalidated.

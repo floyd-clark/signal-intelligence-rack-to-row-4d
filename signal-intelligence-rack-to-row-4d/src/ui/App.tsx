@@ -19,6 +19,9 @@ import { perf } from "../scene/performance";
 const Scene = lazy(() =>
   import("../scene/Scene").then((m) => ({ default: m.Scene })),
 );
+const Catalogue = lazy(() =>
+  import("../catalogue/ui/Catalogue").then((m) => ({ default: m.Catalogue })),
+);
 import {
   loadAsset,
   validateBinding,
@@ -47,6 +50,7 @@ const chapters = [
   "TPM release call",
 ];
 export function App() {
+  const [catalogueOpen, setCatalogueOpen] = useState(false);
   const s = useStore();
   const records = useMemo(
     () => inventory(s.profile, s.racks),
@@ -350,6 +354,14 @@ export function App() {
                     : metric === "rxPower"
                       ? "dBm"
                       : "events";
+  if (catalogueOpen)
+    return (
+      <Suspense
+        fallback={<div className="fallback">Loading local Rack Catalogue…</div>}
+      >
+        <Catalogue onClose={() => setCatalogueOpen(false)} />
+      </Suspense>
+    );
   return (
     <div
       data-render-state={JSON.stringify({
@@ -412,6 +424,14 @@ export function App() {
           </div>
         </div>
         <div className="header-status">● LOCAL SIMULATION</div>
+        <button
+          onClick={() => {
+            s.set({ playing: false });
+            setCatalogueOpen(true);
+          }}
+        >
+          Rack Catalogue 2.0
+        </button>
         <button onClick={() => setPanel("compare")}>
           Compare architectures
         </button>

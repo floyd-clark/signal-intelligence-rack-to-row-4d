@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-15",
+  "reviewer": "User",
+  "request": "Review CATALOGUE_INDEX.md screenshots and share visual fidelity scores or specific failed hardware details",
+  "responseVerbatim": "greater than or equal to 90 for all",
+  "scope": ["CAT-01", "CAT-02", "CAT-03", "CAT-04", "CAT-05", "CAT-06", "CAT-07", "CAT-08", "CAT-09", "CAT-10"],
+  "minimumScorePerBaseFamily": 90,
+  "scaleMaximum": 100,
+  "exactIndividualScores": null,
+  "rubricSubscores": null,
+  "interpretation": "Lower-bound human review in direct response to the scoring request; registry score 90 is the conservative bound, not an invented exact grade",
+  "unscored": ["CAT-04-rubin"],
+  "qualification": "Visual review does not certify vendor CAD accuracy, concealed mechanical dimensions, physical simulation calibration or remaining yellow acceptance items"
+}

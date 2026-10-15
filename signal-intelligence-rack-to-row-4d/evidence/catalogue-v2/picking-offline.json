@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "id": "CAT-01",
+      "frontPick": "CAT-01/tray/1",
+      "rearPick": "CAT-01/power/1"
+    },
+    {
+      "id": "CAT-02",
+      "frontPick": "CAT-02/tray/1",
+      "rearPick": "CAT-02/power/1"
+    },
+    {
+      "id": "CAT-03",
+      "frontPick": "CAT-03/tray/1",
+      "rearPick": "CAT-03/network"
+    },
+    {
+      "id": "CAT-04",
+      "frontPick": "CAT-04/tray/1",
+      "rearPick": "CAT-04/power/1"
+    },
+    {
+      "id": "CAT-05",
+      "frontPick": "CAT-05/tray/1",
+      "rearPick": "CAT-05/fabric/1"
+    },
+    {
+      "id": "CAT-06",
+      "frontPick": "CAT-06/tray/1",
+      "rearPick": "CAT-06/cooling"
+    },
+    {
+      "id": "CAT-07",
+      "frontPick": "CAT-07/tray/1",
+      "rearPick": "CAT-07/network"
+    },
+    {
+      "id": "CAT-08",
+      "frontPick": "CAT-08/tray/1",
+      "rearPick": "CAT-08/cooling"
+    },
+    {
+      "id": "CAT-09",
+      "frontPick": "CAT-09/tray/1",
+      "rearPick": "CAT-09/cooling"
+    },
+    {
+      "id": "CAT-10",
+      "frontPick": "CAT-10/tray/1",
+      "rearPick": "CAT-10/cooling"
+    }
+  ],
+  "errors": [],
+  "remote": []
+}

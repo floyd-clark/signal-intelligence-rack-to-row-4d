@@ -1,0 +1,26 @@
+# Rack Catalogue 2.0 — measured visual performance
+
+Measured October 15, 2026, using installed Chrome with ANGLE D3D11 on this Windows computer. The actual WebGL renderer reports **Intel UHD Graphics (0x00009A60), Direct3D11**, rather than an assumed discrete GPU. Native capture uses a 1920×1080 browser viewport, Balanced quality and DPR 1.25. UI screenshots are full-page captures; their height may exceed the viewport. These are short local measurements, not performance guarantees.
+
+Each base-family rack sample contains five one-second FPS readings after a settling interval. Calls and triangles are per canvas. Exact samples, ownership bounds, object counts, camera/view/time settings, capture timestamps and thumbnail hashes are in [visual-metrics.json](evidence/catalogue-v2/visual-metrics.json).
+
+| Base family | Median FPS | Draw calls | Rendered triangles |
+|---|---:|---:|---:|
+| Enterprise EIA | 48 | 11 | 55,490 |
+| OCP ORv3 | 72 | 11 | 21,470 |
+| DGX B200 | 62 | 11 | 38,642 |
+| GB300 NVL72 | 69 | 13 | 65,518 |
+| AMD Helios | 72 | 13 | 56,686 |
+| Google Ironwood | 54 | 14 | 59,862 |
+| AWS Trainium3 | 72 | 10 | 36,890 |
+| Azure Maia | 72 | 13 | 25,442 |
+| Cerebras CS-4 | 56 | 10 | 10,838 |
+| HPE Cray EX4000 | 67 | 13 | 54,766 |
+
+The base-family median range is 48–72 FPS. Cray's row reflects the final refresh; the other nine retain the full capture samples. Individual samples fluctuate; see the raw minimum/maximum and sample arrays rather than interpreting medians as a sustained floor. A/B comparison has two independently rendered canvases, so its total calls and triangles are the sum of both sides. The recorded GB300/Helios cooling pair uses 26 calls and 125,660 triangles total, with a median of 72 FPS per side in the final five short readings. Its separately recorded audit is under `metrics.comparison`; no all-pair sustained FPS claim is made.
+
+Two complete family-switch cycles recorded equal geometry/texture counts for corresponding families after settling. They demonstrate bounded object counts across that test, not byte-level GPU-memory use or a long-duration leak proof. Batched material geometry limits draw calls; generated environment lighting and model assets stay local. The capture recorded no uncaught page exceptions and no external runtime requests.
+
+Browser interaction regression uses forced SwiftShader at Performance quality and is kept separate from this native GPU benchmark. The 3840×2160 export is a separate render target; it does not permanently increase the interactive canvas DPR. Performance, Balanced and Detail presets remain available.
+
+Remaining checks: long endurance sessions, mobile/touch GPUs, GPU-byte allocation profiling and sustained two-canvas measurements across every deep view/fault/overlay combination. The main Three.js/application bundle still triggers Vite's >500 kB advisory; the catalogue and scene are lazy-loaded, but this is not a claim of fully optimized startup on low-memory devices.

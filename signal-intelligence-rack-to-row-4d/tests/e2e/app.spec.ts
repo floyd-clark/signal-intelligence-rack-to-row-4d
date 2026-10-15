@@ -20,7 +20,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await expect(page.locator("canvas")).toBeVisible();
   await page.waitForTimeout(2500);
   await page.screenshot({
-    path: "evidence/v2/regression-01-rack.png",
+    path: "evidence/catalogue-v2/legacy-01-rack.png",
     fullPage: true,
   });
   await page.getByLabel("Search components").fill("tray -1");
@@ -32,7 +32,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await page.getByRole("treeitem").first().click();
   await expect(page.locator(".inspector")).toContainText("ECC");
   await page.screenshot({
-    path: "evidence/v2/regression-02-component.png",
+    path: "evidence/catalogue-v2/legacy-02-component.png",
     fullPage: true,
   });
   await page.getByRole("button", { name: "← Back" }).click();
@@ -42,7 +42,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
     page.getByRole("heading", { name: "Infrastructure, connected." }),
   ).toBeVisible();
   await page.screenshot({
-    path: "evidence/v2/regression-03-row.png",
+    path: "evidence/catalogue-v2/legacy-03-row.png",
     fullPage: true,
   });
   await page.getByLabel("Visit rack").selectOption("8");
@@ -66,7 +66,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await page.getByRole("button", { name: "Run simulated test" }).nth(2).click();
   await page.getByRole("button", { name: "Sign earned L1 pass" }).click();
   await page.screenshot({
-    path: "evidence/v2/regression-04-gate.png",
+    path: "evidence/catalogue-v2/legacy-04-gate.png",
     fullPage: true,
   });
   await page.getByRole("button", { name: "Close ×", exact: true }).click();
@@ -83,7 +83,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await expect(page.locator(".metrics")).not.toContainText("100.0");
   await page.getByRole("button", { name: "Row overview", exact: true }).click();
   await page.screenshot({
-    path: "evidence/v2/regression-05-incident.png",
+    path: "evidence/catalogue-v2/legacy-05-incident.png",
     fullPage: true,
   });
   await expect(
@@ -105,7 +105,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
     .click();
   await page.getByLabel("Time scrubber").fill("600");
   await page.screenshot({
-    path: "evidence/v2/regression-06-rca.png",
+    path: "evidence/catalogue-v2/legacy-06-rca.png",
     fullPage: true,
   });
   await page.getByLabel("Time scrubber").fill("0");
