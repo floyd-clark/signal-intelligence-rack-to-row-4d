@@ -1,5 +1,12 @@
+import { utilityRoutes } from "./hardware/utilityRoutes";
+import { ComponentInspection } from "./hardware/ComponentInspection";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { Camera } from "./CameraRig";
+import { RowInfrastructure } from "./hardware/RowInfrastructure";
+import { RackHardware } from "./hardware/RackHardware";
+import { TrayInspection } from "./hardware/TrayInspection";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls, Line } from "@react-three/drei";
+import { OrbitControls, Line, OrthographicCamera } from "@react-three/drei";
 import {
   Suspense,
   useEffect,
@@ -17,20 +24,75 @@ import {
   InstancedMesh,
   Object3D,
   Spherical,
+  PMREMGenerator,
 } from "three";
 import { useStore } from "../app/store";
 import { colors, type ComponentRecord } from "../data/model";
 import type { Asset, Binding } from "../import/adapter";
 import { perf } from "./performance";
+import { PackageInspection } from "./hardware/HardwareRendered";
+import { hardwareAudit } from "./hardware/sceneRegistry";
 import { fabricTopology } from "../graphs/dependencies";
+function Studio() {
+  const quality = useStore((s) => s.quality);
+  const { gl, scene } = useThree();
+  useEffect(() => {
+    if (quality === "Performance") {
+      scene.environment = null;
+      return;
+    }
+    const generator = new PMREMGenerator(gl);
+    const room = new RoomEnvironment();
+    const env = generator.fromScene(room, 0.04);
+    scene.environment = env.texture;
+    scene.environmentIntensity = 0.65;
+    return () => {
+      scene.environment = null;
+      env.dispose();
+      room.dispose();
+      generator.dispose();
+    };
+  }, [gl, scene, quality]);
+  return null;
+}
+function Projection() {
+  const camera = useStore((s) => s.camera);
+  const { size } = useThree();
+  return camera === "orthographic" ? (
+    <OrthographicCamera
+      makeDefault
+      position={[0, 2.2, 8]}
+      zoom={size.height / 5.35}
+      near={0.005}
+      far={100}
+    />
+  ) : null;
+}
 function Monitor() {
-  const { gl } = useThree();
+  const { gl, scene } = useThree();
   const count = useRef(0),
     last = useRef(0);
   useFrame(({ clock }) => {
     count.current++;
     if (clock.elapsedTime - last.current >= 1) {
       perf.fps = Math.round(count.current / (clock.elapsedTime - last.current));
+      perf.fpsSamples.push(perf.fps);
+      if (perf.fpsSamples.length > 120) perf.fpsSamples.shift();
+      perf.dpr = gl.getPixelRatio();
+      perf.quality = useStore.getState().quality;
+      hardwareAudit.quality = perf.quality;
+      const mats = new Set();
+      scene.traverse((o: any) => {
+        if (o.material)
+          for (const m of Array.isArray(o.material) ? o.material : [o.material])
+            mats.add(m.uuid);
+      });
+      perf.materials = mats.size;
+      const ctx = gl.getContext();
+      const ext = ctx.getExtension("WEBGL_debug_renderer_info");
+      perf.renderer = ext
+        ? ctx.getParameter(ext.UNMASKED_RENDERER_WEBGL)
+        : ctx.getParameter(ctx.RENDERER);
       perf.calls = gl.info.render.calls;
       perf.triangles = gl.info.render.triangles;
       perf.geometries = gl.info.memory.geometries;
@@ -38,113 +100,6 @@ function Monitor() {
       count.current = 0;
       last.current = clock.elapsedTime;
     }
-  });
-  return null;
-}
-const cameraCache = new Map<string, { position: Vector3; target: Vector3 }>();
-function Camera() {
-  const s = useStore();
-  const { camera, controls } = useThree();
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (
-        ["INPUT", "SELECT", "TEXTAREA"].includes(
-          (e.target as HTMLElement).tagName,
-        ) ||
-        ![
-          "ArrowLeft",
-          "ArrowRight",
-          "ArrowUp",
-          "ArrowDown",
-          "+",
-          "-",
-          "=",
-        ].includes(e.key)
-      )
-        return;
-      e.preventDefault();
-      const target =
-        controls && "target" in controls
-          ? (controls as any).target
-          : new Vector3(0, 2, 0);
-      const spherical = new Spherical().setFromVector3(
-        camera.position.clone().sub(target),
-      );
-      if (e.key === "ArrowLeft") spherical.theta -= 0.12;
-      if (e.key === "ArrowRight") spherical.theta += 0.12;
-      if (e.key === "ArrowUp") spherical.phi -= 0.1;
-      if (e.key === "ArrowDown") spherical.phi += 0.1;
-      if (e.key === "+" || e.key === "=") spherical.radius *= 0.9;
-      if (e.key === "-") spherical.radius *= 1.1;
-      spherical.makeSafe();
-      camera.position.copy(
-        new Vector3().setFromSpherical(spherical).add(target),
-      );
-      camera.lookAt(target);
-      if (controls) (controls as any).update();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [camera, controls]);
-  const desired = useRef<Vector3 | null>(null),
-    look = useRef(new Vector3(0, 2, 0));
-  const context = `${s.profile}:${s.view}:${s.rack}:${s.focus}`;
-  const previous = useRef(context);
-  const key = useRef(s.cameraKey);
-  useEffect(() => {
-    const changed = previous.current !== context;
-    if (changed) {
-      cameraCache.set(previous.current, {
-        position: camera.position.clone(),
-        target:
-          controls && "target" in controls
-            ? (controls as any).target.clone()
-            : look.current.clone(),
-      });
-      previous.current = context;
-    }
-    const cached = cameraCache.get(context);
-    if (cached && changed) {
-      desired.current = cached.position.clone();
-      look.current.copy(cached.target);
-    } else {
-      const row = s.view === "row";
-      const poses: Record<string, number[]> = {
-        isometric: [6, 4.7, 7],
-        front: [0, 2.2, 8],
-        rear: [0, 2.2, -8],
-        left: [-8, 2.2, 0],
-        right: [8, 2.2, 0],
-        top: [0, 10, 0.01],
-        inside: [2, 4, 3],
-        plumbing: [3, 3, -5],
-        aisle: [10, 5, 13],
-        graph: [0, 9, 9],
-      };
-      const p = poses[s.camera] || poses.isometric;
-      desired.current = new Vector3(
-        p[0] * (row ? 1.8 : s.focus ? 0.5 : 1),
-        p[1] * (row ? 1.5 : s.focus ? 0.5 : 1),
-        p[2] * (row ? 1.8 : s.focus ? 0.5 : 1),
-      );
-      look.current.set(0, s.focus ? 1 : s.height, 0);
-    }
-    key.current = s.cameraKey;
-  }, [s.camera, s.cameraKey, context, s.height, camera, controls]);
-  useFrame(() => {
-    if (!desired.current) return;
-    camera.position.lerp(desired.current, s.reduced ? 1 : 0.14);
-    if (controls && "target" in controls) {
-      (controls as any).target.lerp(look.current, s.reduced ? 1 : 0.14);
-      (controls as any).update();
-    } else camera.lookAt(look.current);
-    if (
-      camera.position.distanceTo(desired.current) < 0.01 &&
-      (!controls ||
-        !("target" in controls) ||
-        (controls as any).target.distanceTo(look.current) < 0.01)
-    )
-      desired.current = null;
   });
   return null;
 }
@@ -282,138 +237,6 @@ function Part({
     </mesh>
   );
 }
-function TrayDetails({ parts }: { parts: ComponentRecord[] }) {
-  const s = useStore();
-  const vents = useRef<InstancedMesh>(null);
-  const trays = parts.filter((r) => r.type === "tray");
-  const dummy = useMemo(() => new Object3D(), []);
-  useEffect(() => {
-    if (!vents.current) return;
-    trays.forEach((r, i) => {
-      for (let j = 0; j < 10; j++) {
-        dummy.position.set(-0.44 + j * 0.083, r.position[1], 0.523);
-        dummy.scale.set(0.045, Math.min(r.size[1] * 0.42, 0.065), 0.012);
-        dummy.updateMatrix();
-        vents.current!.setMatrixAt(i * 10 + j, dummy.matrix);
-      }
-    });
-    vents.current.instanceMatrix.needsUpdate = true;
-  }, [parts, dummy]);
-  return (
-    <instancedMesh
-      ref={vents}
-      args={[undefined, undefined, trays.length * 10]}
-      onClick={(e) => {
-        e.stopPropagation();
-        const r = trays[Math.floor((e.instanceId || 0) / 10)];
-        if (r) s.set({ selected: r.id });
-      }}
-      onDoubleClick={(e) => {
-        e.stopPropagation();
-        const r = trays[Math.floor((e.instanceId || 0) / 10)];
-        if (r) s.drill(r.id);
-      }}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#10202a" metalness={0.5} roughness={0.55} />
-    </instancedMesh>
-  );
-}
-function Rack({
-  records,
-  rack,
-  offset,
-  affected,
-}: {
-  records: ComponentRecord[];
-  rack: number;
-  offset: number;
-  affected: boolean;
-}) {
-  const s = useStore();
-  const root = records.find(
-    (r) =>
-      r.type === "rack" &&
-      r.physicalLocation.rack === "RACK-" + String(rack).padStart(2, "0"),
-  )!;
-  const parts = records.filter(
-    (r) =>
-      r.parentId === root.id &&
-      r.level <= s.level &&
-      !(r.type === "door" && s.doors),
-  );
-  return (
-    <group position={[offset, 0, 0]}>
-      {!s.explode && <TrayDetails parts={parts} />}{" "}
-      {/* structural members are one selectable frame record */}
-      <group
-        onClick={(e) => {
-          e.stopPropagation();
-          s.set({ selected: root.id });
-        }}
-        onDoubleClick={(e) => {
-          e.stopPropagation();
-          s.set({ view: "rack", rack, focus: null });
-        }}
-      >
-        {[-0.7, 0.7].flatMap((x) =>
-          [-0.62, 0.62].map((z) => (
-            <mesh key={`${x}${z}`} position={[x, 2.1, z]}>
-              <boxGeometry args={[0.055, 4.2, 0.055]} />
-              <meshStandardMaterial
-                color={s.selected === root.id ? "#b0eadc" : "#46596b"}
-                metalness={0.85}
-                roughness={0.25}
-              />
-            </mesh>
-          )),
-        )}
-        {[0.03, 4.17].map((y) => (
-          <mesh key={y} position={[0, y, 0]}>
-            <boxGeometry args={[1.45, 0.08, 1.3]} />
-            <meshStandardMaterial
-              color="#566a7d"
-              metalness={0.8}
-              roughness={0.3}
-            />
-          </mesh>
-        ))}
-      </group>
-      {parts.map((r, i) => (
-        <group key={r.id}>
-          <Part
-            record={r}
-            position={[
-              r.position[0],
-              r.position[1],
-              r.position[2] +
-                (s.explode
-                  ? r.type === "tray"
-                    ? ((i % 3) * 0.6 + 0.5) * s.explosion
-                    : 0
-                  : 0),
-            ]}
-            size={r.size}
-            affected={
-              affected &&
-              ["tray", "manifold-return", "manifold-supply"].includes(r.type)
-            }
-          />
-          {r.type === "tray" && s.level >= 7 && (
-            <mesh position={[0.47, r.position[1], 0.53]}>
-              <sphereGeometry args={[0.015, 6, 6]} />
-              <meshBasicMaterial color={affected ? "#ffc273" : "#71d3b5"} />
-            </mesh>
-          )}
-        </group>
-      ))}
-      <LocalLabel
-        position={[0, 4.45, 0]}
-        text={`RACK ${String(rack).padStart(2, "0")} / ${rack <= s.racks - 2 ? "COMPUTE" : rack === s.racks - 1 ? "NETWORK" : "STORAGE"}${affected ? " !" : ""}${s.level >= 10 ? ` / ${s.level === 10 ? "LOAD TEST" : s.level === 11 ? "ENDURANCE" : "ACCEPTANCE"}` : ""}`}
-      />
-    </group>
-  );
-}
 function Path({
   color,
   points,
@@ -452,56 +275,37 @@ function Path({
     </>
   );
 }
-function SystemPaths() {
+function SystemPaths({ records }: { records: ComponentRecord[] }) {
   const s = useStore();
+  const row = s.view === "row";
+  if (s.overlay === "Liquid Cooling")
+    return (
+      <>
+        {utilityRoutes(records, s.racks, row, s.rack).map((r, i) => (
+          <Path
+            key={i}
+            color={r.material === "supply" ? "#69bbd0" : "#d2ad82"}
+            points={r.points}
+          />
+        ))}
+      </>
+    );
   return (
     <>
-      {Array.from({ length: s.view === "row" ? s.racks : 1 }, (_, i) => {
-        const x = s.view === "row" ? (i - (s.racks - 1) / 2) * 1.9 : 0;
-        const cooling = s.overlay === "Liquid Cooling",
-          power = s.overlay === "Power";
-        if (cooling)
-          return (
-            <group key={i}>
-              <Path
-                color="#57c9de"
-                points={[
-                  [x - 0.76, 0.2, -0.68],
-                  [x - 0.76, 3.7, -0.68],
-                  [x, 3.7, -0.3],
-                ]}
-              />
-              <Path
-                color="#dd9466"
-                points={[
-                  [x, 1.5, -0.3],
-                  [x + 0.76, 1.5, -0.68],
-                  [x + 0.76, 0.2, -0.68],
-                ]}
-              />
-              {s.view === "row" && i < s.racks - 2 && (
-                <Path
-                  color="#438c9e"
-                  points={[
-                    [-s.racks - 1.7, 1, 0],
-                    [x - 0.76, 1, -0.68],
-                    [x - 0.76, 3.7, -0.68],
-                  ]}
-                />
-              )}
-            </group>
-          );
+      {Array.from({ length: row ? s.racks : 1 }, (_, i) => {
+        const x = row ? (i - (s.racks - 1) / 2) * 1.9 : 0;
+        const left = row ? -(s.racks - 1) * 0.95 - 2.1 : -2.1;
         if (s.overlay === "Airflow")
           return (
             <group key={i}>
               {[1, 2, 3].map((y) => (
                 <Path
                   key={y}
-                  color="#a8c5db"
+                  color="#a7bec9"
                   points={[
-                    [x, y, 1.2],
-                    [x, y, 0.4],
-                    [x, y, -1.1],
+                    [x, y, 1.5],
+                    [x, y, 0],
+                    [x, y, -1.2],
                   ]}
                 />
               ))}
@@ -511,25 +315,23 @@ function SystemPaths() {
           <Path
             key={i}
             color={
-              power
-                ? "#d9ae66"
-                : s.overlay === "Storage"
-                  ? "#c99b77"
-                  : s.overlay === "Management/Telemetry"
-                    ? "#b9a1d6"
-                    : "#82c7a2"
+              s.overlay === "Power"
+                ? "#d6b47a"
+                : s.overlay === "Management/Telemetry"
+                  ? "#a698c4"
+                  : "#80baa3"
             }
             points={
-              power
+              s.overlay === "Power"
                 ? [
-                    [x + 0.6, 4, 0],
-                    [x + 0.6, 4, -0.7],
-                    [x + 0.6, 0.25, -0.7],
+                    [x + 0.3, 5.2, 0.1],
+                    [x + 0.3, 4.35, -1.1],
+                    [x + 0.19, 0.35, -1.22],
                   ]
                 : [
-                    [x, 3.7, 0.7],
-                    [x, 4.7, 0.7],
-                    [x + 1, 4.7, 0.7],
+                    [x - 0.63, 4.48, 1.15],
+                    [x - 0.63, 5.62, 0.8],
+                    [left, 5.62, 0.8],
                   ]
             }
           />
@@ -538,6 +340,7 @@ function SystemPaths() {
     </>
   );
 }
+
 function FabricView({ records }: { records: ComponentRecord[] }) {
   const s = useStore();
   const chips = records.filter(
@@ -693,6 +496,12 @@ export function Scene({
     return () => observer.disconnect();
   }, []);
   const focus = records.find((r) => r.id === s.focus);
+  const boardContext = focus
+    ? records.find((r) => r.id === focus.parentId && r.type === "board")
+    : undefined;
+  const rackContext = focus
+    ? records.find((r) => r.id === focus.parentId && r.type === "rack")
+    : undefined;
   let children = focus
     ? records.filter((r) => r.parentId === focus.id && r.level <= s.level)
     : [];
@@ -704,12 +513,19 @@ export function Scene({
           aria-label="Interactive 3D hardware model; use component tree as keyboard alternative"
           frameloop={visible ? "always" : "never"}
           shadows={false}
-          dpr={[1, 1.5]}
-          camera={{ position: [6, 4.7, 7], fov: 38 }}
-          gl={{ antialias: true, powerPreference: "low-power" }}
+          dpr={
+            s.quality === "Performance"
+              ? 1
+              : s.quality === "Detail"
+                ? 1.5
+                : 1.25
+          }
+          camera={{ position: [6, 4.7, 7], fov: 38, near: 0.005 }}
+          gl={{ antialias: true, powerPreference: "high-performance" }}
         >
           <color attach="background" args={["#0b141e"]} />
-          <ambientLight intensity={1.2} />
+          <hemisphereLight args={["#dce8f4", "#464a42", 1.1]} />
+          <ambientLight intensity={0.65} />
           <directionalLight position={[3, 8, 5]} intensity={3} />
           <directionalLight
             position={[-5, 4, -3]}
@@ -720,12 +536,14 @@ export function Scene({
             <OrbitControls
               makeDefault
               enableDamping={!s.reduced}
-              minDistance={0.4}
+              minDistance={0.08}
               maxDistance={50}
             />
-            <Camera />
+            <Projection />
+            <Studio />
+            <Camera records={records} />
             <Monitor />
-            <gridHelper args={[40, 40, "#304254", "#1b2b3b"]} />
+            {!focus && <gridHelper args={[40, 40, "#304254", "#1b2b3b"]} />}
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.015, 0]}>
               <planeGeometry args={[80, 80]} />
               <meshStandardMaterial color="#111e2a" roughness={0.8} />
@@ -734,27 +552,20 @@ export function Scene({
               <FabricView records={records} />
             ) : asset && binding && s.view === "rack" && !focus ? (
               <Imported asset={asset} binding={binding} />
+            ) : focus?.type === "rack" ? (
+              <RackHardware records={records} rack={s.rack} />
+            ) : focus &&
+              ["accelerator", "hbm", "cold-plate"].includes(focus.type) ? (
+              <PackageInspection records={records} focus={focus} />
+            ) : focus && ["tray", "board"].includes(focus.type) ? (
+              <TrayInspection records={records} focus={focus} />
+            ) : boardContext ? (
+              <TrayInspection records={records} focus={boardContext} />
+            ) : rackContext &&
+              !["power-shelf", "tray"].includes(focus!.type) ? (
+              <RackHardware records={records} rack={s.rack} />
             ) : focus ? (
-              <group position={[0, 0.75, 0]}>
-                {children.map((r, i) => (
-                  <Part
-                    key={r.id}
-                    record={r}
-                    position={
-                      r === focus
-                        ? [0, 0, 0]
-                        : [
-                            r.position[0] * 3,
-                            r.position[1] * 2 +
-                              (s.explode ? i * 0.12 * s.explosion : 0),
-                            r.position[2] * 3,
-                          ]
-                    }
-                    size={r.size.map((v) => v * 3) as [number, number, number]}
-                    affected={false}
-                  />
-                ))}
-              </group>
+              <ComponentInspection records={records} focus={focus} />
             ) : (
               <>
                 {Array.from(
@@ -762,41 +573,34 @@ export function Scene({
                   (_, i) => {
                     const r = s.view === "row" ? i + 1 : s.rack;
                     return (
-                      <Rack
-                        key={r}
-                        records={records}
-                        rack={r}
-                        offset={
-                          s.view === "row" ? (i - (s.racks - 1) / 2) * 1.9 : 0
-                        }
-                        affected={affected.includes(r)}
-                      />
+                      <group key={r}>
+                        <RackHardware
+                          records={records}
+                          rack={r}
+                          affected={affected.includes(r)}
+                          detail={s.view === "rack" || r === s.rack}
+                          offset={
+                            s.view === "row" ? (i - (s.racks - 1) / 2) * 1.9 : 0
+                          }
+                        />
+                        <LocalLabel
+                          position={[
+                            s.view === "row"
+                              ? (i - (s.racks - 1) / 2) * 1.9
+                              : 0,
+                            4.35,
+                            1.08,
+                          ]}
+                          text={`R${String(r).padStart(2, "0")} / ${r <= s.racks - 2 ? "COMPUTE" : r === s.racks - 1 ? "NETWORK" : "STORAGE"}${s.showIds ? " / illustrative" : ""}`}
+                        />
+                      </group>
                     );
                   },
                 )}
-                {records
-                  .filter(
-                    (r) =>
-                      r.physicalLocation.rack === "SHARED" &&
-                      r.type !== "floor" &&
-                      r.level <= s.level,
-                  )
-                  .map((r) => (
-                    <Part
-                      key={r.id}
-                      record={r}
-                      position={[
-                        r.position[0] - (s.view === "row" ? s.racks : 0),
-                        r.position[1],
-                        r.position[2],
-                      ]}
-                      size={r.size}
-                      affected={affected.length > 1 && r.type === "pump"}
-                    />
-                  ))}
+                <RowInfrastructure records={records} />
               </>
             )}
-            {s.overlay !== "Hardware" && <SystemPaths />}
+            {s.overlay !== "Hardware" && <SystemPaths records={records} />}
           </Suspense>
         </Canvas>
       </Boundary>

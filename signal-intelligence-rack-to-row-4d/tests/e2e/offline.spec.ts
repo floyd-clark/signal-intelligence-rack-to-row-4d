@@ -27,7 +27,7 @@ test("production bundle works with external networking blocked, records performa
   expect(audit.fps).toBeGreaterThan(0);
   await import("node:fs/promises").then((fs) =>
     fs.writeFile(
-      "evidence/performance-baseline.json",
+      "evidence/v2/runtime-audit.json",
       JSON.stringify(
         {
           browser: "Chromium with SwiftShader (software rendering)",
@@ -39,7 +39,10 @@ test("production bundle works with external networking blocked, records performa
       ),
     ),
   );
-  await page.screenshot({ path: "evidence/09-audit.png", fullPage: true });
+  await page.screenshot({
+    path: "evidence/v2/regression-09-audit.png",
+    fullPage: true,
+  });
   await page.getByRole("button", { name: "Close ×", exact: true }).click();
   await page.getByRole("button", { name: "Row overview", exact: true }).click();
   await page
@@ -48,7 +51,7 @@ test("production bundle works with external networking blocked, records performa
   await page.getByLabel("Camera preset").selectOption("graph");
   await page.waitForTimeout(1500);
   await page.screenshot({
-    path: "evidence/10-ironwood-topology.png",
+    path: "evidence/v2/regression-10-ironwood-topology.png",
     fullPage: true,
   });
   await page

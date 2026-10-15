@@ -41,3 +41,22 @@ Additional material gaps beyond the checkbox wording: no transform gizmo, no dim
 
 A licensed self-contained GLB with descriptive mesh hierarchy and coordinate units; authoritative program-specific L1–L12 work instructions and evidence requirements; approved BOM/fabric/loop maps and material/coolant assumptions. These improve fidelity, but are not prerequisites for using the included working procedural app.
 
+
+## V2 revision verification
+
+The historical matrix above is retained; its six yellow items remain yellow. See VISUAL_FIDELITY_DELTA.md for the complete revision ledger and qualifications.
+
+| Revision criterion | Result | Evidence / qualification |
+|---|---|---|
+| Packaged HBM, two angles, exploded context | Verified implementation | v2/hbm-closeup, hbm-closeup-alternate, hbm-exploded-cutaway; conceptual internal section |
+| Mechanical tray and PCB detail | Verified implementation | v2/compute-tray-isolated, compute-board-inspection; original illustrative geometry |
+| Three rack views and recognizable equipment classes | Verified implementation | v2/rack-front-hero, rack-front-orthographic, rack-rear-service |
+| Connected row, roles and fault domain | Verified implementation | v2/row-cold-aisle, row-rear-service, row-cooling-fault-t15/t500; graph-derived compute domain |
+| Stable IDs, Back, resize, reduced motion | Verified regression | v2/interaction-regression.json |
+| Offline, model binding, replay and tour | Verified regression | Four browser workflows; denied non-loopback offline test |
+| Inventory and simulation integrity | Verified regression | 23 unit tests; NVIDIA quantities, 80 types, 3266 nodes, 36 incidents unchanged |
+| Default GPU performance target | Measured on this machine | Native Intel UHD D3D11 default Balanced rack 50 FPS; full metrics separate from SwiftShader |
+| Full v2 interaction/device/performance audit | Partial | Bounds hover, scope LOD and action-based cutaway/focus; no full touch/a11y/context-loss or long-duration GPU-byte audit |
+| Vendor-dimensional/photographic fidelity | Partial by design | Original procedural engineering illustration; reviewer acceptance and licensed dimensional CAD remain future inputs |
+
+All requested named screenshot subjects have files under evidence/v2. Visual rubric scores are developer estimates, not independent acceptance.

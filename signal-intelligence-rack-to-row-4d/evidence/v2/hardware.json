@@ -1,0 +1,11 @@
+{
+  "gpu": [
+    "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+    "Intel(R) UHD Graphics"
+  ],
+  "measurement": "Chromium forced SwiftShader software renderer, not the physical GPU",
+  "cpu": [
+    "11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz"
+  ],
+  "os": "Windows"
+}

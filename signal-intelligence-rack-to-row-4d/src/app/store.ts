@@ -5,12 +5,28 @@ interface State {
   profile: ProfileId;
   racks: number;
   selected: string;
+  hovered: string;
   focus: string | null;
-  history: (string | null)[];
+  history: {
+    focus: string | null;
+    selected: string;
+    view: "rack" | "row";
+    rack: number;
+  }[];
   view: "rack" | "row";
   rack: number;
   level: number;
   overlay: string;
+  quality: "Performance" | "Balanced" | "Detail";
+  experience: "Inspect" | "Diagnose" | "Assembly Timeline";
+  panels: boolean;
+  cutaway: boolean;
+  showChassis: boolean;
+  showCoolant: boolean;
+  showPower: boolean;
+  showNetwork: boolean;
+  showIds: boolean;
+  showFaults: boolean;
   explode: boolean;
   explosion: number;
   height: number;
@@ -45,12 +61,23 @@ export const useStore = create<State>((set, get) => ({
   profile: "FS_CONCEPT",
   racks: 8,
   selected: "FS_CONCEPT/R1/rack",
+  hovered: "",
   focus: null,
   history: [],
   view: "rack",
   rack: 1,
   level: 9,
   overlay: "Hardware",
+  quality: "Balanced",
+  experience: "Inspect",
+  panels: true,
+  cutaway: false,
+  showChassis: true,
+  showCoolant: true,
+  showPower: true,
+  showNetwork: true,
+  showIds: false,
+  showFaults: true,
   explode: false,
   explosion: 0.65,
   height: 2,
@@ -84,14 +111,23 @@ export const useStore = create<State>((set, get) => ({
   set: (p) => set(p),
   drill: (id) =>
     set((s) => ({
-      history: [...s.history, s.focus],
+      history: [
+        ...s.history,
+        { focus: s.focus, selected: s.selected, view: s.view, rack: s.rack },
+      ],
       focus: id,
+      cutaway: true,
       selected: id,
       cameraKey: s.cameraKey + 1,
     })),
   back: () =>
     set((s) => ({
-      focus: s.history.at(-1) ?? null,
+      ...(s.history.at(-1) ?? {
+        focus: null,
+        selected: s.profile + "/R" + s.rack + "/rack",
+        view: s.view,
+        rack: s.rack,
+      }),
       history: s.history.slice(0, -1),
       cameraKey: s.cameraKey + 1,
     })),

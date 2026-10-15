@@ -58,3 +58,13 @@ The adapter currently provides searchable per-mesh binding, not drag/drop multi-
 Read ACCEPTANCE_MATRIX.md for exact verification and gaps. Not all ambitious specification items are fully implemented; this handoff does not claim every checkbox is green.
 
 This is an educational/illustrative AI-infrastructure digital twin and not an official Fluidstack mechanical design or deployment record.
+
+## V2 hardware overhaul
+
+The physical scene now includes layered HBM/package context, mechanical compute trays, PCB components, distinct rack faceplates and rear service hardware, and connected CDU/coolant/power/network row infrastructure. Inspect presents the hardware; Diagnose retains incident tools; Assembly Timeline retains L1–L12. Collapse panels for presentation. Photo/closed and CAD cutaway distinguish externally visible hardware from conceptual exposed internals. Performance uses simpler local shading; Balanced and Detail use PBR.
+
+![HBM package cutaway](evidence/v2/hbm-closeup.png)
+![Compute tray](evidence/v2/compute-tray-isolated.png)
+![Connected row](evidence/v2/row-cold-aisle.png)
+
+Read [VISUAL_FIDELITY_DELTA.md](VISUAL_FIDELITY_DELTA.md) for before/after, engineering assumptions, tests, measured native/software performance and remaining gaps. Final evidence and reproducible capture scripts are under `evidence/v2` and `scripts/capture-v2.mjs`. With the local server running, `node scripts/capture-v2.mjs` uses software rendering; set `NATIVE_GPU=1` for native ANGLE D3D11 and separate metrics. No new runtime dependencies or remote assets are required.

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "assertions": [
+    "real rack/tray/board/accelerator/HBM raycast chain",
+    "correct stable IDs and diagnostic card",
+    "HBM complex layered geometry >80 owned primitives",
+    "decorative merged triangles resolve to HBM owner",
+    "Back restores context and camera within 0.06 scene units",
+    "collapsible canvas >1400 px at 1600 viewport",
+    "resize and reduced motion"
+  ],
+  "errors": []
+}

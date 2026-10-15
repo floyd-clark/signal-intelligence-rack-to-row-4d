@@ -1,0 +1,24 @@
+{
+  "build": "tsc -b && vite build: passed",
+  "unit": {
+    "passed": 23,
+    "failed": 0,
+    "files": 2
+  },
+  "browser": {
+    "passed": 4,
+    "failed": 0,
+    "duration": "2.4 minutes",
+    "renderer": "forced SwiftShader for reproducible regression, not performance target"
+  },
+  "checks": [
+    "inventory and exact NVIDIA reference quantities",
+    "deterministic simulation, propagation and local ECC isolation",
+    "original GLB fixture binding and actual mesh pick",
+    "replay roundtrip and tour",
+    "denied-remote offline production startup",
+    "actual rack/tray/board/accelerator/HBM raycast chain",
+    "Back camera context, resize and reduced motion"
+  ],
+  "visualReview": "Developer inspected baseline and new HBM/tray/rack/row images; independent approval not claimed"
+}

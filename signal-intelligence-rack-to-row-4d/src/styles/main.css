@@ -738,3 +738,153 @@ footer button {
 .presenter .scene-top h1 {
   font-size: 32px;
 }
+/* v2 hardware-first presentation; the diagnostic UI remains one click away. */
+.experience-controls {
+  display: flex;
+  gap: 5px;
+  order: 2;
+  margin-left: auto;
+}
+.experience-controls select,
+.experience-controls button {
+  font-size: 10px;
+  padding: 7px;
+}
+.header-status {
+  display: none;
+}
+header {
+  gap: 9px;
+  padding: 0 14px;
+}
+.brand {
+  min-width: 260px;
+  font-size: 12px;
+}
+header > button {
+  font-size: 10px;
+}
+.workspace {
+  height: calc(100vh - 133px);
+  min-height: 670px;
+  overflow: hidden;
+}
+.left {
+  overflow: auto;
+}
+.inspector {
+  max-height: none;
+  height: 100%;
+}
+.canvas {
+  height: auto;
+  min-height: 240px;
+  flex: 1;
+}
+.experience-Inspect .timeline {
+  display: none;
+}
+.experience-Inspect .metrics > div {
+  padding: 10px 16px;
+}
+.experience-Inspect .metrics strong {
+  font-size: 22px;
+  margin: 4px 0;
+}
+.panels-collapsed .workspace {
+  grid-template-columns: minmax(0, 1fr);
+}
+.panels-collapsed .left,
+.panels-collapsed .inspector {
+  display: none;
+}
+.panels-collapsed .metrics {
+  display: none;
+}
+.layer-toggles {
+  display: flex;
+  gap: 4px;
+}
+.layer-toggles button {
+  font-size: 9px;
+  padding: 5px;
+}
+.cutaway-note {
+  display: block;
+  color: #abbdc4;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  max-width: 550px;
+}
+.location-hint {
+  font-size: 8px;
+  color: #738b9d;
+  margin-left: 5px;
+}
+.scene-top {
+  background: linear-gradient(#0b141ed9, transparent);
+  padding-bottom: 24px;
+}
+.camera-bar {
+  gap: 4px;
+  padding: 8px;
+}
+.camera-bar button,
+.camera-bar select {
+  padding: 6px;
+  font-size: 10px;
+}
+.scene-badge {
+  min-width: 100px;
+}
+@media (max-width: 1300px) {
+  .experience-controls {
+    flex-wrap: wrap;
+  }
+  .brand {
+    min-width: 200px;
+  }
+  header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px;
+  }
+  .workspace {
+    height: calc(100vh - 170px);
+  }
+  .layer-toggles {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 900px) {
+  .workspace {
+    height: auto;
+    overflow: visible;
+  }
+  .canvas {
+    height: 600px;
+    min-height: 500px;
+  }
+  .inspector {
+    height: auto;
+  }
+  .panels-collapsed .workspace {
+    display: block;
+  }
+}
+
+.hardware-hover {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  padding: 7px 12px;
+  background: #152b32e8;
+  border: 1px solid #547b79;
+  border-radius: 4px;
+  pointer-events: none;
+  font-size: 11px;
+  color: #d0e6df;
+}

@@ -1,0 +1,516 @@
+{
+  "capturedAt": "2026-10-15T20:01:36.918Z",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "browser": "Installed Chrome, SwiftShader forced for reproducible software rendering; not hardware GPU performance",
+  "runtimeRemoteRequests": [],
+  "errors": [],
+  "scopes": {
+    "rack-balanced": {
+      "fpsSamples": [
+        1,
+        2,
+        3,
+        1,
+        2
+      ],
+      "fpsMin": 1,
+      "fpsMedian": 2,
+      "fpsMax": 3,
+      "drawCalls": 22,
+      "triangles": 55664,
+      "geometries": 34,
+      "materials": 14,
+      "textures": 4,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "dpr": 1.25,
+      "quality": "Balanced",
+      "ownerCount": 69,
+      "settings": {
+        "profile": "FS_CONCEPT",
+        "level": 9,
+        "selected": "FS_CONCEPT/R1/rack",
+        "focus": null,
+        "view": "rack",
+        "rack": 1,
+        "camera": "isometric",
+        "quality": "Balanced",
+        "cutaway": false,
+        "explode": false,
+        "time": 0,
+        "panels": false
+      }
+    },
+    "hbm-balanced": {
+      "fpsSamples": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "fpsMin": 0,
+      "fpsMedian": 1,
+      "fpsMax": 1,
+      "drawCalls": 9,
+      "triangles": 14678,
+      "geometries": 22,
+      "materials": 9,
+      "textures": 3,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "dpr": 1.25,
+      "quality": "Balanced",
+      "ownerCount": 5,
+      "settings": {
+        "profile": "FS_CONCEPT",
+        "level": 9,
+        "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+        "focus": "FS_CONCEPT/R1/hbm-1.1.1",
+        "view": "rack",
+        "rack": 1,
+        "camera": "isometric",
+        "quality": "Balanced",
+        "cutaway": true,
+        "explode": false,
+        "time": 0,
+        "panels": false
+      }
+    },
+    "row-balanced": {
+      "fpsSamples": [
+        2,
+        1,
+        1,
+        2,
+        1
+      ],
+      "fpsMin": 1,
+      "fpsMedian": 1,
+      "fpsMax": 2,
+      "drawCalls": 104,
+      "triangles": 305362,
+      "geometries": 109,
+      "materials": 21,
+      "textures": 11,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "dpr": 1.25,
+      "quality": "Balanced",
+      "ownerCount": 464,
+      "settings": {
+        "profile": "FS_CONCEPT",
+        "level": 9,
+        "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+        "focus": null,
+        "view": "row",
+        "rack": 1,
+        "camera": "isometric",
+        "quality": "Balanced",
+        "cutaway": true,
+        "explode": false,
+        "time": 0,
+        "panels": false
+      }
+    },
+    "row-performance": {
+      "fpsSamples": [
+        3,
+        1,
+        2,
+        2,
+        1
+      ],
+      "fpsMin": 1,
+      "fpsMedian": 2,
+      "fpsMax": 3,
+      "drawCalls": 104,
+      "triangles": 294562,
+      "geometries": 109,
+      "materials": 21,
+      "textures": 11,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "dpr": 1,
+      "quality": "Performance",
+      "ownerCount": 464,
+      "settings": {
+        "profile": "FS_CONCEPT",
+        "level": 9,
+        "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+        "focus": null,
+        "view": "row",
+        "rack": 1,
+        "camera": "isometric",
+        "quality": "Performance",
+        "cutaway": true,
+        "explode": false,
+        "time": 0,
+        "panels": false
+      }
+    }
+  },
+  "screenshots": {
+    "rack-front-hero": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": false,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "rack-front-orthographic": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "orthographic",
+      "quality": "Balanced",
+      "cutaway": false,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "rack-rear-service": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "rear-service",
+      "quality": "Balanced",
+      "cutaway": false,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "rack-selected-tray-extracted": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "rear-service",
+      "quality": "Balanced",
+      "cutaway": false,
+      "explode": true,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "compute-tray-isolated": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/tray-1",
+      "focus": "FS_CONCEPT/R1/tray-1",
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "compute-board-inspection": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/board-1",
+      "focus": "FS_CONCEPT/R1/board-1",
+      "view": "rack",
+      "rack": 1,
+      "camera": "top",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "accelerator-package": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/accelerator-1.1",
+      "focus": "FS_CONCEPT/R1/accelerator-1.1",
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "hbm-closeup": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+      "focus": "FS_CONCEPT/R1/hbm-1.1.1",
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "hbm-closeup-alternate": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+      "focus": "FS_CONCEPT/R1/hbm-1.1.1",
+      "view": "rack",
+      "rack": 1,
+      "camera": "front",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "hbm-exploded-cutaway": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+      "focus": "FS_CONCEPT/R1/hbm-1.1.1",
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": true,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "row-cold-aisle": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+      "focus": null,
+      "view": "row",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "row-rear-service": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R1/hbm-1.1.1",
+      "focus": null,
+      "view": "row",
+      "rack": 1,
+      "camera": "rear-service",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "row-cooling-fault-t15": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R0/pump",
+      "focus": null,
+      "view": "row",
+      "rack": 1,
+      "camera": "rear-service",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 15,
+      "panels": true,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "row-cooling-fault-t500": {
+      "profile": "FS_CONCEPT",
+      "level": 9,
+      "selected": "FS_CONCEPT/R0/pump",
+      "focus": null,
+      "view": "row",
+      "rack": 1,
+      "camera": "rear-service",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 500,
+      "panels": true,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "profile-nvidia": {
+      "profile": "NVIDIA_GB200_NVL72_REFERENCE",
+      "level": 9,
+      "selected": "NVIDIA_GB200_NVL72_REFERENCE/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "power-network-layer": {
+      "profile": "NVIDIA_GB200_NVL72_REFERENCE",
+      "level": 9,
+      "selected": "NVIDIA_GB200_NVL72_REFERENCE/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "isometric",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    },
+    "profile-ironwood": {
+      "profile": "GOOGLE_IRONWOOD_TPU_REFERENCE",
+      "level": 9,
+      "selected": "GOOGLE_IRONWOOD_TPU_REFERENCE/R1/rack",
+      "focus": null,
+      "view": "rack",
+      "rack": 1,
+      "camera": "graph",
+      "quality": "Balanced",
+      "cutaway": true,
+      "explode": false,
+      "time": 0,
+      "panels": false,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "fovDegrees": 38,
+      "assetSource": "original procedural geometry in src/scene/hardware",
+      "build": "v2 local production"
+    }
+  },
+  "notes": [
+    "FPS distributions are five short one-second samples, not a long-duration benchmark",
+    "t15 is 15 seconds, t500 is 500 seconds; the unchanged simulation horizon is 600 seconds",
+    "No vendor photos or remote textures are runtime assets"
+  ]
+}

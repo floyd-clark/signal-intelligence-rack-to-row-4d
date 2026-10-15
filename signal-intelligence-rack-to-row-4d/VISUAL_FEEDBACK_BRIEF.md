@@ -44,3 +44,7 @@ Provide (a) the five most important visual problems, referencing screenshot/sour
 ## Known implementation gaps
 
 Read the acceptance matrix rather than assuming every original directive item is complete. Geometry is schematic, some auxiliary inventories are illustrative, build scheduling is simplified, one root fault is active at a time, imported mapping lacks drag/drop groups and full coverage gating, and accessibility/device QA is partial. Visual review should improve the actual current app without concealing these gaps.
+
+## V2 review handoff
+
+Review evidence/v2/hbm-closeup.png, compute-tray-isolated.png, compute-board-inspection.png, rack-front-hero.png, rack-rear-service.png and row-cold-aisle.png against the preserved baseline and NVIDIA official hardware photographs. The flat HBM slab, bare tray, uniform rack fronts and disconnected row utilities have been replaced with original detailed procedural assemblies. Stable-ID diagnostics, simulation and local GLB binding remain. Please prioritize proportion/packaging, tray mechanical credibility, rear utility continuity and material readability. Distinguish verified vendor counts from illustrative mechanical dimensions and conceptual exposed chip layers. VISUAL_FIDELITY_DELTA.md lists explicit gaps, rubric estimates and measured performance. Do not assume the developer rubric is independent visual approval. This revision is committed locally; publication is not part of the v2 directive.

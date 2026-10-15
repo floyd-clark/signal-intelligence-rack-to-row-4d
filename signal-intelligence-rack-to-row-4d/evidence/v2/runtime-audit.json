@@ -1,0 +1,870 @@
+{
+  "browser": "Chromium with SwiftShader (software rendering)",
+  "viewport": "1600 × 1000",
+  "nodes": 3266,
+  "types": 80,
+  "missing": [],
+  "orphans": [],
+  "sourceCoverage": 3266,
+  "verifiedCards": 0,
+  "renderedScope": "major assemblies; internals revealed on drill",
+  "fps": 2,
+  "drawCalls": 22,
+  "triangles": 55664,
+  "geometries": 34,
+  "textures": 4,
+  "materials": 14,
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "dpr": 1.25,
+  "fpsSamples": [
+    2
+  ],
+  "quality": "Balanced",
+  "tick": 2,
+  "graphEdges": 3284,
+  "hardware": {
+    "scope": "Rack cabinet / service equipment — original illustrative dimensions",
+    "owners": {
+      "FS_CONCEPT/R1/rack": {
+        "primitives": 184,
+        "kind": "Rack cabinet with deep service envelope, slotted uprights, plinth, feet and hinged perforated door",
+        "bounds": [
+          -0.7649999856948853,
+          -0.029999999329447746,
+          -1.1649999618530273,
+          0.7649999856948853,
+          4.215000152587891,
+          1.1649999618530273
+        ]
+      },
+      "FS_CONCEPT/R1/rail": {
+        "primitives": 8,
+        "kind": "",
+        "bounds": [
+          -0.7275000214576721,
+          0.11000002175569534,
+          -1.149999976158142,
+          0.7275000214576721,
+          4.150000095367432,
+          1.149999976158142
+        ]
+      },
+      "FS_CONCEPT/R1/door": {
+        "primitives": 35,
+        "kind": "",
+        "bounds": [
+          -0.9439847469329834,
+          0.2524999976158142,
+          1.1304446458816528,
+          -0.7154446840286255,
+          4.107500076293945,
+          2.5882792472839355
+        ]
+      },
+      "FS_CONCEPT/R1/power-shelf-1": {
+        "primitives": 1,
+        "kind": "",
+        "bounds": [
+          -0.625,
+          0.25986841320991516,
+          -0.925000011920929,
+          0.625,
+          0.4201315641403198,
+          0.925000011920929
+        ]
+      },
+      "FS_CONCEPT/R1/psu-1.1": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.6035000085830688,
+          0.27589473128318787,
+          0.7450000047683716,
+          -0.4165000021457672,
+          0.4041052758693695,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-1.2": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.398499995470047,
+          0.27589473128318787,
+          0.7450000047683716,
+          -0.21150000393390656,
+          0.4041052758693695,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-1.3": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.19349999725818634,
+          0.27589473128318787,
+          0.7450000047683716,
+          -0.00649999687448144,
+          0.4041052758693695,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-1.4": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.011499997228384018,
+          0.27589473128318787,
+          0.7450000047683716,
+          0.19850000739097595,
+          0.4041052758693695,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-1.5": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.21649999916553497,
+          0.27589473128318787,
+          0.7450000047683716,
+          0.4034999907016754,
+          0.4041052758693695,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-1.6": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.42149999737739563,
+          0.27589473128318787,
+          0.7450000047683716,
+          0.6085000038146973,
+          0.4041052758693695,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/power-shelf-2": {
+        "primitives": 1,
+        "kind": "",
+        "bounds": [
+          -0.625,
+          0.4440789520740509,
+          -0.925000011920929,
+          0.625,
+          0.6043421030044556,
+          0.925000011920929
+        ]
+      },
+      "FS_CONCEPT/R1/psu-2.1": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.6035000085830688,
+          0.4601052701473236,
+          0.7450000047683716,
+          -0.4165000021457672,
+          0.5883157849311829,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-2.2": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.398499995470047,
+          0.4601052701473236,
+          0.7450000047683716,
+          -0.21150000393390656,
+          0.5883157849311829,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-2.3": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.19349999725818634,
+          0.4601052701473236,
+          0.7450000047683716,
+          -0.00649999687448144,
+          0.5883157849311829,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-2.4": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.011499997228384018,
+          0.4601052701473236,
+          0.7450000047683716,
+          0.19850000739097595,
+          0.5883157849311829,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-2.5": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.21649999916553497,
+          0.4601052701473236,
+          0.7450000047683716,
+          0.4034999907016754,
+          0.5883157849311829,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-2.6": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.42149999737739563,
+          0.4601052701473236,
+          0.7450000047683716,
+          0.6085000038146973,
+          0.5883157849311829,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/power-shelf-3": {
+        "primitives": 1,
+        "kind": "",
+        "bounds": [
+          -0.625,
+          0.6282894611358643,
+          -0.925000011920929,
+          0.625,
+          0.7885526418685913,
+          0.925000011920929
+        ]
+      },
+      "FS_CONCEPT/R1/psu-3.1": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.6035000085830688,
+          0.644315779209137,
+          0.7450000047683716,
+          -0.4165000021457672,
+          0.7725263237953186,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-3.2": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.398499995470047,
+          0.644315779209137,
+          0.7450000047683716,
+          -0.21150000393390656,
+          0.7725263237953186,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-3.3": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.19349999725818634,
+          0.644315779209137,
+          0.7450000047683716,
+          -0.00649999687448144,
+          0.7725263237953186,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-3.4": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.011499997228384018,
+          0.644315779209137,
+          0.7450000047683716,
+          0.19850000739097595,
+          0.7725263237953186,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-3.5": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.21649999916553497,
+          0.644315779209137,
+          0.7450000047683716,
+          0.4034999907016754,
+          0.7725263237953186,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-3.6": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.42149999737739563,
+          0.644315779209137,
+          0.7450000047683716,
+          0.6085000038146973,
+          0.7725263237953186,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/power-shelf-4": {
+        "primitives": 1,
+        "kind": "",
+        "bounds": [
+          -0.625,
+          0.8125,
+          -0.925000011920929,
+          0.625,
+          0.972763180732727,
+          0.925000011920929
+        ]
+      },
+      "FS_CONCEPT/R1/psu-4.1": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.6035000085830688,
+          0.8285263180732727,
+          0.7450000047683716,
+          -0.4165000021457672,
+          0.9567368626594543,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-4.2": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.398499995470047,
+          0.8285263180732727,
+          0.7450000047683716,
+          -0.21150000393390656,
+          0.9567368626594543,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-4.3": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          -0.19349999725818634,
+          0.8285263180732727,
+          0.7450000047683716,
+          -0.00649999687448144,
+          0.9567368626594543,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-4.4": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.011499997228384018,
+          0.8285263180732727,
+          0.7450000047683716,
+          0.19850000739097595,
+          0.9567368626594543,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-4.5": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.21649999916553497,
+          0.8285263180732727,
+          0.7450000047683716,
+          0.4034999907016754,
+          0.9567368626594543,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/psu-4.6": {
+        "primitives": 10,
+        "kind": "Rectifier/PSU module with fan aperture, extraction latch and status LED",
+        "bounds": [
+          0.42149999737739563,
+          0.8285263180732727,
+          0.7450000047683716,
+          0.6085000038146973,
+          0.9567368626594543,
+          1.0049999952316284
+        ]
+      },
+      "FS_CONCEPT/R1/tray-1": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          0.9967105388641357,
+          -1.0049999952316284,
+          0.6200000047683716,
+          1.1569737195968628,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-5": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          1.0458420515060425,
+          -1.4934531450271606,
+          0.6510000228881836,
+          1.16997230052948,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-2": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          1.1809210777282715,
+          -1.0049999952316284,
+          0.6200000047683716,
+          1.3411842584609985,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-6": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          1.2300525903701782,
+          -1.4934531450271606,
+          0.6510000228881836,
+          1.3541828393936157,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-3": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          1.3651316165924072,
+          -1.0049999952316284,
+          0.6200000047683716,
+          1.5253946781158447,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-7": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          1.414263129234314,
+          -1.4934531450271606,
+          0.6510000228881836,
+          1.5383933782577515,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-4": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          1.549342155456543,
+          -1.0049999952316284,
+          0.6200000047683716,
+          1.7096052169799805,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-8": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          1.5984736680984497,
+          -1.4934531450271606,
+          0.6510000228881836,
+          1.7226039171218872,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-5": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          1.7335526943206787,
+          -1.0049999952316284,
+          0.6200000047683716,
+          1.8938157558441162,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-9": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          1.7826842069625854,
+          -1.4934531450271606,
+          0.6510000228881836,
+          1.906814455986023,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-6": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          1.917763113975525,
+          -1.0049999952316284,
+          0.6200000047683716,
+          2.078026294708252,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-10": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          1.9668947458267212,
+          -1.4934531450271606,
+          0.6510000228881836,
+          2.091024875640869,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-7": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          2.10197377204895,
+          -1.0049999952316284,
+          0.6200000047683716,
+          2.2622368335723877,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-11": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          2.1511051654815674,
+          -1.4934531450271606,
+          0.6510000228881836,
+          2.275235414505005,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-8": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          2.286184310913086,
+          -1.0049999952316284,
+          0.6200000047683716,
+          2.4464473724365234,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/quick-disconnect-12": {
+        "primitives": 6,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          2.335315704345703,
+          -1.4934531450271606,
+          0.6510000228881836,
+          2.4594459533691406,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-9": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          2.4703948497772217,
+          -1.0049999952316284,
+          0.6200000047683716,
+          2.630657911300659,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/hose": {
+        "primitives": 24,
+        "kind": "",
+        "bounds": [
+          -0.6510000228881836,
+          2.519526243209839,
+          -1.4934531450271606,
+          0.6510000228881836,
+          3.1962881088256836,
+          -1.0149999856948853
+        ]
+      },
+      "FS_CONCEPT/R1/tray-10": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          2.6546051502227783,
+          -1.0049999952316284,
+          0.6200000047683716,
+          2.814868450164795,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/tray-11": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          2.838815689086914,
+          -1.0049999952316284,
+          0.6200000047683716,
+          2.9990789890289307,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/tray-12": {
+        "primitives": 58,
+        "kind": "compute service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          3.02302622795105,
+          -1.0049999952316284,
+          0.6200000047683716,
+          3.1832895278930664,
+          1.156000018119812
+        ]
+      },
+      "FS_CONCEPT/R1/switch-asic-switch-1": {
+        "primitives": 38,
+        "kind": "switch service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          3.2072367668151855,
+          -1.0049999952316284,
+          0.6200000047683716,
+          3.367500066757202,
+          1.1510000228881836
+        ]
+      },
+      "FS_CONCEPT/R1/switch-asic-switch-2": {
+        "primitives": 38,
+        "kind": "switch service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          3.3914473056793213,
+          -1.0049999952316284,
+          0.6200000047683716,
+          3.551710605621338,
+          1.1510000228881836
+        ]
+      },
+      "FS_CONCEPT/R1/manifold-supply": {
+        "primitives": 9,
+        "kind": "",
+        "bounds": [
+          -0.6740000247955322,
+          0.10664097964763641,
+          -1.8624999523162842,
+          -0.5659999847412109,
+          3.994999885559082,
+          -1.25
+        ]
+      },
+      "FS_CONCEPT/R1/manifold-return": {
+        "primitives": 9,
+        "kind": "",
+        "bounds": [
+          0.5659999847412109,
+          0.10664097964763641,
+          -1.8624999523162842,
+          0.6740000247955322,
+          3.994999885559082,
+          -1.25
+        ]
+      },
+      "FS_CONCEPT/R1/busbar": {
+        "primitives": 27,
+        "kind": "",
+        "bounds": [
+          -0.20499999821186066,
+          0.2749999463558197,
+          -1.246000051498413,
+          0.24500000476837158,
+          3.924999952316284,
+          -1.159999966621399
+        ]
+      },
+      "FS_CONCEPT/R1/feed-a": {
+        "primitives": 1,
+        "kind": "",
+        "bounds": [
+          0.26499998569488525,
+          4.199996471405029,
+          -1.1000022888183594,
+          0.33500000834465027,
+          4.402694225311279,
+          -0.6560013890266418
+        ]
+      },
+      "FS_CONCEPT/R1/fiber": {
+        "primitives": 8,
+        "kind": "",
+        "bounds": [
+          -0.6660684943199158,
+          3.8531413078308105,
+          1.0990197658538818,
+          0.32409319281578064,
+          4.484570503234863,
+          1.455734372138977
+        ]
+      },
+      "FS_CONCEPT/R1/tor": {
+        "primitives": 75,
+        "kind": "network service chassis, recessed faceplate, ports/perforations, extraction tabs and status lamp",
+        "bounds": [
+          -0.6200000047683716,
+          3.897935152053833,
+          -1.0049999952316284,
+          0.6200000047683716,
+          4.027500152587891,
+          1.2552772760391235
+        ]
+      },
+      "FS_CONCEPT/R1/asset-tag": {
+        "primitives": 1,
+        "kind": "",
+        "bounds": [
+          0.5,
+          4.019999980926514,
+          1.1174999475479126,
+          0.6200000047683716,
+          4.059999942779541,
+          1.122499942779541
+        ]
+      },
+      "FS_CONCEPT/R0/cdu": {
+        "primitives": 23,
+        "kind": "CDU service cabinet with control panel, redundant pump pair, plate heat exchanger, gauges, isolation wheels and connected loop pipes",
+        "bounds": [
+          -2.752500057220459,
+          0.029999995604157448,
+          -2.25,
+          0.47999998927116394,
+          5.150000095367432,
+          0.09449999034404755
+        ]
+      },
+      "FS_CONCEPT/R0/pump": {
+        "primitives": 20,
+        "kind": "Motor-driven secondary pump with finned motor, volute, suction/discharge ports and bolted mounting foot",
+        "bounds": [
+          -2.745368003845215,
+          0.4399999976158142,
+          -2.231558322906494,
+          0.7229944467544556,
+          4.797003746032715,
+          -0.3400000035762787
+        ]
+      },
+      "FS_CONCEPT/R0/spare-pump": {
+        "primitives": 18,
+        "kind": "Motor-driven secondary pump with finned motor, volute, suction/discharge ports and bolted mounting foot",
+        "bounds": [
+          -2.745368003845215,
+          1.2000000476837158,
+          -0.8600000143051147,
+          -1.7399964332580566,
+          2.0600039958953857,
+          -0.3400000035762787
+        ]
+      },
+      "FS_CONCEPT/R0/heat-exchanger": {
+        "primitives": 14,
+        "kind": "",
+        "bounds": [
+          -2.496500015258789,
+          1.9149999618530273,
+          -1.2549999952316284,
+          -1.7484999895095825,
+          2.7850000858306885,
+          -0.6050000190734863
+        ]
+      },
+      "FS_CONCEPT/R0/secondary-loop": {
+        "primitives": 10,
+        "kind": "",
+        "bounds": [
+          -2.6614086627960205,
+          0.39999836683273315,
+          -1.605176568031311,
+          -1.4703974723815918,
+          2.9352917671203613,
+          -0.08999998867511749
+        ]
+      },
+      "FS_CONCEPT/R0/row-pdu": {
+        "primitives": 17,
+        "kind": "",
+        "bounds": [
+          -2.75,
+          0.07499995082616806,
+          -1.115315318107605,
+          0.7000063061714172,
+          5.452805519104004,
+          1.6575000286102295
+        ]
+      },
+      "FS_CONCEPT/R1/cable-tray": {
+        "primitives": 15,
+        "kind": "",
+        "bounds": [
+          -2.1110000610351562,
+          4.47999906539917,
+          0.5274999737739563,
+          0.699999988079071,
+          5.6875,
+          1.1964521408081055
+        ]
+      },
+      "FS_CONCEPT/R0/floor": {
+        "primitives": 60,
+        "kind": "",
+        "bounds": [
+          -3.003999948501587,
+          0.0004999999655410647,
+          -5.5,
+          1.003999948501587,
+          0.008999999612569809,
+          5.5
+        ]
+      }
+    },
+    "camera": [
+      5.999999999999998,
+      4.699999999999999,
+      6.999999999999998
+    ],
+    "target": [
+      0,
+      1.9999994252052518,
+      0
+    ],
+    "quality": "Balanced",
+    "assets": 2
+  }
+}

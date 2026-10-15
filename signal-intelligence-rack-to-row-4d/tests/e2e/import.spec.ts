@@ -1,3 +1,4 @@
+import { audit, clickWorld } from "./hardware-helpers";
 import { test, expect } from "@playwright/test";
 test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
   page,
@@ -7,9 +8,13 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
   await page.goto("/");
   await page.locator("canvas").waitFor();
   await page.waitForTimeout(1200);
-  await page.mouse.click(760, 400);
+  await page.getByLabel("Camera preset").selectOption("front");
+  await page.waitForTimeout(1000);
+  const initial = await audit(page);
+  const bound = initial.hardware.owners["FS_CONCEPT/R1/tray-6"].bounds;
+  await clickWorld(page, [0, (bound[1] + bound[4]) / 2, 1.065]);
   await expect(page.locator(".inspector h2")).toContainText("tray");
-  await page.mouse.dblclick(760, 400);
+  await page.getByRole("button", { name: "Drill In" }).click();
   await expect(page.locator("h1")).toContainText("tray");
   await page.getByRole("button", { name: "← Back" }).click();
   await page
@@ -32,10 +37,11 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
     .click();
   await page.waitForTimeout(1500);
   await page.screenshot({
-    path: "evidence/07-imported-model.png",
+    path: "evidence/v2/regression-07-imported-model.png",
     fullPage: true,
   });
-  await page.mouse.click(760, 400);
+  const box = (await page.locator("canvas").boundingBox())!;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
   await expect(page.locator(".inspector h2")).toContainText("cpu");
   await page
     .getByRole("button", { name: "Settings / Import Better Rack Model" })
@@ -76,6 +82,9 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
   await expect(page.locator(".demo")).toContainText("TPM release call");
   await page.getByRole("button", { name: "Next chapter" }).click();
   await expect(page.locator(".demo")).toContainText("Tour complete");
-  await page.screenshot({ path: "evidence/08-tour.png", fullPage: true });
+  await page.screenshot({
+    path: "evidence/v2/regression-08-tour.png",
+    fullPage: true,
+  });
   expect(errors).toEqual([]);
 });

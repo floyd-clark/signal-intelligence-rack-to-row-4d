@@ -1,3 +1,4 @@
+import { hardwareAudit } from "../scene/hardware/sceneRegistry";
 import { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import { useStore } from "../app/store";
 import {
@@ -221,6 +222,7 @@ export function App() {
       hypothesis: null,
       decision: "",
       playing: true,
+      experience: "Diagnose",
     });
     setTab("investigation");
   }
@@ -349,8 +351,52 @@ export function App() {
                       ? "dBm"
                       : "events";
   return (
-    <div className={`app ${s.reduced ? "reduced" : ""} ${s.mode}`}>
+    <div
+      data-render-state={JSON.stringify({
+        profile: s.profile,
+        level: s.level,
+        selected: s.selected,
+        focus: s.focus,
+        view: s.view,
+        rack: s.rack,
+        camera: s.camera,
+        quality: s.quality,
+        cutaway: s.cutaway,
+        explode: s.explode,
+        time: s.time,
+        panels: s.panels,
+      })}
+      className={`app ${s.reduced ? "reduced" : ""} ${s.mode} ${s.panels ? "" : "panels-collapsed"} experience-${s.experience.replaceAll(" ", "-")}`}
+    >
       <header>
+        <div className="experience-controls">
+          <select
+            aria-label="Explorer experience"
+            value={s.experience}
+            onChange={(e) =>
+              s.set({
+                experience: e.target.value as any,
+                buildTime: e.target.value === "Assembly Timeline",
+              })
+            }
+          >
+            {["Inspect", "Diagnose", "Assembly Timeline"].map((v) => (
+              <option key={v}>{v}</option>
+            ))}
+          </select>
+          <select
+            aria-label="Graphics quality"
+            value={s.quality}
+            onChange={(e) => s.set({ quality: e.target.value as any })}
+          >
+            {["Performance", "Balanced", "Detail"].map((v) => (
+              <option key={v}>{v}</option>
+            ))}
+          </select>
+          <button onClick={() => s.set({ panels: !s.panels })}>
+            {s.panels ? "Collapse panels" : "Show panels"}
+          </button>
+        </div>
         <div className="brand">
           <span className="brandmark">◈</span>
           <div>
@@ -523,7 +569,8 @@ export function App() {
                 onDoubleClick={() => s.drill(r.id)}
               >
                 <span style={{ color: colors[r.family] }}>▪</span>{" "}
-                {r.displayName}
+                {r.displayName}{" "}
+                <span className="location-hint">{r.physicalLocation.rack}</span>
                 <small>L{r.level}</small>
               </button>
             ))}
@@ -547,6 +594,13 @@ export function App() {
                     : "Inside the AI rack."}
               </h1>
               <p>{profile.fabric}</p>
+              <small className="cutaway-note">
+                {s.camera === "graph"
+                  ? "COMPUTATIONAL TOPOLOGY — NOT PHYSICAL CIRCUIT ROUTING"
+                  : s.focus && s.cutaway
+                    ? "CONCEPTUAL EXPOSED CUTAWAY — NOT VISIBLE THROUGH A SEALED PACKAGE"
+                    : "ORIGINAL PROCEDURAL HARDWARE · ILLUSTRATIVE DIMENSIONS"}
+              </small>
             </div>
             <div className="scene-badge">
               {s.overlay.toUpperCase()}
@@ -555,12 +609,25 @@ export function App() {
             </div>
           </div>
           <div className="canvas">
+            {s.hovered && (
+              <div className="hardware-hover">
+                {records.find((r) => r.id === s.hovered)?.displayName} ·{" "}
+                {records.find((r) => r.id === s.hovered)?.physicalLocation.rack}
+              </div>
+            )}
             {s.fallback ? (
               <div className="diagram">
                 <h2>Accessible 2D system diagram</h2>
                 <p>Shared CDU → compute manifolds → cold plates → return</p>
                 <p>Feed A + Feed B → shelf → busbar → VRM → compute</p>
                 <p>{profile.fabric}</p>
+                <small className="cutaway-note">
+                  {s.camera === "graph"
+                    ? "COMPUTATIONAL TOPOLOGY — NOT PHYSICAL CIRCUIT ROUTING"
+                    : s.focus && s.cutaway
+                      ? "CONCEPTUAL EXPOSED CUTAWAY — NOT VISIBLE THROUGH A SEALED PACKAGE"
+                      : "ORIGINAL PROCEDURAL HARDWARE · ILLUSTRATIVE DIMENSIONS"}
+                </small>
                 {records
                   .filter(
                     (r) => r.parentId === selected.id || r.type === "rack",
@@ -589,6 +656,26 @@ export function App() {
             )}
           </div>
           <div className="camera-bar">
+            <div className="layer-toggles">
+              {(
+                [
+                  ["showChassis", "Chassis"],
+                  ["showCoolant", "Coolant"],
+                  ["showPower", "Power"],
+                  ["showNetwork", "Network"],
+                  ["showIds", "IDs"],
+                  ["showFaults", "Fault propagation"],
+                ] as const
+              ).map(([key, label]) => (
+                <button
+                  key={key}
+                  aria-pressed={s[key]}
+                  onClick={() => s.set({ [key]: !s[key] })}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
             <button onClick={() => s.back()}>← Back</button>
             <button onClick={() => s.drill(selected.id)}>Drill In ↗</button>
             <select
@@ -600,8 +687,10 @@ export function App() {
             >
               {[
                 "isometric",
+                "orthographic",
                 "front",
                 "rear",
+                "rear-service",
                 "left",
                 "right",
                 "top",
@@ -629,6 +718,9 @@ export function App() {
               {s.doors ? "Close doors" : "Open doors"}
             </button>
             <button onClick={() => s.reset()}>Reset view</button>
+            <button onClick={() => s.set({ cutaway: !s.cutaway })}>
+              {s.cutaway ? "Photo / closed" : "CAD cutaway"}
+            </button>
             <label className="mini-control">
               Explode{" "}
               <input
@@ -1330,8 +1422,14 @@ export function App() {
                       triangles: perf.triangles,
                       geometries: perf.geometries,
                       textures: perf.textures,
+                      materials: perf.materials,
+                      renderer: perf.renderer,
+                      dpr: perf.dpr,
+                      fpsSamples: perf.fpsSamples,
+                      quality: perf.quality,
                       tick,
                       graphEdges: edges.length,
+                      hardware: hardwareAudit,
                     },
                     null,
                     2,
