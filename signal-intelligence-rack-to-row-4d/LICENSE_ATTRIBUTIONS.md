@@ -9,3 +9,5 @@ The user-supplied REA findings report was used as architecture/interaction conte
 ## V2 hardware assets
 
 All v2 procedural geometry and roughness textures are authored locally. No vendor photographs or CAD meshes are bundled. NVIDIA and Supermicro references were viewed for shapes and service relationships only; their marks remain their owners' property. The studio environment is generated using RoomEnvironment from the existing MIT-licensed Three.js dependency. No new third-party runtime dependency was added.
+
+The Signal Intelligence PNG under `public/brand` is supplied by the user for this project's branding. It is preserved unchanged and packaged locally. Its use does not imply a third-party vendor endorsement or an open-source license grant for the artwork.

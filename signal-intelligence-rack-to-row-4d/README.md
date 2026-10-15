@@ -72,3 +72,7 @@ Read [VISUAL_FIDELITY_DELTA.md](VISUAL_FIDELITY_DELTA.md) for before/after, engi
 Ironwood inspection: choose **Google Ironwood cube**, drill into a compute tray, and use **CAD cutaway** to see four individually selectable, labeled TPU packages. Package drill shows the two conceptual chiplets. The 16-tray/64-chip cube and TPU ICI/OCS topology are preserved.
 
 ![Four TPUs mounted in an Ironwood tray](evidence/v2/ironwood-tray-tpus.png)
+
+## Signal Intelligence branding
+
+The top-left symbol and browser icon use the supplied Signal Intelligence image, stored locally and unchanged. Near-black surfaces, silver typography and blue accents carry the brand through controls, charts and selection outlines. See [BRAND_GUIDE.md](BRAND_GUIDE.md) for palette/asset conventions and `evidence/v2/brand-desktop.png` for the running application.

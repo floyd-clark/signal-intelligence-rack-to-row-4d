@@ -220,12 +220,12 @@ function Part({
         <boxGeometry args={size} />
       )}
       <meshStandardMaterial
-        color={selected ? "#d2fff2" : hover ? "#b7dddc" : color}
+        color={selected ? "#e0f1ff" : hover ? "#d5eaff" : color}
         metalness={record.type === "tray" ? 0.35 : 0.62}
         roughness={0.34}
         transparent
         opacity={s.xray ? 0.35 : record.type === "door" ? 0.12 : 1}
-        emissive={selected ? "#3e9f90" : affected ? "#6f3518" : "#000"}
+        emissive={selected ? "#287dc2" : affected ? "#6f3518" : "#000"}
         emissiveIntensity={0.25}
       />
       {hover && (

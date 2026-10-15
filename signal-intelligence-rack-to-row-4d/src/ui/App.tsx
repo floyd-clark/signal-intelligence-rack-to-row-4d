@@ -398,9 +398,17 @@ export function App() {
           </button>
         </div>
         <div className="brand">
-          <span className="brandmark">◈</span>
+          <span className="brandmark">
+            <img
+              src="/brand/signal-intelligence-symbol.png"
+              alt="Signal Intelligence symbol"
+              width="90"
+              height="90"
+            />
+          </span>
           <div>
-            SIGNAL INTELLIGENCE<small>RACK-TO-ROW · 4D DIGITAL TWIN</small>
+            <span className="brand-name">SIGNAL INTELLIGENCE</span>
+            <small>RACK-TO-ROW · 4D DIGITAL TWIN</small>
           </div>
         </div>
         <div className="header-status">● LOCAL SIMULATION</div>
@@ -895,7 +903,7 @@ export function App() {
               <path
                 d={`M ${values.map((v, i) => `${i * 10},${48 - ((v - min) / (max - min)) * 40}`).join(" L ")}`}
                 fill="none"
-                stroke="#64cbb8"
+                stroke="var(--brand-accent)"
                 strokeWidth="1.6"
               />
               {compare && (

@@ -1,3 +1,13 @@
+/* Signal Intelligence: supplied silver/blue symbol on near-black surfaces. */
+:root {
+  --brand-accent: #66baff;
+  --brand-accent-bright: #a9dcff;
+  --brand-selected: #132d47;
+  --brand-border: #356c9c;
+  --brand-ink: #03070c;
+  --brand-surface: #0b141f;
+  --brand-silver: #e5edf6;
+}
 * {
   box-sizing: border-box;
 }
@@ -7,16 +17,16 @@ body,
   margin: 0;
   min-height: 100%;
   font-family: "Segoe UI", sans-serif;
-  background: #0b1119;
-  color: #c6d2df;
+  background: #070c13;
+  color: #d1dce8;
   font-size: 13px;
 }
 button,
 input,
 select {
   font: inherit;
-  color: #c6d2df;
-  background: #14212e;
+  color: #d1dce8;
+  background: #101d2c;
   border: 1px solid #2c3c4c;
   border-radius: 5px;
   padding: 8px;
@@ -25,7 +35,7 @@ button {
   cursor: pointer;
 }
 button:hover {
-  background: #253b49;
+  background: #1b344e;
   color: #fff;
 }
 button:disabled {
@@ -34,12 +44,12 @@ button:disabled {
 }
 button.active,
 button[aria-pressed="true"] {
-  background: #1c3c40;
-  border-color: #4d9d95;
-  color: #9be9d5;
+  background: var(--brand-selected);
+  border-color: var(--brand-border);
+  color: var(--brand-accent-bright);
 }
 :focus-visible {
-  outline: 2px solid #90e1cd;
+  outline: 2px solid var(--brand-accent);
   outline-offset: 2px;
 }
 select {
@@ -48,10 +58,10 @@ select {
 input[type="range"] {
   width: 100%;
   padding: 0;
-  accent-color: #6bcbb6;
+  accent-color: var(--brand-accent);
 }
 input[type="checkbox"] {
-  accent-color: #6bcbb6;
+  accent-color: var(--brand-accent);
 }
 header {
   height: 76px;
@@ -59,8 +69,8 @@ header {
   align-items: center;
   gap: 12px;
   padding: 0 22px;
-  border-bottom: 1px solid #273544;
-  background: #0e1721;
+  border-bottom: 1px solid var(--brand-border);
+  background: var(--brand-ink);
 }
 .brand {
   display: flex;
@@ -69,25 +79,45 @@ header {
   font-weight: 650;
   letter-spacing: 2px;
   min-width: 310px;
-  color: #edf4f8;
+  color: var(--brand-silver);
 }
 .brand small {
   display: block;
   font-size: 9px;
   letter-spacing: 2px;
-  color: #7990a3;
+  color: #8da9c6;
   margin-top: 6px;
 }
 .brandmark {
-  font-size: 35px;
-  color: #73d1bb;
+  position: relative;
+  display: block;
+  flex: 0 0 60px;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  background: #000;
+}
+.brandmark img {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  max-width: none;
+  left: -15px;
+  top: -13px;
+}
+.brand-name {
+  background: linear-gradient(115deg, #f4f7fa, #bfcede 58%, #73beff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  white-space: nowrap;
 }
 .header-status {
   font-size: 10px;
   letter-spacing: 1px;
   margin-right: auto;
   white-space: nowrap;
-  color: #77c9b2;
+  color: var(--brand-accent);
 }
 .notice {
   padding: 8px 24px;
@@ -145,7 +175,7 @@ aside {
   display: flex;
   gap: 12px;
   font-size: 25px;
-  color: #8cdbc9;
+  color: var(--brand-accent-bright);
 }
 .level-label span {
   font-size: 12px;
@@ -177,7 +207,7 @@ aside {
 }
 .overlays span {
   margin-right: 6px;
-  color: #76c4bd;
+  color: var(--brand-accent);
   font-size: 15px;
 }
 .tree {
@@ -196,7 +226,7 @@ aside {
   padding: 8px 3px;
 }
 .tree button.selected {
-  background: #1c393d;
+  background: var(--brand-selected);
 }
 .tree small {
   float: right;
@@ -240,7 +270,7 @@ h1 {
   text-align: right;
   letter-spacing: 1px;
   font-size: 10px;
-  color: #a7d3cd;
+  color: #a9cfee;
 }
 .scene-badge small {
   color: #738c9e;
@@ -290,13 +320,13 @@ h1 {
   display: block;
   font-size: 29px;
   font-weight: 400;
-  color: #d9eee9;
+  color: var(--brand-silver);
   margin: 8px 0;
 }
 .metrics em {
   font-size: 12px;
   font-style: normal;
-  color: #8bafad;
+  color: #8faccc;
   margin-left: 4px;
 }
 .metrics span {
@@ -320,7 +350,7 @@ h1 {
 }
 .timeline b {
   white-space: nowrap;
-  color: #c4dacf;
+  color: #c4d9ef;
 }
 .timeline small {
   font-size: 10px;
@@ -329,7 +359,7 @@ h1 {
 .chart {
   height: 57px;
   width: 100%;
-  background: linear-gradient(transparent, #142b2e);
+  background: linear-gradient(transparent, #132b46);
   border-bottom: 1px solid #31434d;
   margin-top: 4px;
 }
@@ -387,8 +417,8 @@ h1 {
   padding: 10px 6px;
 }
 .tabs button.active {
-  border-bottom: 2px solid #83cbbb;
-  color: #b6e2d8;
+  border-bottom: 2px solid var(--brand-accent);
+  color: var(--brand-accent-bright);
 }
 .inspector h3 {
   font-size: 11px;
@@ -427,7 +457,7 @@ summary {
   color: #b5c9d3;
 }
 a {
-  color: #7ac7bb;
+  color: var(--brand-accent);
 }
 .inspector button {
   font-size: 10px;
@@ -438,9 +468,9 @@ a {
   font-size: 10px;
 }
 .primary {
-  background: #28584f;
-  border-color: #4a8e7f;
-  color: #d6f4eb;
+  background: #174e7c;
+  border-color: #438ac6;
+  color: #e0f1ff;
 }
 .test {
   background: #122431;
@@ -458,7 +488,7 @@ a {
   border: 1px solid #2e4354;
 }
 .rca div {
-  border-left: 2px solid #497d79;
+  border-left: 2px solid var(--brand-border);
   margin: 9px 0;
   padding: 5px 8px;
   font-size: 10px;
@@ -578,7 +608,7 @@ footer button {
 }
 .compare-grid dt {
   margin-top: 13px;
-  color: #6eaeaa;
+  color: var(--brand-accent);
   font-size: 11px;
 }
 .compare-grid dd {
@@ -613,9 +643,9 @@ footer button {
   display: flex;
   align-items: center;
   gap: 15px;
-  background: #29453e;
+  background: #183553;
   padding: 10px;
-  border: 1px solid #6aab98;
+  border: 1px solid var(--brand-border);
   border-radius: 5px;
   font-size: 11px;
 }
@@ -728,7 +758,7 @@ footer button {
 .role-brief {
   border: 1px solid #314551;
   padding: 8px;
-  color: #8dbeb5 !important;
+  color: #a0c6e8 !important;
   font-size: 10px !important;
 }
 .inspector pre {
@@ -758,7 +788,7 @@ header {
   padding: 0 14px;
 }
 .brand {
-  min-width: 260px;
+  min-width: 290px;
   font-size: 12px;
 }
 header > button {
@@ -881,10 +911,10 @@ header > button {
   transform: translateX(-50%);
   z-index: 4;
   padding: 7px 12px;
-  background: #152b32e8;
-  border: 1px solid #547b79;
+  background: #10253de8;
+  border: 1px solid var(--brand-border);
   border-radius: 4px;
   pointer-events: none;
   font-size: 11px;
-  color: #d0e6df;
+  color: #d6e9fa;
 }

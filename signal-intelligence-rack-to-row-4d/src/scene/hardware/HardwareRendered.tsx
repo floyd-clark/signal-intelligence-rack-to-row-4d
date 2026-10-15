@@ -19,7 +19,7 @@ export function HardwareRendered({ asset }: { asset: RenderAsset }) {
   const helper = useMemo(
     () =>
       owner
-        ? new Box3Helper(owner.bounds, new Color(hover ? "#b9dcd3" : "#79bdad"))
+        ? new Box3Helper(owner.bounds, new Color(hover ? "#d5eaff" : "#66baff"))
         : null,
     [owner, hover],
   );

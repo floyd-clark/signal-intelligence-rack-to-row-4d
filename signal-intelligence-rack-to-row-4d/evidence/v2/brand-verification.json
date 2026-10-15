@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "symbolSHA256": "c138b03c8c0dbbe0d958f136409da5ce1a793f0d83ab93cc1993e1831c54cbf0",
+  "desktop": {
+    "x": 14,
+    "y": 7.5,
+    "width": 60,
+    "height": 60
+  },
+  "narrow": {
+    "x": 8,
+    "y": 8,
+    "width": 60,
+    "height": 60
+  },
+  "colors": {
+    "accent": "#66baff",
+    "header": "rgb(3, 7, 12)",
+    "active": "rgb(19, 45, 71)"
+  },
+  "headerOverflow": false,
+  "errors": [],
+  "remote": [],
+  "checks": [
+    "supplied local image decoded",
+    "accessible symbol name",
+    "top-left placement at 1920 and 1280 widths",
+    "brand palette applied",
+    "panel collapse and responsive header",
+    "remote requests blocked"
+  ]
+}
