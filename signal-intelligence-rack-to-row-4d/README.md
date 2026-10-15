@@ -4,6 +4,8 @@ Working local React/TypeScript/WebGL educational application. Rack Catalogue 2.0
 
 [Public Rack Catalogue 2.0](https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1) · the same build remains available offline through the startup script below.
 
+[Publication and live-site verification](PUBLICATION.md)
+
 ## Run on Windows
 
 ```powershell

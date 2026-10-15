@@ -29,6 +29,14 @@
     "Offline loopback production distribution"
   ],
   "humanVisualAcceptance": "User reports >=90/100 for all ten base families; lower bound recorded in human-review.json; Rubin unscored",
+  "publicDeployment": {
+    "url": "https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1",
+    "githubPagesBuild": "built",
+    "sourceCommit": "2dcde2a19d10d16555e82eba9751707872954060",
+    "staticCommit": "32c574abe4df791fef2568bd83c9f959fc5f5ac7",
+    "verification": "public-verification.json",
+    "passed": true
+  },
   "notes": [
     "Windows file lock encountered when overwriting historical screenshot; final tests write separate catalogue evidence paths and all nine pass",
     "Final row-context ownership is covered by an additional unit check and native runtime captures"
