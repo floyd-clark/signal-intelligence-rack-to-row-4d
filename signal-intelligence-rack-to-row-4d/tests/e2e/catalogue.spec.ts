@@ -1,6 +1,9 @@
 import { test, expect, type Page } from "@playwright/test";
 import { PerspectiveCamera, Vector3 } from "three";
 import fs from "node:fs/promises";
+test.beforeAll(async () => {
+  await fs.mkdir("evidence/catalogue-v2/lifecycle", { recursive: true });
+});
 test("gallery images, generation delta, corresponding concepts, keyboard and fallback remain usable", async ({
   page,
 }) => {
@@ -180,7 +183,7 @@ test("all ten families retain real front/rear picking, accessible IDs, detailed 
   expect(errors).toEqual([]);
   expect(remote).toEqual([]);
   await fs.writeFile(
-    "evidence/catalogue-v2/picking-offline.json",
+    "evidence/catalogue-v2/lifecycle/picking-offline.json",
     JSON.stringify({ passed: true, results, errors, remote }, null, 2),
   );
 });
@@ -209,10 +212,24 @@ test("A/B synchronized orbit, independent overlays, selection, deterministic fai
     { steps: 8 },
   );
   await page.mouse.up();
-  await page.waitForTimeout(700);
-  const after = await audit(page);
-  for (let j = 0; j < 3; j++)
-    expect(Math.abs(after.a.camera[j] - after.b.camera[j])).toBeLessThan(0.04);
+  await page.getByRole("button", { name: "Catalogue render audit" }).click();
+  await expect
+    .poll(
+      async () => {
+        const after = JSON.parse(
+          await page.getByTestId("catalogue-audit").innerText(),
+        );
+        if (!after.a?.camera || !after.b?.camera) return Infinity;
+        return Math.max(
+          ...after.a.camera.map((v: number, j: number) =>
+            Math.abs(v - after.b.camera[j]),
+          ),
+        );
+      },
+      { timeout: 5000 },
+    )
+    .toBeLessThan(0.04);
+  await page.getByRole("button", { name: "Catalogue render audit" }).click();
   await page.getByLabel("Overlay A", { exact: true }).selectOption("Cooling");
   await expect(page.getByLabel("Overlay B", { exact: true })).toHaveValue(
     "Cooling",
@@ -239,7 +256,7 @@ test("A/B synchronized orbit, independent overlays, selection, deterministic fai
     .getByLabel("Import catalogue replay", { exact: true })
     .setInputFiles(path!);
   await expect(page.getByRole("status")).toContainText("Replay loaded");
-  await page.getByRole("button", { name: "NPI", exact: true }).click();
+  await page.getByRole("button", { name: "L1–L12", exact: true }).click();
   await page.getByLabel("Catalogue assembly level").fill("2");
   await page.waitForTimeout(1100);
   expect(
@@ -278,7 +295,7 @@ test("all twenty scenario demonstrations change the correct synthetic state and 
     }
   }
   await fs.writeFile(
-    "evidence/catalogue-v2/scenario-regression.json",
+    "evidence/catalogue-v2/lifecycle/scenario-regression.json",
     JSON.stringify({ passed: true, scenarios: results }, null, 2),
   );
 });

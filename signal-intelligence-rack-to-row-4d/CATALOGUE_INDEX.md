@@ -17,6 +17,8 @@ The ten entries are working original procedural models with automated front/rear
 
 Each base family has two authored synthetic scenarios, a six-chapter/60-second tour, three offline self-checks, an open TPM prompt and architecture-adapted L1–L12 fixtures. Procurement cost, MTTR, deployed wattage and comparative accelerator speed are not invented.
 
+**L1–L12 is directly accessible on every card and above each 3D pane.** Each family/generation retains its own stage, sequential evidence and signed fixture gates across refresh. See [L1–L12 workflow and validation](CATALOGUE_L1_L12.md).
+
 ## Hero before / after
 
 - GB300: the baseline already had the v2 GB200-style geometry. This revision retains that investment and adds a generation-specific GB300 registry, correct Enterprise RA power details, independently owned switch/cartridge geometry and synchronized comparison. It does not claim that every inherited package dimension is B300 CAD.

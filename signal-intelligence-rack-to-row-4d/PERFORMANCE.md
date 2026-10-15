@@ -8,7 +8,7 @@ Each base-family rack sample contains five one-second FPS readings after a settl
 |---|---:|---:|---:|
 | Enterprise EIA | 48 | 11 | 55,490 |
 | OCP ORv3 | 72 | 11 | 21,470 |
-| DGX B200 | 62 | 11 | 38,642 |
+| DGX B200 | 72 | 10 | 39,914 |
 | GB300 NVL72 | 69 | 13 | 65,518 |
 | AMD Helios | 72 | 13 | 56,686 |
 | Google Ironwood | 54 | 14 | 59,862 |
@@ -17,7 +17,7 @@ Each base-family rack sample contains five one-second FPS readings after a settl
 | Cerebras CS-4 | 56 | 10 | 10,838 |
 | HPE Cray EX4000 | 67 | 13 | 54,766 |
 
-The base-family median range is 48–72 FPS. Cray's row reflects the final refresh; the other nine retain the full capture samples. Individual samples fluctuate; see the raw minimum/maximum and sample arrays rather than interpreting medians as a sustained floor. A/B comparison has two independently rendered canvases, so its total calls and triangles are the sum of both sides. The recorded GB300/Helios cooling pair uses 26 calls and 125,660 triangles total, with a median of 72 FPS per side in the final five short readings. Its separately recorded audit is under `metrics.comparison`; no all-pair sustained FPS claim is made.
+The base-family median range is 48–72 FPS. Cray's row reflects the final refresh. DGX reflects the L1–L12 restoration at L12, including its added AC distribution, with five native readings of 72 FPS; see evidence/catalogue-v2/publication-local-verification.json. The other eight retain the full capture samples. Individual samples fluctuate; see the raw minimum/maximum and sample arrays rather than interpreting medians as a sustained floor. A/B comparison has two independently rendered canvases, so its total calls and triangles are the sum of both sides. The recorded GB300/Helios cooling pair uses 26 calls and 125,660 triangles total, with a median of 72 FPS per side in the final five short readings. Its separately recorded audit is under `metrics.comparison`; no all-pair sustained FPS claim is made.
 
 Two complete family-switch cycles recorded equal geometry/texture counts for corresponding families after settling. They demonstrate bounded object counts across that test, not byte-level GPU-memory use or a long-duration leak proof. Batched material geometry limits draw calls; generated environment lighting and model assets stay local. The capture recorded no uncaught page exceptions and no external runtime requests.
 

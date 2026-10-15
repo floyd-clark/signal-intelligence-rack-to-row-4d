@@ -138,6 +138,25 @@ export function orv3(a: Assembly, d: Architecture, o: ModelOptions) {
 }
 export function dgx(a: Assembly, d: Architecture, o: ModelOptions) {
   shell(a, d, o);
+  // Illustrative rack AC distribution, separate from each DGX node's fans/NICs.
+  const power = part(d, "power/1");
+  for (const x of [-d.width * 0.44, d.width * 0.44]) {
+    a.box(
+      power,
+      "polymer",
+      [x, 2.1, -d.depth / 2 + 0.03],
+      [0.12, 3.75, 0.1],
+      0.1,
+    );
+    for (let i = 0; i < 4; i++) {
+      a.withTransform(
+        [x, 0.65 + i * 0.84, -d.depth / 2 - 0.04],
+        [1, 1, 1],
+        () => connector(a, power, [0, 0, 0], 0.09, 0.12),
+        [0, Math.PI, 0],
+      );
+    }
+  }
   for (let i = 0; i < 4; i++) {
     const y = 0.65 + i * 0.84,
       id = part(d, `tray/${i + 1}`),

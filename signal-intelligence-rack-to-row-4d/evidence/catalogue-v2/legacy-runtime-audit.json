@@ -8,7 +8,7 @@
   "sourceCoverage": 3266,
   "verifiedCards": 0,
   "renderedScope": "major assemblies; internals revealed on drill",
-  "fps": 4,
+  "fps": 3,
   "drawCalls": 22,
   "triangles": 55664,
   "geometries": 34,
@@ -19,7 +19,8 @@
   "fpsSamples": [
     2,
     4,
-    4
+    3,
+    3
   ],
   "quality": "Balanced",
   "tick": 3,
@@ -858,12 +859,12 @@
     },
     "camera": [
       6,
-      4.7,
+      4.699999999999999,
       7
     ],
     "target": [
       0,
-      1.9999873727429132,
+      1.9999957460084152,
       0
     ],
     "quality": "Balanced",

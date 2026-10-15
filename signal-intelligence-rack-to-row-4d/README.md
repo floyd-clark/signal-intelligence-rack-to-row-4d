@@ -6,6 +6,8 @@ Working local React/TypeScript/WebGL educational application. Rack Catalogue 2.0
 
 [Publication and live-site verification](PUBLICATION.md)
 
+**L1–L12:** choose **L1–L12 integration** on any catalogue card, or use the twelve level buttons above either hardware view. [Per-family assembly, gate evidence and saved progress](CATALOGUE_L1_L12.md).
+
 ## Run on Windows
 
 ```powershell

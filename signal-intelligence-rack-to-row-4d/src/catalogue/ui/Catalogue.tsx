@@ -19,6 +19,8 @@ import {
   threePhaseCurrent,
 } from "../scenarios/engine";
 import type { Architecture, Concept, FamilyId } from "../types";
+import { lifecycleKey } from "../lifecycle";
+import { AssemblyStages, LifecyclePanel } from "./Lifecycle";
 import "./catalogue.css";
 const concepts: Concept[] = [
   "compute",
@@ -55,11 +57,14 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
     [workload, setWorkload] = useState("Model-parallel training"),
     [facility, setFacility] = useState("Liquid-ready"),
     [budget, setBudget] = useState(50),
-    [uptime, setUptime] = useState("Redundancy-first"),
-    [gates, setGates] = useState<Record<string, boolean>>({});
+    [uptime, setUptime] = useState("Redundancy-first");
   const a = resolveArchitecture(architectureById[s.a], s.variantA),
     b = resolveArchitecture(architectureById[s.b], s.variantB),
-    d = inspectorSide === "a" ? a : b;
+    d = s.screen === "compare" && inspectorSide === "b" ? b : a;
+  const level = s.assemblyLevels[lifecycleKey(d)] ?? 12;
+  useEffect(() => {
+    if (s.screen !== "compare") setInspectorSide("a");
+  }, [s.screen]);
   const replay = s.replays[d.architectureId] || blankReplay(d.architectureId),
     snap = catalogueSnapshot(d, replay, s.time);
   const current = d.components.find(
@@ -142,6 +147,8 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
       data-family-b={s.b}
       data-focus={s.focus}
       data-time={s.time}
+      data-level-a={s.assemblyLevels[lifecycleKey(a)] ?? 12}
+      data-level-b={s.assemblyLevels[lifecycleKey(b)] ?? 12}
     >
       <header>
         <div className="brand">
@@ -275,6 +282,20 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                     }}
                   >
                     Explore hardware →
+                  </button>
+                  <button
+                    aria-label={`L1–L12 for ${d.familyName}`}
+                    onClick={() => {
+                      s.choose("a", d.architectureId);
+                      s.set({ screen: "studio" });
+                      setInspectorSide("a");
+                      setInspectorOpen(true);
+                      setTab("L1–L12");
+                      if (s.assemblyLevels[lifecycleKey(d)] === undefined)
+                        s.setAssemblyLevel(d, 1);
+                    }}
+                  >
+                    L1–L12 integration
                   </button>
                   <button
                     disabled={!builders[d.shape]}
@@ -515,6 +536,15 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                     key={side}
                     onPointerDown={() => setInspectorSide(side as "a" | "b")}
                   >
+                    <AssemblyStages
+                      d={side === "a" ? a : b}
+                      side={side as "a" | "b"}
+                      onOpen={() => {
+                        setInspectorSide(side as "a" | "b");
+                        setInspectorOpen(true);
+                        setTab("L1–L12");
+                      }}
+                    />
                     <div className="cat-overlay-controls">
                       <label>
                         {side.toUpperCase()} overlay{" "}
@@ -540,8 +570,14 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                     </div>
                     {s.fallback ? (
                       <div className="cat-fallback">
-                        {architectureById[s[side as "a" | "b"]].components
-                          .filter((p) => p.level <= s.level)
+                        {(side === "a" ? a : b).components
+                          .filter(
+                            (p) =>
+                              p.level <=
+                              (s.assemblyLevels[
+                                lifecycleKey(side === "a" ? a : b)
+                              ] ?? 12),
+                          )
                           .slice(0, 90)
                           .map((p) => (
                             <button
@@ -627,7 +663,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                   "Explain",
                   "Investigate",
                   "Compare",
-                  "NPI",
+                  "L1–L12",
                   "Learn",
                   "Sources",
                 ].map((t) => (
@@ -710,7 +746,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                       {d.components
                         .filter(
                           (p) =>
-                            p.level <= s.level &&
+                            p.level <= level &&
                             `${p.name} ${p.id}`
                               .toLowerCase()
                               .includes(search.toLowerCase()),
@@ -752,6 +788,20 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                         </option>
                       ))}
                   </select>
+                  <button
+                    disabled={!replay.fault}
+                    onClick={() =>
+                      s.set({
+                        replays: {
+                          ...s.replays,
+                          [d.architectureId]: blankReplay(d.architectureId),
+                        },
+                        playing: false,
+                      })
+                    }
+                  >
+                    Clear family incident
+                  </button>
                   {snap.fault && (
                     <>
                       <p>{snap.fault.signature}</p>
@@ -998,62 +1048,18 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                   </div>
                 </>
               )}
-              {tab === "NPI" && (
-                <>
-                  <h3>Architecture-adapted L1–L12</h3>
-                  <label>
-                    Assembly level {s.level}
-                    <input
-                      aria-label="Catalogue assembly level"
-                      type="range"
-                      min="1"
-                      max="12"
-                      value={s.level}
-                      onChange={(e) =>
-                        s.set({ level: +e.target.value, focus: "rack" })
-                      }
-                    />
-                  </label>
-                  {d.lifecycleStages.map((l) => (
-                    <div className="cat-gate" key={l.level}>
-                      <strong>
-                        L{l.level} · {l.name}
-                      </strong>
-                      <small>{l.note}</small>
-                      <button
-                        disabled={
-                          !l.applicable ||
-                          (l.level > 1 &&
-                            !gates[
-                              `${d.architectureId}-${d.lifecycleStages.filter((x) => x.applicable && x.level < l.level).at(-1)?.level || 0}`
-                            ] &&
-                            d.lifecycleStages.some(
-                              (x) => x.applicable && x.level < l.level,
-                            ))
-                        }
-                        onClick={() =>
-                          setGates({
-                            ...gates,
-                            [`${d.architectureId}-${l.level}`]: true,
-                          })
-                        }
-                      >
-                        {!l.applicable
-                          ? "N/A — validate airflow"
-                          : gates[`${d.architectureId}-${l.level}`]
-                            ? "Fixture evidence collected"
-                            : "Collect synthetic gate evidence"}
-                      </button>
-                    </div>
-                  ))}
-                  <p>
-                    DVT/PVT fixture: service alignment, power reserve,
-                    flow/thermal soak and topology qualification. ECO example:
-                    connector revision needs requalification. Long-lead example:
-                    accelerator and optical modules. These are program teaching
-                    fixtures, not supplier commitments or certification.
-                  </p>
-                </>
+              {tab === "L1–L12" && (
+                <LifecyclePanel
+                  key={lifecycleKey(d)}
+                  d={d}
+                  activeFault={!!snap.fault}
+                  onExport={(data) =>
+                    save(
+                      `${d.architectureId}-${d.shape}-L1-L12-evidence.json`,
+                      data,
+                    )
+                  }
+                />
               )}
               {tab === "Learn" && (
                 <>

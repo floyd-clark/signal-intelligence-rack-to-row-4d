@@ -17,6 +17,7 @@ import type { Architecture, ViewMode } from "../types";
 import { buildModel } from "../models";
 import { resolveOwner } from "../../scene/hardware/assembly";
 import { catalogueSnapshot, blankReplay } from "../scenarios/engine";
+import { lifecycleKey } from "../lifecycle";
 export const catalogueAudit: Record<string, any> = {};
 export const captureCatalogue: Record<
   string,
@@ -26,13 +27,14 @@ const cache = new Map<string, { position: number[]; target: number[] }>();
 let drivingSide: "a" | "b" | null = null;
 function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
   const s = useCatalogue();
+  const level = s.assemblyLevels[lifecycleKey(d)] ?? 12;
   const replay = s.replays[d.architectureId] || blankReplay(d.architectureId);
   const snap = catalogueSnapshot(d, replay, s.time);
   const asset = useMemo(
     () =>
       buildModel(d, {
         view: s.focus,
-        level: s.level,
+        level,
         explode: s.explode,
         cutaway: s.cutaway,
         quality: s.quality,
@@ -46,7 +48,7 @@ function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
     [
       d,
       s.focus,
-      s.level,
+      level,
       s.explode,
       s.cutaway,
       s.quality,
@@ -84,6 +86,7 @@ function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
   useEffect(() => {
     catalogueAudit[side] = {
       family: d.architectureId,
+      level,
       owners: Object.fromEntries(
         [...asset.owners].map(([id, o]) => [
           id,

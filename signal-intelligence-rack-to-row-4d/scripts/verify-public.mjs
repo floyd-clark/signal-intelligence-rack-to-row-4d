@@ -22,6 +22,9 @@ try {
   const response = await page.goto(url);
   expect(response.status()).toBe(200);
   await expect(page.locator(".cat-card")).toHaveCount(10);
+  await expect(
+    page.locator(".cat-card button", { hasText: "L1–L12 integration" }),
+  ).toHaveCount(10);
   await expect
     .poll(() =>
       page
@@ -55,6 +58,84 @@ try {
   await page.getByLabel("Catalogue fault").selectOption("CAT-04-1");
   await page.getByLabel("Catalogue time").fill("180");
   await expect(page.locator(".cat-inspector")).toContainText("27 affected");
+  await page
+    .getByTestId("assembly-a")
+    .getByRole("button", { name: /^A L1 / })
+    .click();
+  await expect(
+    page.getByTestId("assembly-a").locator(".cat-stage-buttons button"),
+  ).toHaveCount(12);
+  await expect(page.getByTestId("assembly-b")).toHaveAttribute(
+    "data-level",
+    "12",
+  );
+  await page
+    .getByRole("button", { name: "Run simulated test 1", exact: true })
+    .click();
+  await expect(page.getByTestId("gate-result-0")).toContainText("FAIL");
+  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Clear family incident", exact: true })
+    .click();
+  await page.getByRole("button", { name: "L1–L12", exact: true }).click();
+  for (let i = 1; i <= 3; i++)
+    await page
+      .getByRole("button", { name: `Run simulated test ${i}`, exact: true })
+      .click();
+  await page
+    .getByLabel("Catalogue gate evidence note")
+    .fill("Live public synthetic fixture verification");
+  await page
+    .getByRole("button", { name: "Sign earned L1 pass", exact: true })
+    .click();
+  await expect(
+    page.locator(".cat-lifecycle-panel [role=status]"),
+  ).toContainText("L1 synthetic pass signed");
+  await page
+    .getByTestId("assembly-a")
+    .getByRole("button", { name: /^A L3 / })
+    .click();
+  await page.waitForTimeout(500);
+  await page.screenshot({
+    path: `${root}/${prefix}-lifecycle.png`,
+    fullPage: true,
+  });
+  await page
+    .getByRole("button", { name: "Architecture studio", exact: true })
+    .click();
+  await page
+    .getByLabel("Architecture A", { exact: true })
+    .selectOption("CAT-03");
+  await page
+    .getByTestId("assembly-a")
+    .getByRole("button", { name: /^A L2 / })
+    .click();
+  await page.getByLabel("Catalogue camera").selectOption("rear");
+  await page.waitForTimeout(600);
+  await page.screenshot({
+    path: `${root}/${prefix}-DGX-L2-power.png`,
+    fullPage: true,
+  });
+  await page
+    .getByTestId("assembly-a")
+    .getByRole("button", { name: /^A L12 / })
+    .click();
+  await page.getByLabel("Catalogue camera").selectOption("oblique");
+  await page.waitForTimeout(5500);
+  await page.getByRole("button", { name: "Catalogue render audit" }).click();
+  const dgx = JSON.parse(
+    await page.getByTestId("catalogue-audit").innerText(),
+  ).a;
+  await page.getByRole("button", { name: "Catalogue render audit" }).click();
+  const dgxPerformance = {
+    fpsSamples: dgx.fpsSamples.slice(-5),
+    drawCalls: dgx.drawCalls,
+    triangles: dgx.renderTriangles,
+    renderer: dgx.renderer,
+    viewport: [1920, 1080],
+    quality: "Balanced",
+    level: 12,
+  };
   await page.getByRole("button", { name: "Return to 4D lab" }).click();
   await expect(page.getByLabel("Architecture profile")).toHaveValue(
     "FS_CONCEPT",
@@ -74,6 +155,14 @@ try {
         drawCalls: [audit.a.drawCalls, audit.b.drawCalls],
         renderer: audit.a.renderer,
         scopedFaultAffected: 27,
+        lifecycle: {
+          cardEntries: 10,
+          stageButtonsPerPane: 12,
+          independentABLevels: true,
+          activeIncidentBlocks: true,
+          l1Signoff: true,
+        },
+        dgxPerformance,
         legacyReturn: true,
         errors,
         failedResponses,
@@ -86,7 +175,12 @@ try {
     JSON.stringify({
       url,
       passed: true,
-      screenshots: [`${prefix}-gallery.png`, `${prefix}-comparison.png`],
+      screenshots: [
+        `${prefix}-gallery.png`,
+        `${prefix}-comparison.png`,
+        `${prefix}-lifecycle.png`,
+        `${prefix}-DGX-L2-power.png`,
+      ],
     }),
   );
 } finally {

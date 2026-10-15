@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-15",
+  "build": "npm run build passed",
+  "unit": { "command": "npm test", "passed": 45, "failed": 0, "files": 4, "durationSeconds": 4.86 },
+  "browser": {
+    "validatedWorkflows": 12,
+    "legacyWorkflows": 5,
+    "catalogueWorkflows": 7,
+    "details": "Five unchanged legacy workflows passed in the full restoration run. Six final catalogue workflows passed together; the camera synchronization workflow passed its focused rerun after replacing a fixed delay with convergence polling at the same 0.04 tolerance.",
+    "finalCatalogueCommand": "npm run test:e2e -- tests/e2e/catalogue-lifecycle.spec.ts tests/e2e/catalogue.spec.ts",
+    "focusedRerunCommand": "npm run test:e2e -- tests/e2e/catalogue.spec.ts --grep 'A/B synchronized'",
+    "focusedRerunPassed": 1
+  },
+  "coverage": {
+    "families": 10,
+    "stagesPerFamily": 12,
+    "applicableSyntheticSignoffs": 118,
+    "explicitAirOnlyNaStages": 2,
+    "realStageGeometry": [1, 2, 3, 12],
+    "savedProgressReload": true,
+    "independentArchitectureAndGenerationEvidence": true,
+    "activeIncidentBlockingAndClearing": true,
+    "downstreamInvalidation": true,
+    "evidenceExport": true
+  },
+  "nativeVerification": "../publication-local-verification.json",
+  "resolvedFindings": [
+    "DGX lacked a physical owned power assembly at L2; original illustrative AC distribution added",
+    "First AC placement occluded a rear NIC pick; relocated inside the rear service channel and the real rear selection test passes",
+    "Historical scenario evidence file was locked by Windows; current restoration artifacts use their own directory",
+    "Concurrent browser rendering caused three unit timeout failures; isolated final suite passes without loosening timeouts",
+    "Fixed 700ms camera assertion sampled damping before convergence; state-based polling retains the original 0.04 pose tolerance"
+  ],
+  "syntheticQualificationOnly": true
+}

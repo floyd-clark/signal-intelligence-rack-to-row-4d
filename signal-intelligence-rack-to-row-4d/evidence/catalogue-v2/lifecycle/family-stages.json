@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "id": "CAT-01",
+      "namedStages": 12,
+      "shellTriangles": 2148,
+      "completeTriangles": 55488,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-02",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 21468,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-03",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 39912,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-04",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 65516,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-05",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 56684,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-06",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 59860,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-07",
+      "namedStages": 12,
+      "shellTriangles": 6300,
+      "completeTriangles": 36888,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-08",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 25440,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-09",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 10836,
+      "powerAtL2": true,
+      "traysAtL3": true
+    },
+    {
+      "id": "CAT-10",
+      "namedStages": 12,
+      "shellTriangles": 2100,
+      "completeTriangles": 54764,
+      "powerAtL2": true,
+      "traysAtL3": true
+    }
+  ]
+}
