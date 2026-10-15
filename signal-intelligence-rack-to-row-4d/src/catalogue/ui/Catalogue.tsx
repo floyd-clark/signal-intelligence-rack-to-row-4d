@@ -147,7 +147,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
         <div className="brand">
           <span className="brandmark">
             <img
-              src="/brand/signal-intelligence-symbol.png"
+              src={`${import.meta.env.BASE_URL}brand/signal-intelligence-symbol.png`}
               alt="Signal Intelligence symbol"
               width="90"
               height="90"
@@ -240,7 +240,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
               <article className="cat-card" key={d.architectureId}>
                 <div className="cat-thumb">
                   <img
-                    src={`/catalogue-thumbs/${d.architectureId}.png`}
+                    src={`${import.meta.env.BASE_URL}catalogue-thumbs/${d.architectureId}.png`}
                     alt={`${d.familyName} original 3D model preview`}
                     onError={(e) => {
                       e.currentTarget.style.display = "none";

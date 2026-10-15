@@ -1,6 +1,6 @@
 # Rack Catalogue 2.0 — implementation handoff
 
-Local branch: `codex/rack-catalogue-2`, based on published `266055b`. The baseline audit confirmed the existing detailed v2 geometry, four dual-chiplet TPUs per Ironwood host and approved Signal Intelligence branding before implementation. No current catalogue changes have been pushed or deployed.
+Feature branch: `codex/rack-catalogue-2`, based on published `266055b`. The baseline audit confirmed the existing detailed v2 geometry, four dual-chiplet TPUs per Ironwood host and approved Signal Intelligence branding before implementation. The user authorized public repository/site publication on October 15 after the local handoff was committed. Publication uses the tested static distribution with paths compatible with both loopback and the GitHub Pages repository prefix.
 
 ## Hardware and architecture data
 

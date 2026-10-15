@@ -2,6 +2,8 @@
 
 Local-first interactive hardware, simulation and diagnostic education. The catalogue adds ten distinct architecture families, synchronized true-3D A/B comparison, twenty synthetic fault cases, source provenance and actual Chromium evidence. The user's visual review reports ≥90/100 for each base family. Engineering limitations remain documented; geometry is original source-informed illustration.
 
+[Open the public Rack Catalogue 2.0](https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1)
+
 ![Architecture comparison](signal-intelligence-rack-to-row-4d/evidence/catalogue-v2/compare-CAT-04-CAT-05.png)
 
 - [Run / application README](signal-intelligence-rack-to-row-4d/README.md)

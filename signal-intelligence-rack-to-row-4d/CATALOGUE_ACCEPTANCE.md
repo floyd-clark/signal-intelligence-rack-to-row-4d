@@ -42,6 +42,6 @@ Generation variants: Vera Rubin has a real separate geometry/electrical delta (f
 
 Other limitations: exact rear harnesses, collision-solved service motion, dimensionally certified vendor interiors, per-incident calibrated physics, long-duration endurance, fully audited device accessibility and vendor service procedures remain unavailable or unverified. Catalogue row placement and internal board/HBM counts beyond cited claims are illustrative. Source-based topologies are separate from mechanical routing. The base legacy engine still supports one root fault at a time; catalogue sides independently simulate one synthetic initiating condition each.
 
-No push or deployment is authorized. See CATALOGUE_INDEX.md, CATALOGUE_PROVENANCE.md and evidence/catalogue-v2/test-results.json for exact handoff details.
+The user authorized public repository/site publication on October 15 after the tested local handoff. This publication approval does not erase the remaining qualification gaps above. See CATALOGUE_INDEX.md, CATALOGUE_PROVENANCE.md and evidence/catalogue-v2/test-results.json for exact handoff details.
 
 Catalogue row context is illustrative and not a new facility simulation: only the central reference is interactive; neighboring copies are context and do not expand fault ownership. The original independently identified row simulation remains available in the 4D lab.

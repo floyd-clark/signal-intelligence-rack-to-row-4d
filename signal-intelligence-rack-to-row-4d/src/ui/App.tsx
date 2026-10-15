@@ -50,7 +50,9 @@ const chapters = [
   "TPM release call",
 ];
 export function App() {
-  const [catalogueOpen, setCatalogueOpen] = useState(false);
+  const [catalogueOpen, setCatalogueOpen] = useState(
+    () => new URLSearchParams(window.location.search).get("catalogue") === "1",
+  );
   const s = useStore();
   const records = useMemo(
     () => inventory(s.profile, s.racks),
@@ -412,7 +414,7 @@ export function App() {
         <div className="brand">
           <span className="brandmark">
             <img
-              src="/brand/signal-intelligence-symbol.png"
+              src={`${import.meta.env.BASE_URL}brand/signal-intelligence-symbol.png`}
               alt="Signal Intelligence symbol"
               width="90"
               height="90"

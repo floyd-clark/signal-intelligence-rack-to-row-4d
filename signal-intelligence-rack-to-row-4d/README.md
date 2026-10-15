@@ -2,6 +2,8 @@
 
 Working local React/TypeScript/WebGL educational application. Rack Catalogue 2.0 adds ten registered architecture families and synchronized A/B hardware comparison. The user reports ≥90/100 visual fidelity for all ten base families; engineering qualification limits remain documented. No account, API key, cloud service, live facility connection or equipment control.
 
+[Public Rack Catalogue 2.0](https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1) · the same build remains available offline through the startup script below.
+
 ## Run on Windows
 
 ```powershell
