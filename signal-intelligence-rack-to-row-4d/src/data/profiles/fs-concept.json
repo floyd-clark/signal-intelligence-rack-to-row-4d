@@ -1,0 +1,13 @@
+{
+  "id": "FS_CONCEPT",
+  "name": "Fluidstack-inspired concept",
+  "trays": 12,
+  "chipsPerTray": 4,
+  "cpusPerTray": 2,
+  "switches": 2,
+  "shelves": 4,
+  "fabric": "Illustrative accelerator fabric",
+  "badge": "Illustrative concept \u2014 not a verified Fluidstack rack design.",
+  "sources": ["fluidstack"],
+  "nominalKW": 96
+}

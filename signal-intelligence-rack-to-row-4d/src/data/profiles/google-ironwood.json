@@ -1,0 +1,13 @@
+{
+  "id": "GOOGLE_IRONWOOD_TPU_REFERENCE",
+  "name": "Google Ironwood cube",
+  "trays": 16,
+  "chipsPerTray": 4,
+  "cpusPerTray": 1,
+  "switches": 0,
+  "shelves": 4,
+  "fabric": "ICI 3D torus / OCS between cubes; separate DCN",
+  "badge": "Public vendor topology; illustrative enclosure and auxiliary inventory. Separate from Fluidstack.",
+  "sources": ["google-stack", "google-architecture"],
+  "nominalKW": 100
+}

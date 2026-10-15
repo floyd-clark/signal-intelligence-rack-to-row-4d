@@ -1,0 +1,156 @@
+[
+  {
+    "id": "fluidstack",
+    "organization": "Fluidstack",
+    "url": "https://fluidstack.io/news/fluidstack-selected-by-anthropic-to-deliver-custom-data-centers-in-the-us",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Relationship with Anthropic only; no equipment assertion",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "anthropic",
+    "organization": "Anthropic",
+    "url": "https://www.anthropic.com/news/expanding-our-use-of-google-cloud-tpus-and-services",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Separate Google TPU workload relationship only",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "nvidia-components",
+    "organization": "NVIDIA",
+    "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/dgx-superpod-components.html",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "GB200: 18 trays, 4 B200 and 2 Grace per tray; 9 switch trays; eight power shelves; separate fabrics",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "nvidia-hardware",
+    "organization": "NVIDIA",
+    "url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/hardware.html",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "GB200 rack major inventory, hybrid cooling, rear manifolds and busbar; exact board geometry not reproduced",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "nvidia-row",
+    "organization": "NVIDIA",
+    "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/dgx-superpod-architecture.html",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Eight compute racks per scalable unit; not eight total facility racks",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "xid",
+    "organization": "NVIDIA",
+    "url": "https://docs.nvidia.com/deploy/xid-errors/analyzing-xid-catalog.html",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Xid signals require generation and differential diagnosis; never TPU codes",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "gpu-triage",
+    "organization": "NVIDIA",
+    "url": "https://docs.nvidia.com/deploy/gpu-debug-guidelines/gpu-node-triage.html",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Evidence-first GPU triage; symptoms are not unique causes",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "google-stack",
+    "organization": "Google Cloud",
+    "url": "https://cloud.google.com/blog/products/compute/inside-the-ironwood-tpu-codesigned-ai-stack/",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Ironwood four chips per host, 64 per cube/rack, six ICI neighbors, 3D torus, OCS between cubes; liquid cooling",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "google-architecture",
+    "organization": "Google Cloud",
+    "url": "https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "TPU functional architecture; MXU, vector processing and HBM distinct from host memory",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "google-reliability",
+    "organization": "Google Cloud",
+    "url": "https://cloud.google.com/blog/products/compute/cluster-reliability-for-trillion-parameter-models-on-tpus",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Unavailable during check; not used to substantiate claims",
+    "applicability": "See supported facts; generation-specific",
+    "status": "unavailable",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "google-cooling",
+    "organization": "Google Cloud",
+    "url": "https://cloud.google.com/blog/topics/systems/enabling-1-mw-it-racks-and-liquid-cooling-at-ocp-emea-summit",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "CDU separates facility loop and technology loop through heat exchanger; not a Fluidstack CDU specification",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "ocp",
+    "organization": "Open Compute Project",
+    "url": "https://www.opencompute.org/projects/rack-and-power/",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Rack and power project context only; no universal ORv3 voltage assumption",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "inspiration",
+    "organization": "Independent NVL72 site",
+    "url": "https://nvl72.dev/anatomy",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Interaction inspiration only; no geometry, text or source code copied",
+    "applicability": "See supported facts; generation-specific",
+    "status": "checked",
+    "assetLicense": "No asset reuse; documentation remains copyright owner",
+    "uncertainties": "Mechanical placement and simulation parameters not established by this source"
+  },
+  {
+    "id": "illustrative",
+    "organization": "Signal Intelligence",
+    "url": "",
+    "checkedDate": "2026-10-15",
+    "supportedFacts": "Authored educational assumptions and synthetic diagnostics, not vendor measurements",
+    "applicability": "All schematic profiles",
+    "status": "authored",
+    "assetLicense": "Original procedural geometry",
+    "uncertainties": "Not suitable for engineering design or physical operation"
+  }
+]

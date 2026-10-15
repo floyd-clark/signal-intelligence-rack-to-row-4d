@@ -1,0 +1,18 @@
+{
+  "browser": "Chromium with SwiftShader (software rendering)",
+  "viewport": "1600 × 1000",
+  "nodes": 3266,
+  "types": 80,
+  "missing": [],
+  "orphans": [],
+  "sourceCoverage": 3266,
+  "verifiedCards": 0,
+  "renderedScope": "major assemblies; internals revealed on drill",
+  "fps": 57,
+  "drawCalls": 95,
+  "triangles": 3292,
+  "geometries": 95,
+  "textures": 1,
+  "tick": 1,
+  "graphEdges": 3284
+}

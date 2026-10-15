@@ -1,0 +1,13 @@
+{
+  "id": "NVIDIA_GB200_NVL72_REFERENCE",
+  "name": "NVIDIA GB200 NVL72",
+  "trays": 18,
+  "chipsPerTray": 4,
+  "cpusPerTray": 2,
+  "switches": 9,
+  "shelves": 8,
+  "fabric": "NVLink 5 / NVSwitch + NVLink-C2C; InfiniBand scale-out",
+  "badge": "Public vendor reference; schematic mechanical placement. Separate from Fluidstack.",
+  "sources": ["nvidia-hardware", "nvidia-components", "nvidia-row"],
+  "nominalKW": 120
+}

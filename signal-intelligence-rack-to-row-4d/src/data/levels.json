@@ -1,0 +1,134 @@
+[
+  {
+    "level": 1,
+    "name": "Enclosure & grounding",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "Footprint drawing review",
+      "Rail datum measurement",
+      "Bonding evidence review"
+    ],
+    "owner": "Mechanical engineering",
+    "phase": "concept"
+  },
+  {
+    "level": 2,
+    "name": "Power interfaces",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "Polarity and port map",
+      "Zero-energy connector fit",
+      "Source redundancy budget"
+    ],
+    "owner": "Power engineering",
+    "phase": "EVT"
+  },
+  {
+    "level": 3,
+    "name": "Tray integration",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "Tray insertion fixture",
+      "Blind-mate witness",
+      "Cable reach and strain"
+    ],
+    "owner": "Hardware integration",
+    "phase": "EVT"
+  },
+  {
+    "level": 4,
+    "name": "Cooling dry integration",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "Hose port map",
+      "Simulated pressure decay",
+      "Cold plate contact review"
+    ],
+    "owner": "Thermal engineering",
+    "phase": "EVT"
+  },
+  {
+    "level": 5,
+    "name": "Board population",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "BOM revision match",
+      "CPU and accelerator count",
+      "Memory serial/channel match"
+    ],
+    "owner": "Board engineering",
+    "phase": "DVT"
+  },
+  {
+    "level": 6,
+    "name": "Management & firmware",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "BMC discovery",
+      "Signed firmware inventory",
+      "Version compatibility"
+    ],
+    "owner": "Firmware engineering",
+    "phase": "DVT"
+  },
+  {
+    "level": 7,
+    "name": "Power-up stability",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": ["Power sequence trace", "PSU current share", "Sensor sanity"],
+    "owner": "Power engineering",
+    "phase": "DVT"
+  },
+  {
+    "level": 8,
+    "name": "Boot & enumeration",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "POST checkpoint trace",
+      "OS image verification",
+      "Device enumeration"
+    ],
+    "owner": "Host platform",
+    "phase": "DVT"
+  },
+  {
+    "level": 9,
+    "name": "High-speed connectivity",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": ["Lane training", "Optical/FEC counters", "Fabric peer discovery"],
+    "owner": "Fabric engineering",
+    "phase": "PVT"
+  },
+  {
+    "level": 10,
+    "name": "Thermal performance",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": ["Heat balance", "Thermal margin at load", "Workload goodput"],
+    "owner": "Thermal engineering",
+    "phase": "PVT"
+  },
+  {
+    "level": 11,
+    "name": "Endurance & recoverability",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "Endurance recurrence",
+      "Failover rehearsal",
+      "Rollback recoverability"
+    ],
+    "owner": "Reliability engineering",
+    "phase": "pilot"
+  },
+  {
+    "level": 12,
+    "name": "Integrated rack acceptance",
+    "note": "Proposed educational mapping pending authoritative program-specific L1\u2013L12 work instructions.",
+    "tests": [
+      "Traceable BOM and serials",
+      "Critical FRACAS closure",
+      "Runbook and DRI release"
+    ],
+    "owner": "NPI TPM",
+    "phase": "rate production"
+  }
+]
