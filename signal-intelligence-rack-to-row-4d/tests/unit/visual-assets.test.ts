@@ -12,6 +12,52 @@ const palette = Object.fromEntries(
   MATERIAL_KEYS.map((k) => [k, new MeshStandardMaterial()]),
 );
 describe("v2 physical assets and semantic picking", () => {
+  it("all sixteen Ironwood trays physically contain four independently pickable dual-chiplet TPUs", () => {
+    const rs = inventory("GOOGLE_IRONWOOD_TPU_REFERENCE");
+    const trays = rs.filter(
+      (r) => r.type === "tray" && r.physicalLocation.rack === "RACK-01",
+    );
+    expect(trays).toHaveLength(16);
+    for (const tray of trays) {
+      const board = rs.find(
+        (r) => r.parentId === tray.id && r.type === "board",
+      )!;
+      const chips = rs.filter(
+        (r) => r.parentId === board.id && r.type === "accelerator",
+      );
+      expect(chips).toHaveLength(4);
+      const a = new Assembly();
+      computeTray(a, rs, tray, {
+        cutaway: true,
+        explode: 0,
+        level: 12,
+        quality: "Balanced",
+      });
+      const asset = a.finish(palette);
+      asset.group.updateMatrixWorld(true);
+      chips.forEach((chip, i) => {
+        expect(a.owners.get(chip.id)!.kind).toContain(
+          "Ironwood TPU: two chiplets",
+        );
+        const ray = new Raycaster(
+          new Vector3(
+            i % 2 ? 1.43 : -1.43,
+            2,
+            Math.floor(i / 2) ? -0.85 : 0.65,
+          ),
+          new Vector3(0, -1, 0),
+        );
+        const hit = ray.intersectObject(asset.group, true)[0];
+        expect(resolveOwner(hit.object, hit.faceIndex)).toBe(chip.id);
+        const bounds = a.owners.get(chip.id)!.bounds;
+        expect(bounds.min.x).toBeGreaterThan(-3);
+        expect(bounds.max.x).toBeLessThan(3);
+        expect(bounds.min.z).toBeGreaterThan(-2.23);
+        expect(bounds.max.z).toBeLessThan(2.23);
+      });
+      asset.dispose();
+    }
+  });
   it("HBM is layered package geometry and merged-face picking preserves ownership", () => {
     const a = new Assembly();
     acceleratorPackage(a, "gpu", ["h0", "h1", "h2", "h3"], "plate", {

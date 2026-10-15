@@ -89,15 +89,29 @@ export function acceleratorPackage(
   id: string,
   hbmIds: string[],
   plateId: string,
-  opts: { cutaway: boolean; explode: number; selected?: string; cpu?: boolean },
+  opts: {
+    cutaway: boolean;
+    explode: number;
+    selected?: string;
+    architecture?: "gpu" | "ironwood";
+  },
 ) {
   a.box(id, "pcb", [0, 0, 0], [2.15, 0.07, 1.65], 0.09);
   a.box(id, "ceramic", [0, 0.06, 0], [1.9, 0.045, 1.4], 0.08);
-  a.box(id, "silicon", [0, 0.13, 0], [0.8, 0.08, 1.02], 0.1);
-  a.box(id, "silicon", [0, 0.176, 0], [0.76, 0.008, 0.98], 0.05);
-  for (let x = -0.3; x < 0.35; x += 0.08)
-    for (let z = -0.39; z < 0.42; z += 0.08)
-      a.box(id, "silicon", [x, 0.182, z], [0.06, 0.002, 0.06]);
+  // Google documents two chiplets per Ironwood chip. These shapes are a
+  // conceptual section; dimensions and HBM positions are not vendor CAD.
+  const ironwood = opts.architecture === "ironwood";
+  for (const center of ironwood ? [-0.27, 0.27] : [0]) {
+    const depth = ironwood ? 0.46 : 1.02;
+    a.box(id, "silicon", [0, 0.13, center], [0.8, 0.08, depth], 0.1);
+    a.box(id, "silicon", [0, 0.176, center], [0.76, 0.008, depth - 0.04], 0.05);
+    for (let x = -0.3; x < 0.35; x += 0.08)
+      for (let z = -depth * 0.38; z < depth * 0.4; z += 0.08)
+        a.box(id, "silicon", [x, 0.182, center + z], [0.06, 0.002, 0.06]);
+  }
+  if (ironwood)
+    for (let x = -0.3; x < 0.35; x += 0.06)
+      a.box(id, "gold", [x, 0.12, 0], [0.018, 0.008, 0.08]);
   for (let i = 0; i < 26; i++) {
     a.box(id, "gold", [-0.98 + i * 0.078, -0.045, 0.73], [0.025, 0.018, 0.11]);
     a.box(
@@ -119,6 +133,7 @@ export function acceleratorPackage(
   );
   if (!opts.cutaway || opts.explode > 0)
     coldPlate(a, plateId, [0, 0.49, 0], opts.cutaway, opts.explode);
-  a.owners.get(id)!.kind =
-    "Accelerator substrate, interposer, silicon package, decoupling and mounting frame";
+  a.owners.get(id)!.kind = ironwood
+    ? "Ironwood TPU: two chiplets, conceptual D2D bridge, substrate/interposer, HBM context and mounting frame"
+    : "Accelerator substrate, interposer, silicon package, decoupling and mounting frame";
 }

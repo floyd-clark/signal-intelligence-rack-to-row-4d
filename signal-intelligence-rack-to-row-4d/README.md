@@ -68,3 +68,7 @@ The physical scene now includes layered HBM/package context, mechanical compute 
 ![Connected row](evidence/v2/row-cold-aisle.png)
 
 Read [VISUAL_FIDELITY_DELTA.md](VISUAL_FIDELITY_DELTA.md) for before/after, engineering assumptions, tests, measured native/software performance and remaining gaps. Final evidence and reproducible capture scripts are under `evidence/v2` and `scripts/capture-v2.mjs`. With the local server running, `node scripts/capture-v2.mjs` uses software rendering; set `NATIVE_GPU=1` for native ANGLE D3D11 and separate metrics. No new runtime dependencies or remote assets are required.
+
+Ironwood inspection: choose **Google Ironwood cube**, drill into a compute tray, and use **CAD cutaway** to see four individually selectable, labeled TPU packages. Package drill shows the two conceptual chiplets. The 16-tray/64-chip cube and TPU ICI/OCS topology are preserved.
+
+![Four TPUs mounted in an Ironwood tray](evidence/v2/ironwood-tray-tpus.png)

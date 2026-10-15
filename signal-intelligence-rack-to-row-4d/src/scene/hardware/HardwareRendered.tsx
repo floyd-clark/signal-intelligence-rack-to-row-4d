@@ -109,6 +109,10 @@ export function PackageInspection({
         cutaway: focus.type === "cold-plate" ? false : s.cutaway,
         explode: s.explode ? s.explosion : 0,
         selected: focus.id,
+        architecture:
+          chip.vendorProfile === "GOOGLE_IRONWOOD_TPU_REFERENCE"
+            ? "ironwood"
+            : "gpu",
       },
     );
     hardwareAudit.scope =

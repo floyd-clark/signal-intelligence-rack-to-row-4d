@@ -66,7 +66,14 @@ export function board(
           r.id,
           hbms.map((x) => x.id),
           cp.id,
-          { cutaway: opts.cutaway, explode: opts.explode * 0.3 },
+          {
+            cutaway: opts.cutaway,
+            explode: opts.explode * 0.3,
+            architecture:
+              r.vendorProfile === "GOOGLE_IRONWOOD_TPU_REFERENCE"
+                ? "ironwood"
+                : "gpu",
+          },
         ),
     );
   });
