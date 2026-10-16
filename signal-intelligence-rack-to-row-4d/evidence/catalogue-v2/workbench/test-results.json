@@ -48,5 +48,14 @@
   "scopeLimits": "../../../CATALOGUE_4D_CONVERGENCE.md",
   "nativeCapture": "native-verification.json",
   "bundleSHA256": "1c8d5adf6d6786b099d59464ce28148129aec19a1cb87c3212bb81bd65deab7c",
-  "nativeCameraAlignmentPassed": true
+  "nativeCameraAlignmentPassed": true,
+  "publication": {
+    "sourceCommit": "5a98fe2",
+    "pagesCommit": "152c354d6a587754e25064dc39fa0d7d3a7e31d4",
+    "url": "https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1&v=4d-workbench",
+    "exactBundle": "index-pGVUAE_L.js",
+    "verifiedAt": "2026-10-16T01:33:24.242Z",
+    "passed": true,
+    "proof": "public-verification.json"
+  }
 }

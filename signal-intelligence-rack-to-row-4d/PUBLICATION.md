@@ -17,3 +17,14 @@ Source commit `2dece2a`; static Pages commit `4de34c19ec26ee414b372e0bd7178bf35a
 Existing open tabs may need a hard refresh (Ctrl+Shift+R) to load the new application bundle. All later documentation-only commits preserve this deployed static build.
 
 To republish a later tested distribution, commit its source/build and push the source branch, then split `signal-intelligence-rack-to-row-4d/dist` with `git subtree split` and push that commit to `gh-pages` without force. GitHub Pages serves the branch root; `.nojekyll` and repository-relative asset paths are included. `node scripts/github-pages.mjs status` checks deployment status using existing Git credential-manager authentication without logging credentials; `node scripts/verify-public.mjs` repeats the live verification.
+
+
+## Catalogue / 4D convergence deployed and verified
+
+Source/application commit `5a98fe2`; static Pages commit `152c354d6a587754e25064dc39fa0d7d3a7e31d4`. GitHub reports this Pages commit **built**. [Open the updated workbench catalogue](https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1&v=4d-workbench).
+
+Every catalogue card opens the full three-panel 4D workspace. Shared intelligence, timeline/chart and local model rendering preserve the original profiles while adding per-family layers, component navigation, investigation/recovery/release and model bindings. All 52 unit tests passed. The complete 16-workflow browser run passed, followed by all 11 catalogue/workbench workflows after the camera correction. Native captures cover all ten entries and verify matching initial A/B camera positions/targets.
+
+Live verification passed against the exact local build bundle `index-pGVUAE_L.js` on 2026-10-16T01:33:24.242Z: HTTP 200, ten decoded cards, the shared workbench/explorer/intelligence, linked A/B controls, two real canvases, a 27-owner GB300 incident, independently staged L1–L12, incident blocking/clearing, earned signoff and return to the original reference profiles. No uncaught page exception or failed HTTP response occurred. [Live verification JSON](evidence/catalogue-v2/workbench/public-verification.json), [live comparison](evidence/catalogue-v2/workbench/public-comparison.png), [live stage preview](evidence/catalogue-v2/workbench/public-lifecycle.png).
+
+[Full changes, screenshots, acceptance and remaining gaps](CATALOGUE_4D_CONVERGENCE.md). Catalogue neighboring row copies remain illustrative; independently identified row simulation remains in the original reference profiles. Imported user files remain local and are not published. Earlier public proof files remain preserved at their original paths; this release's evidence is in the workbench subdirectory. Documentation/evidence-only commits after `5a98fe2` do not change this deployed static build. Existing tabs may need Ctrl+Shift+R.

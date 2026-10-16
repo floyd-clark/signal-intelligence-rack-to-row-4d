@@ -6,7 +6,7 @@ const url =
   "https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1";
 const local = new URL(url).hostname === "127.0.0.1";
 const prefix = local ? "publication-local" : "public";
-const root = "evidence/catalogue-v2";
+const root = "evidence/catalogue-v2/workbench";
 const browser = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   args: ["--use-angle=d3d11"],

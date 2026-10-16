@@ -53,3 +53,6 @@ Imported binaries/mappings stay in the local browser session and are never uploa
 
 
 Final native capture recorded a 72 FPS median for each single-family Inspect view (last four samples, 1920×1080 viewport, Balanced, Intel UHD/D3D11). [Performance procedure, exact A/B state and practical limits](PERFORMANCE.md). No uncaught page exceptions or external runtime requests were observed.
+
+
+Public deployment verified against the exact tested bundle: [live workbench](https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1&v=4d-workbench), [publication and proof](PUBLICATION.md), [live comparison screenshot](evidence/catalogue-v2/workbench/public-comparison.png). Source 5a98fe2; Pages 152c354d6a587754e25064dc39fa0d7d3a7e31d4.

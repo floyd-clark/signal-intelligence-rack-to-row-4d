@@ -1,0 +1,44 @@
+{
+  "url": "https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1&v=4d-workbench",
+  "checkedAt": "2026-10-16T01:33:24.242Z",
+  "http": 200,
+  "galleryFamilies": 10,
+  "converged4DWorkbench": true,
+  "expectedBundle": "index-pGVUAE_L.js",
+  "decodedImages": true,
+  "comparisonCanvases": 2,
+  "drawCalls": [
+    12,
+    12
+  ],
+  "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "scopedFaultAffected": 27,
+  "lifecycle": {
+    "cardEntries": 10,
+    "stageButtonsPerPane": 12,
+    "independentABLevels": true,
+    "activeIncidentBlocks": true,
+    "l1Signoff": true
+  },
+  "dgxPerformance": {
+    "fpsSamples": [
+      70,
+      72,
+      72,
+      72,
+      72
+    ],
+    "drawCalls": 10,
+    "triangles": 39914,
+    "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "quality": "Balanced",
+    "level": 12
+  },
+  "legacyReturn": true,
+  "errors": [],
+  "failedResponses": []
+}
