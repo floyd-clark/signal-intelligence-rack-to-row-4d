@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { audit, clickWorld } from "./hardware-helpers";
 import { test, expect } from "@playwright/test";
 test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
@@ -36,7 +37,7 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
     .getByRole("button", { name: "Validate, preview & apply mapping" })
     .click();
   await page.waitForTimeout(1500);
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-07-imported-model.png",
     fullPage: true,
   });
@@ -46,7 +47,7 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
   await page
     .getByRole("button", { name: "Rack Catalogue 2.0", exact: true })
     .click();
-  await page.getByRole("button", { name: "Return to 4D lab" }).click();
+  await page.getByRole("button", { name: "Reference profiles" }).click();
   await page.waitForTimeout(500);
   const restored = (await page.locator("canvas").boundingBox())!;
   await page.mouse.click(
@@ -93,7 +94,7 @@ test("real mesh picking, safe GLB mapping, replay roundtrip and tour", async ({
   await expect(page.locator(".demo")).toContainText("TPM release call");
   await page.getByRole("button", { name: "Next chapter" }).click();
   await expect(page.locator(".demo")).toContainText("Tour complete");
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-08-tour.png",
     fullPage: true,
   });

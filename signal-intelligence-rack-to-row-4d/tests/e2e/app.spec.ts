@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { test, expect } from "@playwright/test";
 test("rack, drill, row, profiles, gates, investigation and offline requests", async ({
   page,
@@ -19,7 +20,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   ).toBeVisible();
   await expect(page.locator("canvas")).toBeVisible();
   await page.waitForTimeout(2500);
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-01-rack.png",
     fullPage: true,
   });
@@ -31,7 +32,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await page.getByLabel("Search components").fill("hbm -1.1.1");
   await page.getByRole("treeitem").first().click();
   await expect(page.locator(".inspector")).toContainText("ECC");
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-02-component.png",
     fullPage: true,
   });
@@ -41,7 +42,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await expect(
     page.getByRole("heading", { name: "Infrastructure, connected." }),
   ).toBeVisible();
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-03-row.png",
     fullPage: true,
   });
@@ -65,7 +66,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await page.getByRole("button", { name: "Run simulated test" }).nth(1).click();
   await page.getByRole("button", { name: "Run simulated test" }).nth(2).click();
   await page.getByRole("button", { name: "Sign earned L1 pass" }).click();
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-04-gate.png",
     fullPage: true,
   });
@@ -82,7 +83,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
   await page.getByLabel("Time scrubber").fill("500");
   await expect(page.locator(".metrics")).not.toContainText("100.0");
   await page.getByRole("button", { name: "Row overview", exact: true }).click();
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-05-incident.png",
     fullPage: true,
   });
@@ -104,7 +105,7 @@ test("rack, drill, row, profiles, gates, investigation and offline requests", as
     .getByRole("button", { name: "Apply simulated recovery", exact: true })
     .click();
   await page.getByLabel("Time scrubber").fill("600");
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-06-rca.png",
     fullPage: true,
   });

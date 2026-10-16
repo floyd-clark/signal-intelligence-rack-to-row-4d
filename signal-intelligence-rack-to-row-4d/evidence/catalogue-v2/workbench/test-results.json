@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-16T01:28:37.450373+00:00",
+  "build": {
+    "command": "npm run build",
+    "passed": true,
+    "advisories": [
+      "Existing >500 kB bundle advisory",
+      "Dependency comment annotations removed by Rollup"
+    ]
+  },
+  "unit": {
+    "command": "npm test",
+    "passed": 52,
+    "failed": 0,
+    "files": 5,
+    "durationSeconds": 4.42
+  },
+  "browser": {
+    "uniqueWorkflowsValidated": 16,
+    "completeRun": {
+      "report": "browser-full-results.json",
+      "passed": 16,
+      "failed": 0,
+      "durationMs": 313893.001
+    },
+    "afterCameraCorrection": {
+      "report": "browser-results.json",
+      "passed": 11,
+      "failed": 0,
+      "durationMs": 165872.323,
+      "scope": "All seven catalogue/lifecycle and four converged-workbench workflows; original five workflows unchanged by catalogue camera correction"
+    }
+  },
+  "gates": {
+    "families": 10,
+    "previews": 120,
+    "applicableSignoffs": 118,
+    "explicitAirOnlyNA": 2
+  },
+  "resolvedFindings": [
+    "Restored linked overlays checkbox discovered by browser regression",
+    "Remapped detail owner identities after builder annotations to support non-first trays",
+    "Cleared family investigation evidence on repeat injection",
+    "Retried only transient filesystem evidence writes; browser assertions are not retried",
+    "Native screenshot review found mismatched A/B targets after deep-view Back; live-pose caching and explicit Back revision fix validated by new initial-alignment assertions"
+  ],
+  "initialRun": "browser-initial-results.json",
+  "scopeLimits": "../../../CATALOGUE_4D_CONVERGENCE.md",
+  "nativeCapture": "native-verification.json",
+  "bundleSHA256": "1c8d5adf6d6786b099d59464ce28148129aec19a1cb87c3212bb81bd65deab7c",
+  "nativeCameraAlignmentPassed": true
+}

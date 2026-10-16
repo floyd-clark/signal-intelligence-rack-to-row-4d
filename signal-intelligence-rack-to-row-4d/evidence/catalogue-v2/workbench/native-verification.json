@@ -1,0 +1,1855 @@
+{
+  "url": "http://127.0.0.1:4173/?catalogue=1",
+  "checkedAt": "2026-10-16T01:29:36.104Z",
+  "bundleSHA256": "1c8d5adf6d6786b099d59464ce28148129aec19a1cb87c3212bb81bd65deab7c",
+  "results": [
+    {
+      "id": "CAT-01",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 293,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        47,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 10,
+      "triangles": 55490,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-02",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 293,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        67,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 10,
+      "triangles": 21470,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-03",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 293,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        66,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 10,
+      "triangles": 39914,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-04",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        65,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 12,
+      "triangles": 65518,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-05",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        65,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 12,
+      "triangles": 56686,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-06",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        66,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 13,
+      "triangles": 59862,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-07",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        67,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 9,
+      "triangles": 36890,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-08",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        68,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 12,
+      "triangles": 25442,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-09",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        69,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 9,
+      "triangles": 10838,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "id": "CAT-10",
+      "quality": "Balanced",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "canvas": {
+        "x": 250,
+        "y": 288,
+        "width": 1329,
+        "height": 612.75
+      },
+      "fpsSamples": [
+        67,
+        72,
+        72,
+        72,
+        72
+      ],
+      "medianFPS": 72,
+      "drawCalls": 12,
+      "triangles": 54766,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  ],
+  "comparison": {
+    "a": {
+      "family": "CAT-04",
+      "level": 12,
+      "owners": {
+        "CAT-04/rack": {
+          "bounds": [
+            -0.8199999928474426,
+            0.002500001108273864,
+            -1.2799999713897705,
+            0.8199999928474426,
+            4.21999979019165,
+            1.2799999713897705
+          ],
+          "kind": "NVIDIA GB300 NVL72: NVIDIA GB300 NVL72 / service",
+          "primitives": 107
+        },
+        "CAT-04/power/1": {
+          "bounds": [
+            -0.6660000085830688,
+            0.2150000035762787,
+            -1.3200000524520874,
+            0.6660000085830688,
+            3.924999952316284,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 1 / power",
+          "primitives": 49
+        },
+        "CAT-04/power/2": {
+          "bounds": [
+            -0.6660000085830688,
+            0.36500000953674316,
+            -1.0440000295639038,
+            0.6660000085830688,
+            0.5350000262260437,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 2 / power",
+          "primitives": 31
+        },
+        "CAT-04/power/3": {
+          "bounds": [
+            -0.6660000085830688,
+            0.5149999856948853,
+            -1.0440000295639038,
+            0.6660000085830688,
+            0.6850000023841858,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 3 / power",
+          "primitives": 31
+        },
+        "CAT-04/power/4": {
+          "bounds": [
+            -0.6660000085830688,
+            0.6650000214576721,
+            -1.0440000295639038,
+            0.6660000085830688,
+            0.8349999785423279,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 4 / power",
+          "primitives": 31
+        },
+        "CAT-04/tray/1": {
+          "bounds": [
+            -0.6478719711303711,
+            0.9514999985694885,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.034500002861023,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 1 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/2": {
+          "bounds": [
+            -0.6478719711303711,
+            1.0444999933242798,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.127500057220459,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 2 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/3": {
+          "bounds": [
+            -0.6478719711303711,
+            1.1375000476837158,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.2204999923706055,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 3 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/4": {
+          "bounds": [
+            -0.6478719711303711,
+            1.2304999828338623,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.3135000467300415,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 4 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/5": {
+          "bounds": [
+            -0.6478719711303711,
+            1.3235000371932983,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.406499981880188,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 5 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/6": {
+          "bounds": [
+            -0.6478719711303711,
+            1.4164999723434448,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.499500036239624,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 6 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/7": {
+          "bounds": [
+            -0.6478719711303711,
+            1.5095000267028809,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.5924999713897705,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 7 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/8": {
+          "bounds": [
+            -0.6478719711303711,
+            1.6024999618530273,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.6855000257492065,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 8 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/9": {
+          "bounds": [
+            -0.6478719711303711,
+            1.6955000162124634,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.778499960899353,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 9 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/10": {
+          "bounds": [
+            -0.6478719711303711,
+            1.7884999513626099,
+            -1.128000020980835,
+            0.6478719711303711,
+            1.871500015258789,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 10 / compute",
+          "primitives": 31
+        },
+        "CAT-04/fabric/1": {
+          "bounds": [
+            -0.6477456092834473,
+            0.75,
+            -1.319000005722046,
+            0.6477456092834473,
+            3.549999952316284,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 1 / network",
+          "primitives": 48
+        },
+        "CAT-04/fabric/2": {
+          "bounds": [
+            -0.6477456092834473,
+            0.75,
+            -1.319000005722046,
+            0.6477456092834473,
+            3.549999952316284,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 2 / network",
+          "primitives": 48
+        },
+        "CAT-04/fabric/3": {
+          "bounds": [
+            -0.6477456092834473,
+            0.75,
+            -1.319000005722046,
+            0.6477456092834473,
+            3.549999952316284,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 3 / network",
+          "primitives": 48
+        },
+        "CAT-04/fabric/4": {
+          "bounds": [
+            -0.6477456092834473,
+            0.75,
+            -1.319000005722046,
+            0.6477456092834473,
+            3.549999952316284,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 4 / network",
+          "primitives": 48
+        },
+        "CAT-04/fabric/5": {
+          "bounds": [
+            -0.6477456092834473,
+            0.75,
+            -1.319000005722046,
+            0.6477456092834473,
+            3.549999952316284,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 5 / network",
+          "primitives": 48
+        },
+        "CAT-04/fabric/6": {
+          "bounds": [
+            -0.6477456092834473,
+            0.75,
+            -1.319000005722046,
+            0.6477456092834473,
+            3.549999952316284,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 6 / network",
+          "primitives": 48
+        },
+        "CAT-04/fabric/7": {
+          "bounds": [
+            -0.6477456092834473,
+            2.387500047683716,
+            -1.128000020980835,
+            0.6477456092834473,
+            2.4625000953674316,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 7 / network",
+          "primitives": 28
+        },
+        "CAT-04/fabric/8": {
+          "bounds": [
+            -0.6477456092834473,
+            2.4725000858306885,
+            -1.128000020980835,
+            0.6477456092834473,
+            2.547499895095825,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 8 / network",
+          "primitives": 28
+        },
+        "CAT-04/fabric/9": {
+          "bounds": [
+            -0.6477456092834473,
+            2.557499885559082,
+            -1.128000020980835,
+            0.6477456092834473,
+            2.632499933242798,
+            1.3272312879562378
+          ],
+          "kind": "NVIDIA GB300 NVL72: Rack-wide fifth-generation NVLink 9 / network",
+          "primitives": 28
+        },
+        "CAT-04/tray/11": {
+          "bounds": [
+            -0.6478719711303711,
+            2.6465001106262207,
+            -1.128000020980835,
+            0.6478719711303711,
+            2.7295000553131104,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 11 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/12": {
+          "bounds": [
+            -0.6478719711303711,
+            2.739500045776367,
+            -1.128000020980835,
+            0.6478719711303711,
+            2.822499990463257,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 12 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/13": {
+          "bounds": [
+            -0.6478719711303711,
+            2.8324999809265137,
+            -1.128000020980835,
+            0.6478719711303711,
+            2.9154999256134033,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 13 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/14": {
+          "bounds": [
+            -0.6478719711303711,
+            2.92549991607666,
+            -1.128000020980835,
+            0.6478719711303711,
+            3.008500099182129,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 14 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/15": {
+          "bounds": [
+            -0.6478719711303711,
+            3.0185000896453857,
+            -1.128000020980835,
+            0.6478719711303711,
+            3.1015000343322754,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 15 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/16": {
+          "bounds": [
+            -0.6478719711303711,
+            3.1115000247955322,
+            -1.128000020980835,
+            0.6478719711303711,
+            3.194499969482422,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 16 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/17": {
+          "bounds": [
+            -0.6478719711303711,
+            3.2044999599456787,
+            -1.128000020980835,
+            0.6478719711303711,
+            3.2874999046325684,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 17 / compute",
+          "primitives": 31
+        },
+        "CAT-04/tray/18": {
+          "bounds": [
+            -0.6478719711303711,
+            3.297499895095825,
+            -1.128000020980835,
+            0.6478719711303711,
+            3.380500078201294,
+            1.3269224166870117
+          ],
+          "kind": "NVIDIA GB300 NVL72: Compute tray 18 / compute",
+          "primitives": 31
+        },
+        "CAT-04/power/5": {
+          "bounds": [
+            -0.6660000085830688,
+            3.4040000438690186,
+            -1.0440000295639038,
+            0.6660000085830688,
+            3.5739998817443848,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 5 / power",
+          "primitives": 31
+        },
+        "CAT-04/power/6": {
+          "bounds": [
+            -0.6660000085830688,
+            3.553999900817871,
+            -1.0440000295639038,
+            0.6660000085830688,
+            3.7239999771118164,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 6 / power",
+          "primitives": 31
+        },
+        "CAT-04/power/7": {
+          "bounds": [
+            -0.6660000085830688,
+            3.7039999961853027,
+            -1.0440000295639038,
+            0.6660000085830688,
+            3.874000072479248,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 7 / power",
+          "primitives": 31
+        },
+        "CAT-04/power/8": {
+          "bounds": [
+            -0.6660000085830688,
+            3.8540000915527344,
+            -1.0440000295639038,
+            0.6660000085830688,
+            4.02400016784668,
+            1.348387360572815
+          ],
+          "kind": "NVIDIA GB300 NVL72: Power shelf 8 / power",
+          "primitives": 31
+        },
+        "CAT-04/network": {
+          "bounds": [
+            -0.6476697325706482,
+            0.9831097722053528,
+            -1.5617855787277222,
+            0.7136539220809937,
+            4.014999866485596,
+            1.3274149894714355
+          ],
+          "kind": "NVIDIA GB300 NVL72: Scale-out / management interface / network",
+          "primitives": 128
+        },
+        "CAT-04/cooling": {
+          "bounds": [
+            -0.671999990940094,
+            0.23000001907348633,
+            -1.5604687929153442,
+            0.671999990940094,
+            4.352238655090332,
+            -1.149999976158142
+          ],
+          "kind": "NVIDIA GB300 NVL72: Supply/return manifolds / cooling",
+          "primitives": 90
+        }
+      },
+      "triangles": 65300,
+      "renderMode": "procedural",
+      "assetName": null,
+      "highlightedOwners": null,
+      "camera": [
+        6,
+        4.1000000000000005,
+        7
+      ],
+      "target": [
+        0,
+        2.05,
+        0
+      ],
+      "fpsSamples": [
+        61,
+        72,
+        67,
+        69,
+        70,
+        60,
+        72,
+        72,
+        72,
+        72
+      ],
+      "drawCalls": 39,
+      "renderTriangles": 65626,
+      "geometries": 39,
+      "textures": 2,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "b": {
+      "family": "CAT-06",
+      "level": 12,
+      "owners": {
+        "CAT-06/rack": {
+          "bounds": [
+            -0.9200000166893005,
+            0.002500001108273864,
+            -1.2300000190734863,
+            0.9200000166893005,
+            4.21999979019165,
+            1.2300000190734863
+          ],
+          "kind": "Google Ironwood: Google Ironwood / service",
+          "primitives": 107
+        },
+        "CAT-06/power/1": {
+          "bounds": [
+            -0.7307999730110168,
+            0.20999999344348907,
+            -1.2699999809265137,
+            0.7307999730110168,
+            3.924999952316284,
+            1.299775242805481
+          ],
+          "kind": "Google Ironwood: Power shelf 1 / power",
+          "primitives": 49
+        },
+        "CAT-06/power/2": {
+          "bounds": [
+            -0.7307999730110168,
+            0.3799999952316284,
+            -1.000499963760376,
+            0.7307999730110168,
+            0.5199999809265137,
+            1.299775242805481
+          ],
+          "kind": "Google Ironwood: Power shelf 2 / power",
+          "primitives": 31
+        },
+        "CAT-06/power/3": {
+          "bounds": [
+            -0.7307999730110168,
+            0.550000011920929,
+            -1.000499963760376,
+            0.7307999730110168,
+            0.6899999976158142,
+            1.299775242805481
+          ],
+          "kind": "Google Ironwood: Power shelf 3 / power",
+          "primitives": 31
+        },
+        "CAT-06/power/4": {
+          "bounds": [
+            -0.7307999730110168,
+            0.7200000286102295,
+            -1.000499963760376,
+            0.7307999730110168,
+            0.8600000143051147,
+            1.299775242805481
+          ],
+          "kind": "Google Ironwood: Power shelf 4 / power",
+          "primitives": 31
+        },
+        "CAT-06/tray/1": {
+          "bounds": [
+            -0.7307999730110168,
+            0.9750000238418579,
+            -1.0809999704360962,
+            0.7307999730110168,
+            1.125,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 1 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/1.1": {
+          "bounds": [
+            -0.5649999976158142,
+            1.0175000429153442,
+            1.1859999895095825,
+            -0.4350000023841858,
+            1.0824999809265137,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 1.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/1.2": {
+          "bounds": [
+            -0.23499999940395355,
+            1.0175000429153442,
+            1.1859999895095825,
+            -0.10500000417232513,
+            1.0824999809265137,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 1.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/1.3": {
+          "bounds": [
+            0.0949999988079071,
+            1.0175000429153442,
+            1.1859999895095825,
+            0.22499999403953552,
+            1.0824999809265137,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 1.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/1.4": {
+          "bounds": [
+            0.42500001192092896,
+            1.0175000429153442,
+            1.1859999895095825,
+            0.5550000071525574,
+            1.0824999809265137,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 1.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/2": {
+          "bounds": [
+            -0.7307999730110168,
+            1.1540000438690186,
+            -1.0809999704360962,
+            0.7307999730110168,
+            1.3040000200271606,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 2 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/2.1": {
+          "bounds": [
+            -0.5649999976158142,
+            1.1964999437332153,
+            1.1859999895095825,
+            -0.4350000023841858,
+            1.2615000009536743,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 2.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/2.2": {
+          "bounds": [
+            -0.23499999940395355,
+            1.1964999437332153,
+            1.1859999895095825,
+            -0.10500000417232513,
+            1.2615000009536743,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 2.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/2.3": {
+          "bounds": [
+            0.0949999988079071,
+            1.1964999437332153,
+            1.1859999895095825,
+            0.22499999403953552,
+            1.2615000009536743,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 2.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/2.4": {
+          "bounds": [
+            0.42500001192092896,
+            1.1964999437332153,
+            1.1859999895095825,
+            0.5550000071525574,
+            1.2615000009536743,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 2.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/3": {
+          "bounds": [
+            -0.7307999730110168,
+            1.3329999446868896,
+            -1.0809999704360962,
+            0.7307999730110168,
+            1.4830000400543213,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 3 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/3.1": {
+          "bounds": [
+            -0.5649999976158142,
+            1.375499963760376,
+            1.1859999895095825,
+            -0.4350000023841858,
+            1.440500020980835,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 3.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/3.2": {
+          "bounds": [
+            -0.23499999940395355,
+            1.375499963760376,
+            1.1859999895095825,
+            -0.10500000417232513,
+            1.440500020980835,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 3.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/3.3": {
+          "bounds": [
+            0.0949999988079071,
+            1.375499963760376,
+            1.1859999895095825,
+            0.22499999403953552,
+            1.440500020980835,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 3.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/3.4": {
+          "bounds": [
+            0.42500001192092896,
+            1.375499963760376,
+            1.1859999895095825,
+            0.5550000071525574,
+            1.440500020980835,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 3.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/4": {
+          "bounds": [
+            -0.7307999730110168,
+            1.5119999647140503,
+            -1.0809999704360962,
+            0.7307999730110168,
+            1.662000060081482,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 4 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/4.1": {
+          "bounds": [
+            -0.5649999976158142,
+            1.5544999837875366,
+            1.1859999895095825,
+            -0.4350000023841858,
+            1.6195000410079956,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 4.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/4.2": {
+          "bounds": [
+            -0.23499999940395355,
+            1.5544999837875366,
+            1.1859999895095825,
+            -0.10500000417232513,
+            1.6195000410079956,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 4.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/4.3": {
+          "bounds": [
+            0.0949999988079071,
+            1.5544999837875366,
+            1.1859999895095825,
+            0.22499999403953552,
+            1.6195000410079956,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 4.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/4.4": {
+          "bounds": [
+            0.42500001192092896,
+            1.5544999837875366,
+            1.1859999895095825,
+            0.5550000071525574,
+            1.6195000410079956,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 4.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/5": {
+          "bounds": [
+            -0.7307999730110168,
+            1.690999984741211,
+            -1.0809999704360962,
+            0.7307999730110168,
+            1.840999960899353,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 5 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/5.1": {
+          "bounds": [
+            -0.5649999976158142,
+            1.7335000038146973,
+            1.1859999895095825,
+            -0.4350000023841858,
+            1.7984999418258667,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 5.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/5.2": {
+          "bounds": [
+            -0.23499999940395355,
+            1.7335000038146973,
+            1.1859999895095825,
+            -0.10500000417232513,
+            1.7984999418258667,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 5.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/5.3": {
+          "bounds": [
+            0.0949999988079071,
+            1.7335000038146973,
+            1.1859999895095825,
+            0.22499999403953552,
+            1.7984999418258667,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 5.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/5.4": {
+          "bounds": [
+            0.42500001192092896,
+            1.7335000038146973,
+            1.1859999895095825,
+            0.5550000071525574,
+            1.7984999418258667,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 5.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/6": {
+          "bounds": [
+            -0.7307999730110168,
+            1.8700000047683716,
+            -1.0809999704360962,
+            0.7307999730110168,
+            2.0199999809265137,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 6 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/6.1": {
+          "bounds": [
+            -0.5649999976158142,
+            1.912500023841858,
+            1.1859999895095825,
+            -0.4350000023841858,
+            1.9774999618530273,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 6.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/6.2": {
+          "bounds": [
+            -0.23499999940395355,
+            1.912500023841858,
+            1.1859999895095825,
+            -0.10500000417232513,
+            1.9774999618530273,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 6.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/6.3": {
+          "bounds": [
+            0.0949999988079071,
+            1.912500023841858,
+            1.1859999895095825,
+            0.22499999403953552,
+            1.9774999618530273,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 6.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/6.4": {
+          "bounds": [
+            0.42500001192092896,
+            1.912500023841858,
+            1.1859999895095825,
+            0.5550000071525574,
+            1.9774999618530273,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 6.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/7": {
+          "bounds": [
+            -0.7307999730110168,
+            2.0490000247955322,
+            -1.0809999704360962,
+            0.7307999730110168,
+            2.199000120162964,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 7 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/7.1": {
+          "bounds": [
+            -0.5649999976158142,
+            2.0915000438690186,
+            1.1859999895095825,
+            -0.4350000023841858,
+            2.1565001010894775,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 7.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/7.2": {
+          "bounds": [
+            -0.23499999940395355,
+            2.0915000438690186,
+            1.1859999895095825,
+            -0.10500000417232513,
+            2.1565001010894775,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 7.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/7.3": {
+          "bounds": [
+            0.0949999988079071,
+            2.0915000438690186,
+            1.1859999895095825,
+            0.22499999403953552,
+            2.1565001010894775,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 7.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/7.4": {
+          "bounds": [
+            0.42500001192092896,
+            2.0915000438690186,
+            1.1859999895095825,
+            0.5550000071525574,
+            2.1565001010894775,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 7.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/8": {
+          "bounds": [
+            -0.7307999730110168,
+            2.2279999256134033,
+            -1.0809999704360962,
+            0.7307999730110168,
+            2.378000020980835,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 8 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/8.1": {
+          "bounds": [
+            -0.5649999976158142,
+            2.2704999446868896,
+            1.1859999895095825,
+            -0.4350000023841858,
+            2.3355000019073486,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 8.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/8.2": {
+          "bounds": [
+            -0.23499999940395355,
+            2.2704999446868896,
+            1.1859999895095825,
+            -0.10500000417232513,
+            2.3355000019073486,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 8.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/8.3": {
+          "bounds": [
+            0.0949999988079071,
+            2.2704999446868896,
+            1.1859999895095825,
+            0.22499999403953552,
+            2.3355000019073486,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 8.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/8.4": {
+          "bounds": [
+            0.42500001192092896,
+            2.2704999446868896,
+            1.1859999895095825,
+            0.5550000071525574,
+            2.3355000019073486,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 8.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/9": {
+          "bounds": [
+            -0.7307999730110168,
+            2.4070000648498535,
+            -1.0809999704360962,
+            0.7307999730110168,
+            2.556999921798706,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 9 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/9.1": {
+          "bounds": [
+            -0.5649999976158142,
+            2.44950008392334,
+            1.1859999895095825,
+            -0.4350000023841858,
+            2.5144999027252197,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 9.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/9.2": {
+          "bounds": [
+            -0.23499999940395355,
+            2.44950008392334,
+            1.1859999895095825,
+            -0.10500000417232513,
+            2.5144999027252197,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 9.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/9.3": {
+          "bounds": [
+            0.0949999988079071,
+            2.44950008392334,
+            1.1859999895095825,
+            0.22499999403953552,
+            2.5144999027252197,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 9.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/9.4": {
+          "bounds": [
+            0.42500001192092896,
+            2.44950008392334,
+            1.1859999895095825,
+            0.5550000071525574,
+            2.5144999027252197,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 9.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/10": {
+          "bounds": [
+            -0.7307999730110168,
+            2.5859999656677246,
+            -1.0809999704360962,
+            0.7307999730110168,
+            2.7360000610351562,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 10 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/10.1": {
+          "bounds": [
+            -0.5649999976158142,
+            2.628499984741211,
+            1.1859999895095825,
+            -0.4350000023841858,
+            2.69350004196167,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 10.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/10.2": {
+          "bounds": [
+            -0.23499999940395355,
+            2.628499984741211,
+            1.1859999895095825,
+            -0.10500000417232513,
+            2.69350004196167,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 10.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/10.3": {
+          "bounds": [
+            0.0949999988079071,
+            2.628499984741211,
+            1.1859999895095825,
+            0.22499999403953552,
+            2.69350004196167,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 10.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/10.4": {
+          "bounds": [
+            0.42500001192092896,
+            2.628499984741211,
+            1.1859999895095825,
+            0.5550000071525574,
+            2.69350004196167,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 10.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/11": {
+          "bounds": [
+            -0.7307999730110168,
+            2.765000104904175,
+            -1.0809999704360962,
+            0.7307999730110168,
+            2.9149999618530273,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 11 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/11.1": {
+          "bounds": [
+            -0.5649999976158142,
+            2.807499885559082,
+            1.1859999895095825,
+            -0.4350000023841858,
+            2.872499942779541,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 11.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/11.2": {
+          "bounds": [
+            -0.23499999940395355,
+            2.807499885559082,
+            1.1859999895095825,
+            -0.10500000417232513,
+            2.872499942779541,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 11.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/11.3": {
+          "bounds": [
+            0.0949999988079071,
+            2.807499885559082,
+            1.1859999895095825,
+            0.22499999403953552,
+            2.872499942779541,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 11.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/11.4": {
+          "bounds": [
+            0.42500001192092896,
+            2.807499885559082,
+            1.1859999895095825,
+            0.5550000071525574,
+            2.872499942779541,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 11.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/12": {
+          "bounds": [
+            -0.7307999730110168,
+            2.944000005722046,
+            -1.0809999704360962,
+            0.7307999730110168,
+            3.0940001010894775,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 12 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/12.1": {
+          "bounds": [
+            -0.5649999976158142,
+            2.9865000247955322,
+            1.1859999895095825,
+            -0.4350000023841858,
+            3.051500082015991,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 12.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/12.2": {
+          "bounds": [
+            -0.23499999940395355,
+            2.9865000247955322,
+            1.1859999895095825,
+            -0.10500000417232513,
+            3.051500082015991,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 12.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/12.3": {
+          "bounds": [
+            0.0949999988079071,
+            2.9865000247955322,
+            1.1859999895095825,
+            0.22499999403953552,
+            3.051500082015991,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 12.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/12.4": {
+          "bounds": [
+            0.42500001192092896,
+            2.9865000247955322,
+            1.1859999895095825,
+            0.5550000071525574,
+            3.051500082015991,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 12.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/13": {
+          "bounds": [
+            -0.7307999730110168,
+            3.122999906539917,
+            -1.0809999704360962,
+            0.7307999730110168,
+            3.2730000019073486,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 13 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/13.1": {
+          "bounds": [
+            -0.5649999976158142,
+            3.1654999256134033,
+            1.1859999895095825,
+            -0.4350000023841858,
+            3.2304999828338623,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 13.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/13.2": {
+          "bounds": [
+            -0.23499999940395355,
+            3.1654999256134033,
+            1.1859999895095825,
+            -0.10500000417232513,
+            3.2304999828338623,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 13.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/13.3": {
+          "bounds": [
+            0.0949999988079071,
+            3.1654999256134033,
+            1.1859999895095825,
+            0.22499999403953552,
+            3.2304999828338623,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 13.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/13.4": {
+          "bounds": [
+            0.42500001192092896,
+            3.1654999256134033,
+            1.1859999895095825,
+            0.5550000071525574,
+            3.2304999828338623,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 13.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/14": {
+          "bounds": [
+            -0.7307999730110168,
+            3.302000045776367,
+            -1.0809999704360962,
+            0.7307999730110168,
+            3.4519999027252197,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 14 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/14.1": {
+          "bounds": [
+            -0.5649999976158142,
+            3.3445000648498535,
+            1.1859999895095825,
+            -0.4350000023841858,
+            3.4094998836517334,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 14.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/14.2": {
+          "bounds": [
+            -0.23499999940395355,
+            3.3445000648498535,
+            1.1859999895095825,
+            -0.10500000417232513,
+            3.4094998836517334,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 14.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/14.3": {
+          "bounds": [
+            0.0949999988079071,
+            3.3445000648498535,
+            1.1859999895095825,
+            0.22499999403953552,
+            3.4094998836517334,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 14.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/14.4": {
+          "bounds": [
+            0.42500001192092896,
+            3.3445000648498535,
+            1.1859999895095825,
+            0.5550000071525574,
+            3.4094998836517334,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 14.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/15": {
+          "bounds": [
+            -0.7307999730110168,
+            3.4809999465942383,
+            -1.0809999704360962,
+            0.7307999730110168,
+            3.63100004196167,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 15 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/15.1": {
+          "bounds": [
+            -0.5649999976158142,
+            3.5234999656677246,
+            1.1859999895095825,
+            -0.4350000023841858,
+            3.5885000228881836,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 15.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/15.2": {
+          "bounds": [
+            -0.23499999940395355,
+            3.5234999656677246,
+            1.1859999895095825,
+            -0.10500000417232513,
+            3.5885000228881836,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 15.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/15.3": {
+          "bounds": [
+            0.0949999988079071,
+            3.5234999656677246,
+            1.1859999895095825,
+            0.22499999403953552,
+            3.5885000228881836,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 15.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/15.4": {
+          "bounds": [
+            0.42500001192092896,
+            3.5234999656677246,
+            1.1859999895095825,
+            0.5550000071525574,
+            3.5885000228881836,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 15.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/tray/16": {
+          "bounds": [
+            -0.7307999730110168,
+            3.6600000858306885,
+            -1.0809999704360962,
+            0.7307999730110168,
+            3.809999942779541,
+            1.27597177028656
+          ],
+          "kind": "Google Ironwood: Compute tray 16 / compute",
+          "primitives": 43
+        },
+        "CAT-06/chip/16.1": {
+          "bounds": [
+            -0.5649999976158142,
+            3.702500104904175,
+            1.1859999895095825,
+            -0.4350000023841858,
+            3.7674999237060547,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 16.1 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/16.2": {
+          "bounds": [
+            -0.23499999940395355,
+            3.702500104904175,
+            1.1859999895095825,
+            -0.10500000417232513,
+            3.7674999237060547,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 16.2 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/16.3": {
+          "bounds": [
+            0.0949999988079071,
+            3.702500104904175,
+            1.1859999895095825,
+            0.22499999403953552,
+            3.7674999237060547,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 16.3 / compute",
+          "primitives": 1
+        },
+        "CAT-06/chip/16.4": {
+          "bounds": [
+            0.42500001192092896,
+            3.702500104904175,
+            1.1859999895095825,
+            0.5550000071525574,
+            3.7674999237060547,
+            1.2000000476837158
+          ],
+          "kind": "Google Ironwood: TPU7x / dual chiplet TPU 16.4 / compute",
+          "primitives": 1
+        },
+        "CAT-06/cooling": {
+          "bounds": [
+            -0.7720000147819519,
+            0.23000001907348633,
+            -1.5082426071166992,
+            0.7720000147819519,
+            4.3531413078308105,
+            -1.100000023841858
+          ],
+          "kind": "Google Ironwood: Supply/return manifolds / cooling",
+          "primitives": 82
+        },
+        "CAT-06/network": {
+          "bounds": [
+            0.4974057972431183,
+            1.0400975942611694,
+            -1.5080991983413696,
+            0.80523282289505,
+            4.002754211425781,
+            -1.2233611345291138
+          ],
+          "kind": "Google Ironwood: Separate OCS / DCN optical unit / network",
+          "primitives": 16
+        },
+        "CAT-06/fabric/ocs": {
+          "bounds": [
+            0.49871066212654114,
+            1.4499999284744263,
+            -1.4559911489486694,
+            1.7484869956970215,
+            3.9669206142425537,
+            0.001500000013038516
+          ],
+          "kind": "Google Ironwood: Cross-cube optical circuit switch / network",
+          "primitives": 66
+        },
+        "CAT-06/fabric/ici": {
+          "bounds": [
+            -0.7033945918083191,
+            1.041139841079712,
+            -1.666383147239685,
+            0.7033945918083191,
+            3.7438597679138184,
+            -1.3448994159698486
+          ],
+          "kind": "Google Ironwood: Rack-local ICI neighbor links / network",
+          "primitives": 32
+        }
+      },
+      "triangles": 59644,
+      "renderMode": "procedural",
+      "assetName": null,
+      "highlightedOwners": null,
+      "camera": [
+        6,
+        4.1000000000000005,
+        7
+      ],
+      "target": [
+        0,
+        2.05,
+        0
+      ],
+      "fpsSamples": [
+        66,
+        72,
+        72,
+        72,
+        72
+      ],
+      "drawCalls": 13,
+      "renderTriangles": 59646,
+      "geometries": 13,
+      "textures": 2,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x00009A60) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  },
+  "deepSelected": "CAT-04/memory/2.1",
+  "errors": [],
+  "remote": []
+}

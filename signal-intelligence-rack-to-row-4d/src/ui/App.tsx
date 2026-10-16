@@ -16,6 +16,15 @@ import { applicableIncidents } from "../data/failures/incidents";
 import { snapshot, scenarioSchema, type Scenario } from "../simulation/engine";
 import { graph, descendants } from "../graphs/dependencies";
 import { perf } from "../scene/performance";
+import {
+  SignalBrand,
+  WorkbenchFrame,
+  TimelineTransport,
+  TelemetryChart,
+  ComponentIntelligence,
+} from "./Workbench";
+import { architectures } from "../catalogue/registry";
+import { useCatalogue } from "../catalogue/store";
 const Scene = lazy(() =>
   import("../scene/Scene").then((m) => ({ default: m.Scene })),
 );
@@ -361,7 +370,16 @@ export function App() {
       <Suspense
         fallback={<div className="fallback">Loading local Rack Catalogue…</div>}
       >
-        <Catalogue onClose={() => setCatalogueOpen(false)} />
+        <Catalogue
+          onClose={(profile) => {
+            if (profile && profile !== s.profile) {
+              s.changeProfile(profile);
+              setAsset(null);
+              setBinding(null);
+            }
+            setCatalogueOpen(false);
+          }}
+        />
       </Suspense>
     );
   return (
@@ -411,30 +429,24 @@ export function App() {
             {s.panels ? "Collapse panels" : "Show panels"}
           </button>
         </div>
-        <div className="brand">
-          <span className="brandmark">
-            <img
-              src={`${import.meta.env.BASE_URL}brand/signal-intelligence-symbol.png`}
-              alt="Signal Intelligence symbol"
-              width="90"
-              height="90"
-            />
-          </span>
-          <div>
-            <span className="brand-name">SIGNAL INTELLIGENCE</span>
-            <small>RACK-TO-ROW · 4D DIGITAL TWIN</small>
-          </div>
-        </div>
+        <SignalBrand />
         <div className="header-status">● LOCAL SIMULATION</div>
         <button
           onClick={() => {
             s.set({ playing: false });
+            useCatalogue.setState({ screen: "gallery" });
             setCatalogueOpen(true);
           }}
         >
           Rack Catalogue 2.0
         </button>
-        <button onClick={() => setPanel("compare")}>
+        <button
+          onClick={() => {
+            s.set({ playing: false });
+            useCatalogue.setState({ screen: "compare" });
+            setCatalogueOpen(true);
+          }}
+        >
           Compare architectures
         </button>
         <button
@@ -453,13 +465,22 @@ export function App() {
         {profile.badge}
         <span>All telemetry is synthetic. No affiliation or endorsement.</span>
       </div>
-      <div className="workspace">
+      <WorkbenchFrame>
         <aside className="left">
           <div className="eyebrow">ARCHITECTURE</div>
           <select
             aria-label="Architecture profile"
             value={s.profile}
             onChange={(e) => {
+              if (e.target.value.startsWith("CAT-")) {
+                useCatalogue
+                  .getState()
+                  .choose("a", e.target.value as `CAT-${string}`);
+                useCatalogue.setState({ screen: "studio", playing: false });
+                s.set({ playing: false });
+                setCatalogueOpen(true);
+                return;
+              }
               s.changeProfile(e.target.value as ProfileId);
               setAsset(null);
               setBinding(null);
@@ -470,6 +491,13 @@ export function App() {
                 {p.name}
               </option>
             ))}
+            <optgroup label="Rack catalogue">
+              {architectures.map((d) => (
+                <option key={d.architectureId} value={d.architectureId}>
+                  {d.familyName}
+                </option>
+              ))}
+            </optgroup>
           </select>
           <div className="segmented">
             <button
@@ -837,45 +865,17 @@ export function App() {
                 Baseline compare
               </button>
             </div>
-            <div className="row">
-              <button onClick={() => s.set({ playing: !s.playing })}>
-                {s.playing ? "Ⅱ Pause" : "▶ Play"}
-              </button>
-              <select
-                aria-label="Playback speed"
-                value={s.speed}
-                onChange={(e) => s.set({ speed: Number(e.target.value) })}
-              >
-                {[1, 10, 100].map((n) => (
-                  <option key={n} value={n}>
-                    {n}×
-                  </option>
-                ))}
-              </select>
-              <button onClick={() => s.set({ time: Math.max(0, s.time - 30) })}>
-                −30s
-              </button>
-              <input
-                aria-label="Time scrubber"
-                type="range"
-                min="0"
-                max="600"
-                value={s.time}
-                onChange={(e) =>
-                  s.set({ time: Number(e.target.value), playing: false })
-                }
-              />
-              <b>
-                {s.buildTime
-                  ? `Day ${Math.floor(s.time / 5)}`
-                  : `${Math.floor(s.time / 60)}:${String(Math.floor(s.time % 60)).padStart(2, "0")}`}
-              </b>
-              <button
-                onClick={() => s.set({ bookmarks: [...s.bookmarks, s.time] })}
-              >
-                Bookmark
-              </button>
-            </div>
+            <TimelineTransport
+              time={s.time}
+              playing={s.playing}
+              speed={s.speed}
+              bookmarks={[]}
+              buildTime={s.buildTime}
+              onTime={(time) => s.set({ time, playing: false })}
+              onPlay={() => s.set({ playing: !s.playing })}
+              onSpeed={(speed) => s.set({ speed })}
+              onBookmark={() => s.set({ bookmarks: [...s.bookmarks, s.time] })}
+            />
             <div className="row">
               <select
                 aria-label="Metric trace"
@@ -916,66 +916,26 @@ export function App() {
                 </button>
               ))}
             </div>
-            <svg
-              className="chart"
-              viewBox="0 0 600 55"
-              role="img"
-              aria-label={`${metric} in ${unit}, synthetic data`}
-            >
-              <path
-                d={`M ${values.map((v, i) => `${i * 10},${48 - ((v - min) / (max - min)) * 40}`).join(" L ")}`}
-                fill="none"
-                stroke="var(--brand-accent)"
-                strokeWidth="1.6"
-              />
-              {compare && (
-                <line
-                  x1="0"
-                  x2="600"
-                  y1={
-                    48 -
-                    (((metric === "temperature"
-                      ? 58.4
-                      : metric === "flow"
-                        ? 120
-                        : metric === "goodput"
-                          ? 100
-                          : metric === "power"
-                            ? 96
-                            : metric === "pressure"
-                              ? 80
-                              : metric === "link"
-                                ? 400
-                                : 0) -
-                      min) /
-                      (max - min)) *
-                      40
-                  }
-                  y2={
-                    48 -
-                    (((metric === "temperature"
-                      ? 58.4
-                      : metric === "flow"
-                        ? 120
-                        : metric === "goodput"
-                          ? 100
-                          : metric === "power"
-                            ? 96
-                            : metric === "pressure"
-                              ? 80
-                              : metric === "link"
-                                ? 400
-                                : 0) -
-                      min) /
-                      (max - min)) *
-                      40
-                  }
-                  stroke="#8da4b8"
-                  strokeDasharray="4 4"
-                />
-              )}
-              <line x1={s.time} x2={s.time} y1="0" y2="55" stroke="#e9bf77" />
-            </svg>
+            <TelemetryChart
+              values={values}
+              time={s.time}
+              metric={metric}
+              unit={unit}
+              baseline={
+                compare
+                  ? (
+                      {
+                        temperature: 58.4,
+                        flow: 120,
+                        goodput: 100,
+                        power: 96,
+                        pressure: 80,
+                        link: 400,
+                      } as Record<string, number>
+                    )[metric] || 0
+                  : undefined
+              }
+            />
             <small>
               {metric === "temperature"
                 ? "Lumped junction response; rack-dependent time constants."
@@ -1035,31 +995,29 @@ export function App() {
           </p>
           {tab === "intelligence" ? (
             <>
-              <section>
-                <h3>What is it?</h3>
-                <p>{selected.shortDescription}</p>
-                <h3>Why it matters</h3>
-                <p>{selected.whyItMatters}</p>
-              </section>
-              <section>
-                <h3>What would I see?</h3>
-                <p className="signature">
-                  △ {selected.primaryFailureSignature}
-                </p>
-                <h3>How do I distinguish it?</h3>
-                {selected.evidenceToCollect.map((t) => (
-                  <p key={t}>{t}</p>
-                ))}
-                <small>
-                  Alternative: {selected.alternativeExplanations[0]}
-                </small>
-              </section>
-              <details>
-                <summary>Engineer depth / operating principle</summary>
-                <p>{selected.normalOperatingPrinciple}</p>
-                <p>{selected.secondarySignatures}</p>
-                <p>Telemetry: {selected.telemetryKeys.join(", ")}</p>
-                <p>{selected.applicabilityNotes}</p>
+              <ComponentIntelligence
+                card={selected}
+                downstream={
+                  selected.type === "pump"
+                    ? "Shared compute cooling loop → manifold flow → thermal margin → workload derating. Network and storage racks are outside this assumed liquid domain."
+                    : selected.type === "hbm"
+                      ? "Local memory integrity and device capacity; no edge to other racks."
+                      : `${selected.family} service and explicit graph descendants.`
+                }
+                downstreamCount={descendants(selected.id, edges).length - 1}
+                onInvestigate={() => {
+                  const i = incidents.find((i) => i.type === selected.type);
+                  if (i) {
+                    setIncidentId(i.id);
+                    inject(i.id);
+                  } else {
+                    setTab("investigation");
+                    setError(
+                      "Choose a relevant family preset; this part has no dedicated preset.",
+                    );
+                  }
+                }}
+              >
                 {s.profile === "NVIDIA_GB200_NVL72_REFERENCE" && (
                   <p>
                     NVIDIA Xid examples: 48 (double-bit ECC), 79 (fallen off
@@ -1075,47 +1033,7 @@ export function App() {
                     sealed package.
                   </p>
                 )}
-              </details>
-              <section>
-                <h3>What breaks next?</h3>
-                <p>
-                  {selected.type === "pump"
-                    ? "Shared compute cooling loop → manifold flow → thermal margin → workload derating. Network and storage racks are outside this assumed liquid domain."
-                    : selected.type === "hbm"
-                      ? "Local memory integrity and device capacity; no edge to other racks."
-                      : `${selected.family} service and explicit graph descendants.`}
-                </p>
-                <small>
-                  {descendants(selected.id, edges).length - 1} downstream nodes
-                </small>
-                <h3>How do I confirm it is fixed?</h3>
-                {selected.validationTests
-                  .concat(selected.exitCriteria)
-                  .map((t) => (
-                    <p key={t}>{t}</p>
-                  ))}
-              </section>
-              <section>
-                <h3>TPM decision and DRI</h3>
-                <p>{selected.ownerFunctions.join(" + ")}</p>
-                <small>BOM EDU-C · serial SI-2026-0001 · fictional</small>
-                <button
-                  onClick={() => {
-                    const i = incidents.find((i) => i.type === selected.type);
-                    if (i) {
-                      setIncidentId(i.id);
-                      inject(i.id);
-                    } else {
-                      setTab("investigation");
-                      setError(
-                        "Choose a relevant family preset; this part has no dedicated preset.",
-                      );
-                    }
-                  }}
-                >
-                  Investigate selected component
-                </button>
-              </section>
+              </ComponentIntelligence>
               <details>
                 <summary>Sources & applicability</summary>
                 <p>
@@ -1344,7 +1262,7 @@ export function App() {
             </>
           )}
         </aside>
-      </div>
+      </WorkbenchFrame>
       <footer>
         <span>
           ◈ Illustrative geometry · synthetic signals · educational mapping

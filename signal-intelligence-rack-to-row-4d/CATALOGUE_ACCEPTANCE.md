@@ -34,7 +34,7 @@
 | O Offline | GREEN | Non-loopback requests blocked in browser test/capture; no external runtime assets or new dependencies |
 | P Resource management | YELLOW | Batched geometry disposal; two complete switch cycles recorded bounded GPU object counts; GPU-byte/long-duration leak proof not established |
 | Q Keyboard/accessibility | YELLOW | Native keyboard family selector, accessible component list, fallback, panel resizing and reduced motion; full screen-reader/touch audit pending |
-| R Model import | GREEN | Legacy licensed GLB fixture binding/picking/replay preserved, including catalogue roundtrip; catalogue-specific import adapter mapping is not added |
+| R Model import | GREEN | Shared licensed model validator/renderer now supports catalogue-specific stable-ID mappings, transformed ownership, picking, original-profile roundtrip and procedural restore; user files remain local |
 | S Deployment truth | GREEN | No Fluidstack equipment deployment, vendor affiliation or live-telemetry assertion |
 | T Evidence | GREEN | Ten screenshot sets, ten t0/t180 demonstrations plus 20 scenario regression outputs, five A/B pairs and 4K export |
 
@@ -47,3 +47,6 @@ Other limitations: exact rear harnesses, collision-solved service motion, dimens
 The user authorized public repository/site publication on October 15 after the tested local handoff. This publication approval does not erase the remaining qualification gaps above. See CATALOGUE_INDEX.md, CATALOGUE_PROVENANCE.md and evidence/catalogue-v2/test-results.json for exact handoff details.
 
 Catalogue row context is illustrative and not a new facility simulation: only the central reference is interactive; neighboring copies are context and do not expand fault ownership. The original independently identified row simulation remains available in the 4D lab.
+
+
+4D convergence revision: [current workbench acceptance, actual screenshots, behavior and retained scope limits](CATALOGUE_4D_CONVERGENCE.md). The original intelligence, timeline transport/chart and model renderer are shared with catalogue entries; this does not extend calibrated vendor fault coverage or turn illustrative neighboring copies into a facility simulation.

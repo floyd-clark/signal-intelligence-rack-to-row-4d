@@ -3,6 +3,7 @@ import { inventory, type ComponentRecord } from "../../data/model";
 import { computeTray } from "../../scene/hardware/ComputeTray";
 import { acceleratorPackage } from "../../scene/hardware/AcceleratorPackage";
 import type { Architecture, Concept, ViewMode } from "../types";
+import { carrierIndex } from "./inspection";
 export interface ModelOptions {
   view: ViewMode;
   level: number;
@@ -311,7 +312,7 @@ export function trayDetails(a: Assembly, d: Architecture, opts: ModelOptions) {
       )
     )
       children.add(r.id);
-  const t = Number(opts.selected.match(/\/(?:tray|board)\/(\d+)/)?.[1] || 1);
+  const t = carrierIndex(opts.selected);
   const mapped = rs
     .filter((r) => children.has(r.id))
     .map((r) => {

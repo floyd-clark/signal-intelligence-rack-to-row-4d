@@ -1,4 +1,28 @@
-# Rack Catalogue 2.0 — measured visual performance
+# 4D workbench — current measured visual performance
+
+Final convergence build, captured 2026-10-16T01:29:36.104Z. Installed Chrome, ANGLE D3D11, Intel UHD Graphics (0x00009A60); 1920×1080 browser viewport, Balanced, DPR 1.25. All ten single-rack samples used the same three-panel Inspect workbench. After settling, the last four one-second samples each had a median of 72 FPS on this machine; this is a short observation near the refresh cap, not a sustained-performance guarantee.
+
+| Family | Median FPS | Draw calls | Rendered triangles |
+|---|---:|---:|---:|
+| Enterprise EIA | 72 | 10 | 55,490 |
+| OCP ORv3 | 72 | 10 | 21,470 |
+| DGX B200 | 72 | 10 | 39,914 |
+| GB300 NVL72 | 72 | 12 | 65,518 |
+| AMD Helios | 72 | 12 | 56,686 |
+| Google Ironwood | 72 | 13 | 59,862 |
+| AWS Trainium3 | 72 | 9 | 36,890 |
+| Azure Maia | 72 | 12 | 25,442 |
+| Cerebras CS-4 | 72 | 9 | 10,838 |
+| HPE Cray EX4000 | 72 | 12 | 54,766 |
+
+The single hardware canvas measured about 1329×613 CSS pixels. A/B GB300/Ironwood at t=180s with a shared-manifold fault, runtime chart and two canvases recorded 52 total calls and 125,272 rendered triangles. Last four sample medians: A 72.0 FPS, B 72.0 FPS. Only this comparison state was measured, not every pair/deep view.
+
+[Exact native samples, canvas bounds, generation/ownership and bundle hash](evidence/catalogue-v2/workbench/native-verification.json). All new screenshots are under evidence/catalogue-v2/workbench; no uncaught exceptions or external runtime requests occurred during this capture. Browser regression uses SwiftShader separately.
+
+The main application still has a >500 kB bundle advisory. Long endurance, byte-level GPU memory, touch/mobile GPUs and every two-canvas state remain unqualified. Earlier differing measurements are retained below as history rather than being overwritten or presented as current.
+
+## Earlier catalogue measurements
+
 
 Measured October 15, 2026, using installed Chrome with ANGLE D3D11 on this Windows computer. The actual WebGL renderer reports **Intel UHD Graphics (0x00009A60), Direct3D11**, rather than an assumed discrete GPU. Native capture uses a 1920×1080 browser viewport, Balanced quality and DPR 1.25. UI screenshots are full-page captures; their height may exceed the viewport. These are short local measurements, not performance guarantees.
 

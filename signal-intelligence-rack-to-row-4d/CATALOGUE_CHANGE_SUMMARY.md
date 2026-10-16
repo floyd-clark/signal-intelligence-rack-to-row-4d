@@ -12,11 +12,11 @@ New `src/catalogue/types.ts`, `registry.ts`, `variants.ts`, `sources/register.ts
 
 ## Interaction, diagnostics and teaching
 
-`src/catalogue/ui/` provides an offline gallery with actual rendered thumbnails, a single architecture studio and synchronized true-3D A/B comparison. Camera orbit including damping, presets, time and explosion synchronize; overlays can be linked or independent. Compute/memory/power/cooling/network/service concepts resolve to actual owned assemblies on both sides. Front/rear/deep picking, click/drill/back, retained selection, cutaways, topology, reference-row context, panel collapse, keyboard selection, reduced motion, fallback and 4K hardware export are implemented.
+`src/catalogue/ui/` provides an offline gallery with actual rendered thumbnails, a full three-panel 4D workbench and synchronized true-3D A/B comparison. Camera orbit including damping, presets, time and explosion synchronize; overlays can be linked or independent. Compute/memory/power/cooling/network/service concepts resolve to actual owned assemblies on both sides. Front/rear/deep picking, click/drill/back, retained selection, cutaways, topology, reference-row context, panel collapse, keyboard selection, reduced motion, fallback and 4K hardware export are implemented.
 
 Twenty authored synthetic fault scenarios have architecture-specific symptoms, hypotheses, tests, containment and prevention. Pure seeded snapshots support rewind and validated replay import/export. Scope distinguishes local, shared cooling/power, communication fabric and software conditions. Cooling flow changes precede heat/throttling; reserve power loss does not imply an automatic outage. Five comparison matchups explain design differences. Qualitative fit controls, six-chapter tours, self-checks and L1–L12 NPI fixtures are available.
 
-The original 4D lab remains accessible, preserving its 80 concept types/3,266 records, original IDs, 36 incidents, deterministic simulation, diagnostics, independent row propagation and GLB binding/import. A tested catalogue roundtrip preserves imported geometry and picking. The existing local model-replacement adapter remains available; a new catalogue-specific arbitrary-CAD binding adapter was not added.
+The original 4D lab remains accessible, preserving its 80 concept types/3,266 records, original IDs, 36 incidents, deterministic simulation, diagnostics, independent row propagation and GLB binding/import. A tested catalogue roundtrip preserves imported geometry and picking. The local model validator and imported renderer are now shared with catalogue-specific component mappings, including transformed ownership and original-profile roundtrip.
 
 ## Validation and acceptance
 
@@ -27,3 +27,8 @@ Initial publication passed 39 unit tests and nine browser workflows. The L1–L1
 Actual native Chrome captures include ten full screenshot sets, fault states, defining components, illustrative row context, five A/B pairs, Rubin's generation delta and a 3840×2160 export. [Performance](PERFORMANCE.md) reports native per-family FPS/calls/triangles and explicitly limits the memory/disposal evidence. Regression SwiftShader FPS is not used as a native benchmark.
 
 The user's direct review response reports **≥90/100 for all ten base families**; it is recorded as a lower bound with the original wording in `evidence/catalogue-v2/human-review.json`. Rubin remains unscored. [Acceptance](CATALOGUE_ACCEPTANCE.md) keeps unavailable CAD/hidden dimensions, unmodelled roadmap variants, calibrated physical dynamics, long endurance/GPU-byte profiling and full assistive-device QA explicit. There is no claim of vendor certification, live facility telemetry or deployed equipment inventories.
+
+
+## 4D workbench convergence
+
+[Complete implementation changes and current acceptance](CATALOGUE_4D_CONVERGENCE.md). All ten entries now use the original workbench layout and shared intelligence/timeline/import components. New checks exercise arbitrary-carrier inspection, semantic layers, per-family evidence/recovery/release, model mappings and synchronized build-time comparison. Earlier test totals above describe the preceding lifecycle release.

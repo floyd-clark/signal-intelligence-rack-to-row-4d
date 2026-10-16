@@ -18,6 +18,11 @@ import { buildModel } from "../models";
 import { resolveOwner } from "../../scene/hardware/assembly";
 import { catalogueSnapshot, blankReplay } from "../scenarios/engine";
 import { lifecycleKey } from "../lifecycle";
+import type { BoundModel } from "./ModelImport";
+import { ImportedHardware } from "../../import/ImportedHardware";
+import { importedOwners } from "../../import/ownership";
+import { layerMatches, downstreamParts } from "../workbench";
+import { inspectionView } from "../models/inspection";
 export const catalogueAudit: Record<string, any> = {};
 export const captureCatalogue: Record<
   string,
@@ -25,7 +30,15 @@ export const captureCatalogue: Record<
 > = {};
 const cache = new Map<string, { position: number[]; target: number[] }>();
 let drivingSide: "a" | "b" | null = null;
-function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
+function Hardware({
+  d,
+  side,
+  imported,
+}: {
+  d: Architecture;
+  side: "a" | "b";
+  imported?: BoundModel;
+}) {
   const s = useCatalogue();
   const level = s.assemblyLevels[lifecycleKey(d)] ?? 12;
   const replay = s.replays[d.architectureId] || blankReplay(d.architectureId);
@@ -65,7 +78,36 @@ function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
     current?.concept === s.concept
       ? current.id
       : representativePart(d, s.concept)?.id;
-  const owner = asset.owners.get(selected || "");
+  const levels = useMemo(
+    () => Object.fromEntries(d.components.map((p) => [p.id, p.level])),
+    [d],
+  );
+  const activeImport = s.focus === "rack" && imported;
+  const owners = useMemo(
+    () =>
+      activeImport
+        ? importedOwners(
+            activeImport.asset,
+            activeImport.binding,
+            levels,
+            level,
+          )
+        : asset.owners,
+    [activeImport, asset, levels, level],
+  );
+  const overlay = side === "a" ? s.overlayA : s.overlayB;
+  const highlighted = useMemo(() => {
+    if (overlay === "Hardware") return undefined;
+    const part = d.components.find((p) => p.id === selected);
+    return new Set(
+      overlay === "Dependencies" && part
+        ? [part.id, ...downstreamParts(d, part)]
+        : d.components
+            .filter((p) => layerMatches(d, p, overlay))
+            .map((p) => p.id),
+    );
+  }, [d, overlay, selected]);
+  const owner = owners.get(selected || "");
   const helper = useMemo(
     () => (owner ? new Box3Helper(owner.bounds, new Color("#66baff")) : null),
     [owner],
@@ -88,7 +130,7 @@ function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
       family: d.architectureId,
       level,
       owners: Object.fromEntries(
-        [...asset.owners].map(([id, o]) => [
+        [...owners].map(([id, o]) => [
           id,
           {
             bounds: [...o.bounds.min.toArray(), ...o.bounds.max.toArray()],
@@ -97,35 +139,48 @@ function Hardware({ d, side }: { d: Architecture; side: "a" | "b" }) {
           },
         ]),
       ),
-      triangles: asset.triangles,
+      triangles: activeImport ? null : asset.triangles,
+      renderMode: activeImport ? "imported" : "procedural",
+      assetName: activeImport ? activeImport.asset.name : null,
+      highlightedOwners: highlighted ? [...highlighted] : null,
     };
     return () => {
       delete catalogueAudit[side];
     };
-  }, [asset, d, side]);
+  }, [asset, d, side, owners, activeImport, highlighted]);
+  const select = (id: string, drill = false) => {
+    const p = d.components.find((p) => p.id === id);
+    if (!p) return;
+    s.select(d.architectureId, id, p.concept);
+    if (drill) s.drill(inspectionView(p));
+  };
   const pick = (e: any, drill = false) => {
     const id = resolveOwner(e.object, e.faceIndex);
     const p = d.components.find((p) => p.id === id);
     if (!p) return;
     e.stopPropagation();
-    s.select(d.architectureId, id, p.concept);
-    if (drill)
-      s.drill(
-        p.concept === "network"
-          ? "topology"
-          : s.focus === "rack" || s.focus === "row"
-            ? "tray"
-            : "chip",
-      );
+    select(id!, drill);
   };
   return (
     <group onClick={(e) => pick(e)} onDoubleClick={(e) => pick(e, true)}>
-      <primitive object={asset.group} dispose={null} />
+      {activeImport ? (
+        <ImportedHardware
+          asset={activeImport.asset}
+          binding={activeImport.binding}
+          levels={levels}
+          level={level}
+          highlighted={highlighted}
+          onSelect={(id) => select(id)}
+          onDrill={(id) => select(id, true)}
+        />
+      ) : (
+        <primitive object={asset.group} dispose={null} />
+      )}
       {helper && !selected?.endsWith("/rack") && (
         <primitive object={helper} dispose={null} raycast={() => null} />
       )}
       {snap.affected.map((id, i) => {
-        const o = asset.owners.get(id);
+        const o = owners.get(id);
         if (!o) return null;
         const center = o.bounds.getCenter(new Vector3());
         const size = o.bounds.getSize(new Vector3());
@@ -156,7 +211,7 @@ function Rig({ side, d }: { side: "a" | "b"; d: Architecture }) {
     stamp = useRef(0),
     fps = useRef<number[]>([]);
   const previous = useRef("");
-  const previousDepth = useRef(s.history.length);
+  const lastBack = useRef(s.backRevision);
   useEffect(() => {
     captureCatalogue[side] = (width, height) => {
       const size = gl.getSize(new Vector2()),
@@ -219,15 +274,10 @@ function Rig({ side, d }: { side: "a" | "b"; d: Architecture }) {
   useEffect(() => {
     const c = controls as any;
     if (!c) return;
-    const key = `${side}:${d.architectureId}:${s.focus}`;
-    if (previous.current && previous.current !== key)
-      cache.set(previous.current, {
-        position: camera.position.toArray(),
-        target: c.target.toArray(),
-      });
+    const key = `${side}:${d.architectureId}:${d.shape}:${s.focus}`;
     const cached = cache.get(key);
-    const restoring = s.history.length < previousDepth.current;
-    previousDepth.current = s.history.length;
+    const restoring = s.backRevision !== lastBack.current;
+    lastBack.current = s.backRevision;
     previous.current = key;
     const deep = ["tray", "chip", "component"].includes(s.focus);
     const target = deep ? [0, 0.15, 0] : [0, 2.05, 0];
@@ -255,6 +305,11 @@ function Rig({ side, d }: { side: "a" | "b"; d: Architecture }) {
     }
   }, [s.orbit, controls, camera]);
   useFrame((state) => {
+    if (previous.current && controls)
+      cache.set(previous.current, {
+        position: camera.position.toArray(),
+        target: (controls as any).target.toArray(),
+      });
     if (catalogueAudit[side]) {
       catalogueAudit[side].camera = camera.position.toArray();
       catalogueAudit[side].target = (controls as any)?.target.toArray();
@@ -306,11 +361,21 @@ function Rig({ side, d }: { side: "a" | "b"; d: Architecture }) {
   });
   return null;
 }
-export function StudioScene({ side = "a" }: { side?: "a" | "b" }) {
+export function StudioScene({
+  side = "a",
+  imported,
+}: {
+  side?: "a" | "b";
+  imported?: BoundModel;
+}) {
   const s = useCatalogue();
-  const d = resolveArchitecture(
-    architectureById[s[side]],
-    side === "a" ? s.variantA : s.variantB,
+  const d = useMemo(
+    () =>
+      resolveArchitecture(
+        architectureById[s[side]],
+        side === "a" ? s.variantA : s.variantB,
+      ),
+    [s[side], side === "a" ? s.variantA : s.variantB],
   );
   const deep =
     s.focus === "tray" || s.focus === "chip" || s.focus === "component";
@@ -340,7 +405,7 @@ export function StudioScene({ side = "a" }: { side?: "a" | "b" }) {
           color="#86b9e8"
         />
         <group scale={physical}>
-          <Hardware d={d} side={side} />
+          <Hardware d={d} side={side} imported={imported} />
         </group>
         {!deep && (
           <>
@@ -357,7 +422,6 @@ export function StudioScene({ side = "a" }: { side?: "a" | "b" }) {
           dampingFactor={0.14}
           minDistance={0.6}
           maxDistance={28}
-          target={deep ? [0, 0.15, 0] : [0, 2.05, 0]}
         />
         <Rig d={d} side={side} />
       </Canvas>
@@ -369,6 +433,9 @@ export function StudioScene({ side = "a" }: { side?: "a" | "b" }) {
         <small>{d.generation}</small>
       </div>
       <div className="cat-scene-foot">
+        {s.focus === "rack" && imported
+          ? `${imported.asset.name} · ${imported.binding.attribution} · ${imported.binding.license} · `
+          : ""}
         {deep
           ? "Conceptual exposed interior · illustrative dimensions"
           : s.focus === "row"

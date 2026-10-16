@@ -51,6 +51,19 @@ export class Assembly {
     geometry: BufferGeometry;
   }[] = [];
   owners = new Map<string, OwnerInfo>();
+  remapOwners(mapper: (id: string) => string) {
+    for (const entry of this.entries) if (entry.id) entry.id = mapper(entry.id);
+    const owners = new Map<string, OwnerInfo>();
+    for (const [id, owner] of this.owners) {
+      const next = mapper(id),
+        previous = owners.get(next);
+      if (previous) {
+        previous.bounds.union(owner.bounds);
+        previous.primitives += owner.primitives;
+      } else owners.set(next, { ...owner, bounds: owner.bounds.clone() });
+    }
+    this.owners = owners;
+  }
   add(
     id: string,
     material: string,

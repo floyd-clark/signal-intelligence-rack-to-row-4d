@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "./artifacts.mjs";
 import { chromium, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 const url =
@@ -21,6 +22,10 @@ page.on("response", (r) => {
 try {
   const response = await page.goto(url);
   expect(response.status()).toBe(200);
+  const expectedBundle = (await fs.readFile("dist/index.html", "utf8")).match(
+    /src="\.\/assets\/([^"]+)"/,
+  )[1];
+  expect(await response.text()).toContain(expectedBundle);
   await expect(page.locator(".cat-card")).toHaveCount(10);
   await expect(
     page.locator(".cat-card button", { hasText: "L1–L12 integration" }),
@@ -34,7 +39,7 @@ try {
         ),
     )
     .toBe(true);
-  await page.screenshot({
+  await screenshot(page, {
     path: `${root}/${prefix}-gallery.png`,
     fullPage: true,
   });
@@ -42,6 +47,14 @@ try {
     .getByRole("button", { name: "Compare the rack-scale heroes ↗" })
     .click();
   await expect(page.locator(".cat-canvas canvas")).toHaveCount(2);
+  await expect(page.getByTestId("4d-workbench")).toBeVisible();
+  await expect(
+    page.getByRole("tree", { name: "Accessible component tree", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "What is it?", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Linked overlays")).toBeVisible();
   await page.waitForTimeout(1800);
   await page.getByRole("button", { name: "Catalogue render audit" }).click();
   const audit = JSON.parse(
@@ -50,11 +63,13 @@ try {
   expect(audit.a.drawCalls).toBeGreaterThan(0);
   expect(audit.b.drawCalls).toBeGreaterThan(0);
   await page.getByRole("button", { name: "Catalogue render audit" }).click();
-  await page.screenshot({
+  await screenshot(page, {
     path: `${root}/${prefix}-comparison.png`,
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Investigation", exact: true })
+    .click();
   await page.getByLabel("Catalogue fault").selectOption("CAT-04-1");
   await page.getByLabel("Catalogue time").fill("180");
   await expect(page.locator(".cat-inspector")).toContainText("27 affected");
@@ -73,7 +88,9 @@ try {
     .getByRole("button", { name: "Run simulated test 1", exact: true })
     .click();
   await expect(page.getByTestId("gate-result-0")).toContainText("FAIL");
-  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Investigation", exact: true })
+    .click();
   await page
     .getByRole("button", { name: "Clear family incident", exact: true })
     .click();
@@ -96,13 +113,11 @@ try {
     .getByRole("button", { name: /^A L3 / })
     .click();
   await page.waitForTimeout(500);
-  await page.screenshot({
+  await screenshot(page, {
     path: `${root}/${prefix}-lifecycle.png`,
     fullPage: true,
   });
-  await page
-    .getByRole("button", { name: "Architecture studio", exact: true })
-    .click();
+  await page.getByRole("button", { name: "4D workspace", exact: true }).click();
   await page
     .getByLabel("Architecture A", { exact: true })
     .selectOption("CAT-03");
@@ -112,7 +127,7 @@ try {
     .click();
   await page.getByLabel("Catalogue camera").selectOption("rear");
   await page.waitForTimeout(600);
-  await page.screenshot({
+  await screenshot(page, {
     path: `${root}/${prefix}-DGX-L2-power.png`,
     fullPage: true,
   });
@@ -136,13 +151,13 @@ try {
     quality: "Balanced",
     level: 12,
   };
-  await page.getByRole("button", { name: "Return to 4D lab" }).click();
+  await page.getByRole("button", { name: "Reference profiles" }).click();
   await expect(page.getByLabel("Architecture profile")).toHaveValue(
     "FS_CONCEPT",
   );
   expect(errors).toEqual([]);
   expect(failedResponses).toEqual([]);
-  await fs.writeFile(
+  await writeEvidence(
     `${root}/${prefix}-verification.json`,
     JSON.stringify(
       {
@@ -150,6 +165,8 @@ try {
         checkedAt: new Date().toISOString(),
         http: response.status(),
         galleryFamilies: 10,
+        converged4DWorkbench: true,
+        expectedBundle,
         decodedImages: true,
         comparisonCanvases: 2,
         drawCalls: [audit.a.drawCalls, audit.b.drawCalls],

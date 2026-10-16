@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { test, expect } from "@playwright/test";
 test("production bundle works with external networking blocked, records performance and topology", async ({
   page,
@@ -26,7 +27,7 @@ test("production bundle works with external networking blocked, records performa
   const audit = JSON.parse(await page.locator(".modal pre").innerText());
   expect(audit.fps).toBeGreaterThan(0);
   await import("node:fs/promises").then((fs) =>
-    fs.writeFile(
+    writeEvidence(
       "evidence/catalogue-v2/legacy-runtime-audit.json",
       JSON.stringify(
         {
@@ -39,7 +40,7 @@ test("production bundle works with external networking blocked, records performa
       ),
     ),
   );
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-09-audit.png",
     fullPage: true,
   });
@@ -50,7 +51,7 @@ test("production bundle works with external networking blocked, records performa
     .selectOption("GOOGLE_IRONWOOD_TPU_REFERENCE");
   await page.getByLabel("Camera preset").selectOption("graph");
   await page.waitForTimeout(1500);
-  await page.screenshot({
+  await screenshot(page, {
     path: "evidence/catalogue-v2/legacy-10-ironwood-topology.png",
     fullPage: true,
   });

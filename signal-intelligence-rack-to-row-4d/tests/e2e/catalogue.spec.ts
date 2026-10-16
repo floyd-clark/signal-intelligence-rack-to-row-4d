@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { test, expect, type Page } from "@playwright/test";
 import { PerspectiveCamera, Vector3 } from "three";
 import fs from "node:fs/promises";
@@ -26,11 +27,9 @@ test("gallery images, generation delta, corresponding concepts, keyboard and fal
   await page.getByLabel("Search catalogue", { exact: true }).fill("UALink");
   await expect(page.locator(".cat-card")).toHaveCount(1);
   await page.getByLabel("Search catalogue", { exact: true }).fill("");
-  await page
-    .getByRole("button", { name: "Architecture studio", exact: true })
-    .click();
+  await page.getByRole("button", { name: "4D workspace", exact: true }).click();
   await page.getByLabel("Generation A", { exact: true }).selectOption("rubin");
-  await expect(page.locator(".cat-inspector h2")).toHaveText(
+  await expect(page.getByTestId("architecture-name")).toHaveText(
     "NVIDIA Vera Rubin NVL72",
   );
   await page.getByRole("button", { name: "Sources", exact: true }).click();
@@ -38,7 +37,7 @@ test("gallery images, generation delta, corresponding concepts, keyboard and fal
     "Power shelves: 4 shelf",
   );
   await expect(page.locator(".cat-inspector")).toContainText("DC output: 54 V");
-  await page.getByRole("button", { name: "Explain", exact: true }).click();
+  await page.getByRole("button", { name: "Intelligence", exact: true }).click();
   await page
     .locator(".cat-flowbar")
     .getByRole("button", { name: "memory", exact: true })
@@ -47,14 +46,14 @@ test("gallery images, generation delta, corresponding concepts, keyboard and fal
     "data-focus",
     "chip",
   );
-  await page.getByRole("button", { name: "Hide engineering panel" }).click();
+  await page.getByRole("button", { name: "Collapse panels" }).click();
   await expect
     .poll(
       async () =>
         (await page.locator(".cat-canvas canvas").boundingBox())!.width,
     )
     .toBeGreaterThan(1400);
-  await page.getByRole("button", { name: "Show engineering panel" }).click();
+  await page.getByRole("button", { name: "Show panels" }).click();
   await page.getByLabel("2D fallback", { exact: true }).check();
   await expect(page.locator(".cat-canvas canvas")).toHaveCount(0);
   await page.locator(".cat-fallback button").first().click();
@@ -75,9 +74,7 @@ async function open(page: Page) {
   await page
     .getByRole("button", { name: "Rack Catalogue 2.0", exact: true })
     .click();
-  await page
-    .getByRole("button", { name: "Architecture studio", exact: true })
-    .click();
+  await page.getByRole("button", { name: "4D workspace", exact: true }).click();
   await page.getByLabel("Catalogue quality").selectOption("Performance");
 }
 async function audit(page: Page) {
@@ -182,7 +179,7 @@ test("all ten families retain real front/rear picking, accessible IDs, detailed 
   }
   expect(errors).toEqual([]);
   expect(remote).toEqual([]);
-  await fs.writeFile(
+  await writeEvidence(
     "evidence/catalogue-v2/lifecycle/picking-offline.json",
     JSON.stringify({ passed: true, results, errors, remote }, null, 2),
   );
@@ -239,10 +236,12 @@ test("A/B synchronized orbit, independent overlays, selection, deterministic fai
   await expect(page.getByLabel("Overlay A", { exact: true })).toHaveValue(
     "Cooling",
   );
-  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Investigation", exact: true })
+    .click();
   await page.getByLabel("Catalogue fault").selectOption("CAT-04-1");
   await page.getByLabel("Catalogue time").fill("8");
-  await expect(page.locator(".cat-telemetry")).toContainText("48.0 °C");
+  await expect(page.locator(".cat-telemetry")).toContainText("48.0°C");
   await page.getByLabel("Catalogue time").fill("180");
   await expect(page.locator(".cat-inspector")).toContainText("27 affected");
   await page.getByLabel("Catalogue time").fill("0");
@@ -265,7 +264,7 @@ test("A/B synchronized orbit, independent overlays, selection, deterministic fai
     ),
   ).toBe(true);
   await page.getByLabel("Catalogue assembly level").fill("12");
-  await page.getByRole("button", { name: "Return to 4D lab" }).click();
+  await page.getByRole("button", { name: "Reference profiles" }).click();
   await expect(page.getByLabel("Architecture profile")).toHaveValue(
     "FS_CONCEPT",
   );
@@ -275,7 +274,9 @@ test("all twenty scenario demonstrations change the correct synthetic state and 
 }) => {
   test.setTimeout(180000);
   await open(page);
-  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Investigation", exact: true })
+    .click();
   const results = [];
   for (let i = 1; i <= 10; i++) {
     const id = `CAT-${String(i).padStart(2, "0")}`;
@@ -294,7 +295,7 @@ test("all twenty scenario demonstrations change the correct synthetic state and 
       await expect(page.locator(".cat-telemetry")).toContainText("100.0%");
     }
   }
-  await fs.writeFile(
+  await writeEvidence(
     "evidence/catalogue-v2/lifecycle/scenario-regression.json",
     JSON.stringify({ passed: true, scenarios: results }, null, 2),
   );

@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { test, expect, type Page } from "@playwright/test";
 import fs from "node:fs/promises";
 const root = "evidence/catalogue-v2/lifecycle";
@@ -7,9 +8,7 @@ const familyIds = Array.from(
 );
 async function open(page: Page) {
   await page.goto("/?catalogue=1");
-  await page
-    .getByRole("button", { name: "Architecture studio", exact: true })
-    .click();
+  await page.getByRole("button", { name: "4D workspace", exact: true }).click();
   await page.getByLabel("Catalogue quality").selectOption("Performance");
 }
 async function level(page: Page, n: number, side = "a") {
@@ -73,7 +72,7 @@ test("all ten catalogue entries expose L1-L12 and real independently staged hard
     expect(Object.keys(shell.owners).some((id) => id.includes("/tray/"))).toBe(
       false,
     );
-    await page.screenshot({ path: `${root}/${id}-L1.png`, fullPage: true });
+    await screenshot(page, { path: `${root}/${id}-L1.png`, fullPage: true });
     await level(page, 2);
     const power = (await audit(page, 2)).a;
     expect(power.owners[`${id}/power/1`]).toBeTruthy();
@@ -83,7 +82,7 @@ test("all ten catalogue entries expose L1-L12 and real independently staged hard
     await level(page, 12);
     const complete = (await audit(page, 12)).a;
     expect(complete.triangles).toBeGreaterThan(shell.triangles);
-    await page.screenshot({ path: `${root}/${id}-L12.png`, fullPage: true });
+    await screenshot(page, { path: `${root}/${id}-L12.png`, fullPage: true });
     results.push({
       id,
       namedStages: 12,
@@ -93,7 +92,7 @@ test("all ten catalogue entries expose L1-L12 and real independently staged hard
       traysAtL3: true,
     });
   }
-  await fs.writeFile(
+  await writeEvidence(
     `${root}/family-stages.json`,
     JSON.stringify({ passed: true, results }, null, 2),
   );
@@ -140,7 +139,7 @@ test("all ten families can earn each applicable gate through three checks and ev
     }
     results.push({ id, signed, skipped });
   }
-  await fs.writeFile(
+  await writeEvidence(
     `${root}/gate-signoffs.json`,
     JSON.stringify({ passed: true, results, synthetic: true }, null, 2),
   );
@@ -159,7 +158,9 @@ test("A/B and Rubin have separate saved levels; fixture failures block signing; 
     page.getByRole("button", { name: "Sign earned L1 pass" }),
   ).toBeDisabled();
   await page.getByLabel("Simulate a failing acceptance fixture").uncheck();
-  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Investigation", exact: true })
+    .click();
   await page.getByLabel("Catalogue fault").selectOption("CAT-04-1");
   await page.getByRole("button", { name: "L1–L12", exact: true }).click();
   await page
@@ -171,7 +172,9 @@ test("A/B and Rubin have separate saved levels; fixture failures block signing; 
   await expect(
     page.getByRole("button", { name: "Sign earned L1 pass" }),
   ).toBeDisabled();
-  await page.getByRole("button", { name: "Investigate", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Investigation", exact: true })
+    .click();
   await page
     .getByRole("button", { name: "Clear family incident", exact: true })
     .click();
@@ -220,9 +223,7 @@ test("A/B and Rubin have separate saved levels; fixture failures block signing; 
   );
   await expect(page.getByLabel("Catalogue gate evidence note")).toHaveValue("");
   await page.reload();
-  await page
-    .getByRole("button", { name: "Architecture studio", exact: true })
-    .click();
+  await page.getByRole("button", { name: "4D workspace", exact: true }).click();
   await expect(page.getByTestId("assembly-a")).toHaveAttribute(
     "data-level",
     "2",

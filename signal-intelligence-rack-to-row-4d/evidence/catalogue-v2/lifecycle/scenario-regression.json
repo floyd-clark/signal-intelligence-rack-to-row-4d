@@ -4,102 +4,102 @@
     {
       "family": "CAT-01",
       "fault": "CAT-01-1",
-      "t180": "Enterprise EIA\n84.9 °C die · Air-cooled · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\nAir\nSelected architecture cooling\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-01",
       "fault": "CAT-01-2",
-      "t180": "Enterprise EIA\n48.0 °C die · Air-cooled · 100.0% synthetic goodput · 35% reserve"
+      "t180": "USEFUL CAPACITY\n100.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\nAir\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-02",
       "fault": "CAT-02-1",
-      "t180": "OCP Open Rack V3\n48.0 °C die · Air-cooled · 100.0% synthetic goodput · 35% reserve"
+      "t180": "USEFUL CAPACITY\n100.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\nAir\nAir baseline; optional liquid study\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-02",
       "fault": "CAT-02-2",
-      "t180": "OCP Open Rack V3\n84.9 °C die · Air-cooled · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\nAir\nAir baseline; optional liquid study\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-03",
       "fault": "CAT-03-1",
-      "t180": "NVIDIA DGX B200\n48.0 °C die · Air-cooled · 75.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n75.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\nAir\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-03",
       "fault": "CAT-03-2",
-      "t180": "NVIDIA DGX B200\n48.0 °C die · Air-cooled · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\nAir\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-04",
       "fault": "CAT-04-1",
-      "t180": "NVIDIA GB300 NVL72\n84.9 °C die · 72 L/min · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\n72L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-04",
       "fault": "CAT-04-2",
-      "t180": "NVIDIA GB300 NVL72\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-05",
       "fault": "CAT-05-1",
-      "t180": "AMD Helios\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-05",
       "fault": "CAT-05-2",
-      "t180": "AMD Helios\n84.9 °C die · 4 L/min · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\n4L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-06",
       "fault": "CAT-06-1",
-      "t180": "Google Ironwood\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-06",
       "fault": "CAT-06-2",
-      "t180": "Google Ironwood\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-07",
       "fault": "CAT-07-1",
-      "t180": "AWS Trainium3\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-07",
       "fault": "CAT-07-2",
-      "t180": "AWS Trainium3\n48.0 °C die · 240 L/min · 91.7% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n91.7%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-08",
       "fault": "CAT-08-1",
-      "t180": "Azure Maia\n84.9 °C die · 72 L/min · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\n72L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-08",
       "fault": "CAT-08-2",
-      "t180": "Azure Maia\n48.0 °C die · 240 L/min · 73.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n73.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-09",
       "fault": "CAT-09-1",
-      "t180": "Cerebras CS-4\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-09",
       "fault": "CAT-09-2",
-      "t180": "Cerebras CS-4\n84.9 °C die · 24 L/min · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\n24L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-10",
       "fault": "CAT-10-1",
-      "t180": "HPE Cray EX4000\n84.9 °C die · 72 L/min · 79.4% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n79.4%\nSynthetic workload goodput\nDEVICE JUNCTION\n84.9°C\nIllustrative thermal response\nSECONDARY FLOW\n72L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n10.1°C\nIllustrative 95°C limit"
     },
     {
       "family": "CAT-10",
       "fault": "CAT-10-2",
-      "t180": "HPE Cray EX4000\n48.0 °C die · 240 L/min · 68.0% synthetic goodput · 100% reserve"
+      "t180": "USEFUL CAPACITY\n68.0%\nSynthetic workload goodput\nDEVICE JUNCTION\n48.0°C\nIllustrative thermal response\nSECONDARY FLOW\n240L/min\nSelected architecture cooling\nTHERMAL HEADROOM\n47.0°C\nIllustrative 95°C limit"
     }
   ]
 }

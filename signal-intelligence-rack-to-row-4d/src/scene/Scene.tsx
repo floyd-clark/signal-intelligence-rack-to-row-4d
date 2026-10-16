@@ -29,6 +29,7 @@ import {
 import { useStore } from "../app/store";
 import { colors, type ComponentRecord } from "../data/model";
 import type { Asset, Binding } from "../import/adapter";
+import { ImportedHardware } from "../import/ImportedHardware";
 import { perf } from "./performance";
 import { PackageInspection } from "./hardware/HardwareRendered";
 import { hardwareAudit } from "./hardware/sceneRegistry";
@@ -424,35 +425,12 @@ function FabricView({ records }: { records: ComponentRecord[] }) {
 }
 function Imported({ asset, binding }: { asset: Asset; binding: Binding }) {
   const s = useStore();
-  const object = useMemo(() => {
-    const o = asset.object.clone(true);
-    o.traverse((x) => {
-      if (x instanceof Mesh) {
-        const materials = (
-          Array.isArray(x.material) ? x.material : [x.material]
-        ).map((m) => {
-          const clone = m.clone();
-          clone.transparent = binding.xray;
-          clone.opacity = binding.xray ? 0.4 : 1;
-          return clone;
-        });
-        x.material = materials.length === 1 ? materials[0] : materials;
-      }
-    });
-    return o;
-  }, [asset, binding.xray]);
   return (
-    <group
-      scale={binding.scale}
-      rotation={[0, (binding.rotation * Math.PI) / 180, 0]}
-      onClick={(e) => {
-        e.stopPropagation();
-        const id = binding.meshes[e.object.name];
-        if (id) s.set({ selected: id });
-      }}
-    >
-      <primitive object={object} />
-    </group>
+    <ImportedHardware
+      asset={asset}
+      binding={binding}
+      onSelect={(id) => s.set({ selected: id })}
+    />
   );
 }
 class Boundary extends Component<{ children: ReactNode }, { failed: boolean }> {

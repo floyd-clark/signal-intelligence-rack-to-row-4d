@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import { audit, clickWorld } from "./hardware-helpers";
@@ -75,7 +76,7 @@ test("v2 actual hardware chain, layered memory picking, exact Back camera, layer
   await page.getByRole("button", { name: "Close ×", exact: true }).click();
   await expect(page.locator(".app")).toHaveClass(/reduced/);
   expect(errors).toEqual([]);
-  await fs.writeFile(
+  await writeEvidence(
     "evidence/v2/interaction-regression.json",
     JSON.stringify(
       {

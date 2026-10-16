@@ -4,9 +4,12 @@ Local-first interactive hardware, simulation and diagnostic education. The catal
 
 [Open the public Rack Catalogue 2.0](https://floyd-clark.github.io/signal-intelligence-rack-to-row-4d/?catalogue=1)
 
-![Architecture comparison](signal-intelligence-rack-to-row-4d/evidence/catalogue-v2/compare-CAT-04-CAT-05.png)
+Every catalogue entry opens the full 4D workbench: architecture explorer, actual hardware, component intelligence, L1–L12 gates and runtime/build timelines. Original reference profiles and offline functionality remain available.
+
+![4D hardware workspace](signal-intelligence-rack-to-row-4d/evidence/catalogue-v2/workbench/GB300-HBM-tray2-4D.png)
 
 - [Run / application README](signal-intelligence-rack-to-row-4d/README.md)
+- [4D convergence changes, screenshots and validation](signal-intelligence-rack-to-row-4d/CATALOGUE_4D_CONVERGENCE.md)
 - [Catalogue index](signal-intelligence-rack-to-row-4d/CATALOGUE_INDEX.md)
 - [Acceptance and remaining gaps](signal-intelligence-rack-to-row-4d/CATALOGUE_ACCEPTANCE.md)
 - [Sources and engineering provenance](signal-intelligence-rack-to-row-4d/CATALOGUE_PROVENANCE.md)

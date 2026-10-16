@@ -18,6 +18,8 @@ import {
   enterpriseTray,
 } from "./families";
 import { trayDetails, chipDetails, part, type ModelOptions } from "./common";
+import { inspectionOwner } from "./inspection";
+import { layerMatches, downstreamParts } from "../workbench";
 export const builders: Record<
   string,
   (a: Assembly, d: Architecture, o: ModelOptions) => void
@@ -40,9 +42,16 @@ export function buildModel(
   palette?: Parameters<Assembly["finish"]>[0],
 ): RenderAsset {
   let contextOnly = false;
+  const records = new Map(d.components.map((p) => [p.id, p]));
+  const selected = records.get(o.selected);
+  const dependencies = new Set(
+    selected ? [selected.id, ...downstreamParts(d, selected)] : [],
+  );
   class LevelAssembly extends Assembly {
     override add(...args: Parameters<Assembly["add"]>) {
-      const record = d.components.find((p) => p.id === args[0]);
+      const record = records.get(
+        inspectionOwner(d, args[0], o.selected, o.view),
+      );
       if (
         (o.view === "rack" || o.view === "row") &&
         record &&
@@ -52,6 +61,14 @@ export function buildModel(
         return;
       }
       if (contextOnly) args[0] = "";
+      if (
+        record &&
+        o.overlay !== "Hardware" &&
+        !(o.overlay === "Dependencies"
+          ? dependencies.has(record.id)
+          : layerMatches(d, record, o.overlay))
+      )
+        args[1] = "black";
       super.add(...args);
     }
   }
@@ -109,16 +126,17 @@ export function buildModel(
   else {
     const build = builders[d.shape];
     if (!build) throw Error("Model under construction: " + d.familyName);
-    build(a, d, o);
+    build(a, d, { ...o, overlay: "Hardware" });
     if (o.view === "row") {
       contextOnly = true;
       for (const x of [-d.width - 1, d.width + 1])
         a.withTransform([x, 0, 0], [1, 1, 1], () =>
-          build(a, d, { ...o, explode: 0 }),
+          build(a, d, { ...o, explode: 0, overlay: "Hardware" }),
         );
       contextOnly = false;
     }
   }
+  a.remapOwners((id) => inspectionOwner(d, id, o.selected, o.view));
   for (const [id, owner] of a.owners) {
     const record = d.components.find((p) => p.id === id);
     owner.kind = record

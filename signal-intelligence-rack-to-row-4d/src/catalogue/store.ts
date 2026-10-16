@@ -13,6 +13,24 @@ import {
   type GateResult,
 } from "./lifecycle";
 import type { Architecture } from "./types";
+export interface InvestigationRecord {
+  replayKey: string;
+  evidence: string[];
+  hypothesis: string;
+  containmentAt: number | null;
+  decision: string;
+  reveal: boolean;
+  gateAtRecovery: string | null;
+}
+export const emptyInvestigation = (replayKey = ""): InvestigationRecord => ({
+  replayKey,
+  evidence: [],
+  hypothesis: "",
+  containmentAt: null,
+  decision: "",
+  reveal: false,
+  gateAtRecovery: null,
+});
 interface State {
   screen: "gallery" | "studio" | "compare";
   a: FamilyId;
@@ -25,6 +43,7 @@ interface State {
   history: ViewMode[];
   camera: string;
   cameraRevision: number;
+  backRevision: number;
   orbit: { position: number[]; target: number[] } | null;
   explode: number;
   cutaway: boolean;
@@ -47,18 +66,22 @@ interface State {
   time: number;
   playing: boolean;
   replays: Record<string, Replay>;
-  evidence: string[];
-  hypothesis: string;
   reduced: boolean;
   fallback: boolean;
   tour: number | null;
+  experience: "Inspect" | "Diagnose" | "Assembly Timeline";
+  speed: number;
+  buildTime: boolean;
+  bookmarks: number[];
+  role: string;
+  challenge: boolean;
+  investigations: Record<string, InvestigationRecord>;
   set: (s: Partial<State>) => void;
   choose: (side: "a" | "b", id: FamilyId) => void;
   select: (family: FamilyId, id: string, concept: Concept) => void;
   drill: (view: ViewMode) => void;
   back: () => void;
   inject: (family: FamilyId, fault: string) => void;
-  recover: () => void;
 }
 const savedLifecycle = readSavedLifecycle();
 export const useCatalogue = create<State>((set, get) => ({
@@ -67,12 +90,13 @@ export const useCatalogue = create<State>((set, get) => ({
   b: "CAT-05",
   variantA: "",
   variantB: "",
-  concept: "compute",
-  selections: {},
+  concept: "service",
+  selections: { "CAT-04": "CAT-04/rack" },
   focus: "rack",
   history: [],
   camera: "oblique",
   cameraRevision: 0,
+  backRevision: 0,
   orbit: null,
   explode: 0,
   cutaway: false,
@@ -139,11 +163,16 @@ export const useCatalogue = create<State>((set, get) => ({
   time: 0,
   playing: false,
   replays: {},
-  evidence: [],
-  hypothesis: "",
   reduced: false,
   fallback: false,
   tour: null,
+  experience: "Inspect",
+  speed: 10,
+  buildTime: false,
+  bookmarks: [],
+  role: "NPI TPM",
+  challenge: false,
+  investigations: {},
   set,
   choose: (side, id) =>
     set({
@@ -154,6 +183,8 @@ export const useCatalogue = create<State>((set, get) => ({
       history: [],
       orbit: null,
       cameraRevision: get().cameraRevision + 1,
+      selections: { ...get().selections, [id]: `${id}/rack` },
+      concept: "service",
     }),
   select: (family, id, concept) =>
     set({ selections: { ...get().selections, [family]: id }, concept }),
@@ -166,6 +197,7 @@ export const useCatalogue = create<State>((set, get) => ({
     }),
   back: () =>
     set({
+      backRevision: get().backRevision + 1,
       focus: get().history.at(-1) || "rack",
       history: get().history.slice(0, -1),
       orbit: null,
@@ -173,21 +205,16 @@ export const useCatalogue = create<State>((set, get) => ({
     }),
   inject: (family, fault) =>
     set({
+      investigations: Object.fromEntries(
+        Object.entries(get().investigations).map(([key, record]) => [
+          key,
+          key.startsWith(`${family}/`) ? emptyInvestigation() : record,
+        ]),
+      ),
       replays: {
         ...get().replays,
         [family]: { ...blankReplay(family), fault, injectedAt: get().time },
       },
-      evidence: [],
-      hypothesis: "",
-    }),
-  recover: () =>
-    set({
-      replays: Object.fromEntries(
-        Object.entries(get().replays).map(([k, v]) => [
-          k,
-          { ...v, recoveredAt: get().time },
-        ]),
-      ),
     }),
 }));
 useCatalogue.subscribe((state, previous) => {

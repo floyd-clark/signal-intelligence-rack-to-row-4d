@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   architectures,
   architectureById,
@@ -22,6 +22,18 @@ import type { Architecture, Concept, FamilyId } from "../types";
 import { lifecycleKey } from "../lifecycle";
 import { AssemblyStages, LifecyclePanel } from "./Lifecycle";
 import "./catalogue.css";
+import type { ProfileId } from "../../data/model";
+import {
+  SignalBrand,
+  WorkbenchFrame,
+  ComponentIntelligence,
+} from "../../ui/Workbench";
+import { WorkbenchRail } from "./WorkbenchRail";
+import { WorkbenchTimeline } from "./WorkbenchTimeline";
+import { downstreamParts, intelligenceFor, systemLayers } from "../workbench";
+import { catalogueModels, ModelImport } from "./ModelImport";
+import { Investigation } from "./Investigation";
+import { inspectionView } from "../models/inspection";
 const concepts: Concept[] = [
   "compute",
   "memory",
@@ -30,7 +42,7 @@ const concepts: Concept[] = [
   "network",
   "service",
 ];
-const overlays = ["Hardware", "Power", "Cooling", "Network"];
+const overlays = [...systemLayers, "Cooling"];
 function save(name: string, data: unknown) {
   const url = URL.createObjectURL(
     new Blob(
@@ -44,11 +56,15 @@ function save(name: string, data: unknown) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 500);
 }
-export function Catalogue({ onClose }: { onClose: () => void }) {
+export function Catalogue({
+  onClose,
+}: {
+  onClose: (profile?: ProfileId) => void;
+}) {
   const s = useCatalogue();
   const [search, setSearch] = useState(""),
     [filter, setFilter] = useState("all"),
-    [tab, setTab] = useState("Explain"),
+    [tab, setTab] = useState("Intelligence"),
     [inspectorSide, setInspectorSide] = useState<"a" | "b">("a"),
     [diagnostic, setDiagnostic] = useState(false),
     [inspectorOpen, setInspectorOpen] = useState(true),
@@ -57,9 +73,17 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
     [workload, setWorkload] = useState("Model-parallel training"),
     [facility, setFacility] = useState("Liquid-ready"),
     [budget, setBudget] = useState(50),
-    [uptime, setUptime] = useState("Redundancy-first");
-  const a = resolveArchitecture(architectureById[s.a], s.variantA),
-    b = resolveArchitecture(architectureById[s.b], s.variantB),
+    [uptime, setUptime] = useState("Redundancy-first"),
+    [settingsOpen, setSettingsOpen] = useState(false),
+    [modelRevision, setModelRevision] = useState(0);
+  const a = useMemo(
+      () => resolveArchitecture(architectureById[s.a], s.variantA),
+      [s.a, s.variantA],
+    ),
+    b = useMemo(
+      () => resolveArchitecture(architectureById[s.b], s.variantB),
+      [s.b, s.variantB],
+    ),
     d = s.screen === "compare" && inspectorSide === "b" ? b : a;
   const level = s.assemblyLevels[lifecycleKey(d)] ?? 12;
   useEffect(() => {
@@ -67,11 +91,18 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
   }, [s.screen]);
   const replay = s.replays[d.architectureId] || blankReplay(d.architectureId),
     snap = catalogueSnapshot(d, replay, s.time);
+  const openIncident =
+    !!snap.fault && (replay.recoveredAt === null || snap.strength > 0.02);
   const current = d.components.find(
     (p) => p.id === s.selections[d.architectureId],
   );
   const selected =
     current?.concept === s.concept ? current : representativePart(d, s.concept);
+  const intelligence = useMemo(
+    () => intelligenceFor(d, selected),
+    [d, selected],
+  );
+  const downstream = useMemo(() => downstreamParts(d, selected), [d, selected]);
   useEffect(() => {
     const t = setInterval(() => setTick((x) => x + 1), 1000);
     return () => clearInterval(t);
@@ -81,10 +112,10 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
     const t = setInterval(
       () =>
         useCatalogue.setState((v) => ({
-          time: Math.min(600, v.time + 1),
-          playing: v.time < 599,
+          time: Math.min(600, v.time + v.speed),
+          playing: v.time + v.speed < 600,
         })),
-      250,
+      1000,
     );
     return () => clearInterval(t);
   }, [s.playing]);
@@ -99,6 +130,13 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
     );
     return () => clearInterval(t);
   }, [s.tour]);
+  useEffect(() => {
+    if (!s.buildTime) return;
+    const next = Math.min(12, Math.floor(s.time / 50) + 1);
+    for (const model of s.screen === "compare" ? [a, b] : [a])
+      if ((s.assemblyLevels[lifecycleKey(model)] ?? 12) !== next)
+        s.setAssemblyLevel(model, next);
+  }, [s.buildTime, s.time, a, b, s.screen]);
   const chapter = s.tour === null ? -1 : Math.floor(s.tour / 10);
   useEffect(() => {
     if (chapter < 0) return;
@@ -131,7 +169,9 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, []);
-  const physical = !!a.knownPhysicalDimensions && !!b.knownPhysicalDimensions;
+  const physical =
+    !!a.knownPhysicalDimensions &&
+    (s.screen !== "compare" || !!b.knownPhysicalDimensions);
   const visible = architectures.filter(
     (d) =>
       `${d.familyName} ${d.generation} ${d.fabric} ${d.cooling} ${d.power}`
@@ -141,7 +181,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
   );
   return (
     <div
-      className="cat-root"
+      className={`cat-root app cat-unified ${s.screen === "gallery" ? "cat-gallery-mode" : ""} ${inspectorOpen ? "" : "panels-collapsed"} experience-${s.experience.replaceAll(" ", "-")}`}
       data-testid="catalogue"
       data-family-a={s.a}
       data-family-b={s.b}
@@ -151,31 +191,66 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
       data-level-b={s.assemblyLevels[lifecycleKey(b)] ?? 12}
     >
       <header>
-        <div className="brand">
-          <span className="brandmark">
-            <img
-              src={`${import.meta.env.BASE_URL}brand/signal-intelligence-symbol.png`}
-              alt="Signal Intelligence symbol"
-              width="90"
-              height="90"
-            />
-          </span>
-          <div>
-            <span className="brand-name">SIGNAL INTELLIGENCE</span>
-            <small>RACK CATALOGUE · 2.0</small>
+        <SignalBrand />
+        {s.screen !== "gallery" && (
+          <div className="experience-controls">
+            <select
+              aria-label="Explorer experience"
+              value={s.experience}
+              onChange={(e) => {
+                const experience = e.target.value as typeof s.experience;
+                s.set({
+                  experience,
+                  buildTime: experience === "Assembly Timeline",
+                  playing: false,
+                  ...(experience === "Assembly Timeline" ? { time: 0 } : {}),
+                });
+                if (experience === "Diagnose") setTab("Investigation");
+                if (experience === "Assembly Timeline") setTab("L1–L12");
+              }}
+            >
+              <option>Inspect</option>
+              <option>Diagnose</option>
+              <option>Assembly Timeline</option>
+            </select>
+            <select
+              aria-label="Catalogue quality"
+              value={s.quality}
+              onChange={(e) =>
+                s.set({ quality: e.target.value as typeof s.quality })
+              }
+            >
+              {["Performance", "Balanced", "Detail"].map((v) => (
+                <option key={v}>{v}</option>
+              ))}
+            </select>
+            <button onClick={() => setInspectorOpen(!inspectorOpen)}>
+              {inspectorOpen ? "Collapse panels" : "Show panels"}
+            </button>
           </div>
-        </div>
+        )}
         <nav aria-label="Catalogue navigation">
           {(["gallery", "studio", "compare"] as const).map((v) => (
             <button
               key={v}
               aria-pressed={s.screen === v}
-              onClick={() => s.set({ screen: v })}
+              onClick={() =>
+                s.set({
+                  screen: v,
+                  ...(v === "compare"
+                    ? {
+                        orbit: null,
+                        history: [],
+                        cameraRevision: s.cameraRevision + 1,
+                      }
+                    : {}),
+                })
+              }
             >
               {v === "gallery"
                 ? "Catalogue"
                 : v === "studio"
-                  ? "Architecture studio"
+                  ? "4D workspace"
                   : "A/B comparison"}
             </button>
           ))}
@@ -187,13 +262,29 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
             onClose();
           }}
         >
-          Return to 4D lab
+          Reference profiles
         </button>
+        {s.screen !== "gallery" && (
+          <>
+            <button onClick={() => s.set({ tour: s.tour === null ? 0 : null })}>
+              {s.tour === null ? "▶ Family tour" : "■ Stop tour"}
+            </button>
+            <button
+              onClick={() => {
+                setInspectorOpen(true);
+                setSettingsOpen(true);
+              }}
+            >
+              Settings / Import Better Rack Model
+            </button>
+          </>
+        )}
       </header>
-      <div className="cat-notice">
-        Public architecture references · original source-informed 3D · synthetic
-        signals · concealed mechanics illustrative · ten base families reviewed
-        by user ≥90/100
+      <div className="cat-notice notice">
+        {s.screen === "gallery"
+          ? "Choose an architecture to enter its 4D hardware workspace."
+          : d.disclosureBanner}
+        <span>All telemetry is synthetic. No affiliation or endorsement.</span>
       </div>
       {s.screen === "gallery" ? (
         <main className="cat-gallery">
@@ -281,7 +372,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                       setInspectorSide("a");
                     }}
                   >
-                    Explore hardware →
+                    Open 4D workspace →
                   </button>
                   <button
                     aria-label={`L1–L12 for ${d.familyName}`}
@@ -313,180 +404,20 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
         </main>
       ) : (
         <>
-          <div className="cat-toolbar">
-            <label>
-              A{" "}
-              <select
-                aria-label="Architecture A"
-                value={s.a}
-                onChange={(e) => s.choose("a", e.target.value as FamilyId)}
-              >
-                {architectures.map((d) => (
-                  <option
-                    key={d.architectureId}
-                    value={d.architectureId}
-                    disabled={!builders[d.shape]}
-                  >
-                    {d.familyName}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {s.screen === "compare" && (
-              <label>
-                B{" "}
-                <select
-                  aria-label="Architecture B"
-                  value={s.b}
-                  onChange={(e) => s.choose("b", e.target.value as FamilyId)}
-                >
-                  {architectures.map((d) => (
-                    <option
-                      key={d.architectureId}
-                      value={d.architectureId}
-                      disabled={!builders[d.shape]}
-                    >
-                      {d.familyName}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
-            {(s.screen === "compare" ? ["a", "b"] : ["a"]).map((side) => {
-              const family = architectureById[s[side as "a" | "b"]];
-              return family.variants.some((v) => v.modelled) ? (
-                <label key={side}>
-                  Generation {side.toUpperCase()}{" "}
-                  <select
-                    aria-label={`Generation ${side.toUpperCase()}`}
-                    value={side === "a" ? s.variantA : s.variantB}
-                    onChange={(e) =>
-                      s.set({
-                        [side === "a" ? "variantA" : "variantB"]:
-                          e.target.value,
-                        focus: "rack",
-                        orbit: null,
-                        cameraRevision: s.cameraRevision + 1,
-                      })
-                    }
-                  >
-                    <option value="">{family.generation}</option>
-                    {family.variants.map((v) => (
-                      <option key={v.id} value={v.id} disabled={!v.modelled}>
-                        {v.name} · {v.status}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ) : null;
-            })}
-            <label>
-              View{" "}
-              <select
-                aria-label="Catalogue camera"
-                value={s.camera}
-                onChange={(e) =>
-                  s.set({
-                    camera: e.target.value,
-                    orbit: null,
-                    cameraRevision: s.cameraRevision + 1,
-                  })
-                }
-              >
-                <option value="oblique">Front ¾</option>
-                <option value="front">Front face</option>
-                <option value="rear">Rear service ¾</option>
-                <option value="top">Top</option>
-              </select>
-            </label>
-            <button onClick={() => s.back()}>← Back</button>
-            <button
-              aria-pressed={s.cutaway}
-              onClick={() => s.set({ cutaway: !s.cutaway })}
-            >
-              CAD cutaway
-            </button>
-            <label>
-              Explode{" "}
-              <input
-                aria-label="Catalogue explosion"
-                type="range"
-                min="0"
-                max="1"
-                step=".05"
-                value={s.explode}
-                onChange={(e) => s.set({ explode: +e.target.value })}
-              />
-            </label>
-            <select
-              aria-label="Catalogue quality"
-              value={s.quality}
-              onChange={(e) =>
-                s.set({ quality: e.target.value as typeof s.quality })
-              }
-            >
-              {["Performance", "Balanced", "Detail"].map((v) => (
-                <option key={v}>{v}</option>
-              ))}
-            </select>
-            <select
-              aria-label="Comparison scale"
-              value={s.scale}
-              onChange={(e) =>
-                s.set({ scale: e.target.value as typeof s.scale })
-              }
-            >
-              <option value="normalized">Normalized conceptual height</option>
-              <option disabled={!physical} value="physical">
-                Published enclosure scale
-              </option>
-            </select>
-            <button onClick={() => setInspectorOpen(!inspectorOpen)}>
-              {inspectorOpen
-                ? "Hide engineering panel"
-                : "Show engineering panel"}
-            </button>
-            <button
-              onClick={() =>
-                document.fullscreenElement
-                  ? document.exitFullscreen()
-                  : document.documentElement.requestFullscreen()
-              }
-            >
-              Full screen
-            </button>
-            <button
-              disabled={s.fallback}
-              onClick={async () => {
-                const canvas = document.createElement("canvas");
-                canvas.width = 3840;
-                canvas.height = 2160;
-                const ctx = canvas.getContext("2d")!;
-                const sides = s.screen === "compare" ? ["a", "b"] : ["a"];
-                for (let i = 0; i < sides.length; i++) {
-                  const url = captureCatalogue[sides[i]]?.(
-                    3840 / sides.length,
-                    2160,
-                  );
-                  if (!url) continue;
-                  const img = new Image();
-                  img.src = url;
-                  await img.decode();
-                  ctx.drawImage(img, (i * 3840) / sides.length, 0);
-                }
-                const link = document.createElement("a");
-                link.href = canvas.toDataURL("image/png");
-                link.download = "signal-intelligence-4k-hardware.png";
-                link.click();
-              }}
-            >
-              Export 4K hardware
-            </button>
-          </div>
-          <div
-            className={`cat-workspace ${s.screen === "compare" ? "cat-two" : ""} ${inspectorOpen ? "" : "cat-wide"}`}
+          <WorkbenchFrame
+            className={`cat-workspace ${s.screen === "compare" ? "cat-two" : ""}`}
           >
-            <section className="cat-visual-area">
+            <WorkbenchRail
+              d={d}
+              side={inspectorSide}
+              onTab={(tab) => {
+                setTab(tab);
+                setInspectorOpen(true);
+              }}
+              onAudit={() => setDiagnostic(!diagnostic)}
+              onReference={(id) => onClose(id)}
+            />
+            <main className="cat-visual-area">
               <div className="cat-flowbar">
                 {concepts.map((c) => (
                   <button
@@ -596,72 +527,153 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                           ))}
                       </div>
                     ) : (
-                      <StudioScene side={side as "a" | "b"} />
+                      <StudioScene
+                        side={side as "a" | "b"}
+                        imported={catalogueModels.get(
+                          lifecycleKey(side === "a" ? a : b),
+                        )}
+                      />
                     )}
                   </div>
                 ))}
               </div>
-              <div className="cat-timebar">
-                <button onClick={() => s.set({ playing: !s.playing })}>
-                  {s.playing ? "Pause catalogue" : "Play catalogue"}
+              <div className="cat-toolbar camera-bar">
+                <label>
+                  View{" "}
+                  <select
+                    aria-label="Catalogue camera"
+                    value={s.camera}
+                    onChange={(e) =>
+                      s.set({
+                        camera: e.target.value,
+                        orbit: null,
+                        cameraRevision: s.cameraRevision + 1,
+                      })
+                    }
+                  >
+                    <option value="oblique">Front ¾</option>
+                    <option value="front">Front face</option>
+                    <option value="rear">Rear service ¾</option>
+                    <option value="top">Top</option>
+                  </select>
+                </label>
+                <button onClick={() => s.back()}>← Back</button>
+                <button
+                  aria-pressed={s.cutaway}
+                  onClick={() => s.set({ cutaway: !s.cutaway })}
+                >
+                  CAD cutaway
                 </button>
                 <label>
-                  Synchronized time · {s.time}s
+                  Explode{" "}
                   <input
-                    aria-label="Catalogue time"
+                    aria-label="Catalogue explosion"
                     type="range"
                     min="0"
-                    max="600"
-                    value={s.time}
-                    onChange={(e) =>
-                      s.set({ time: +e.target.value, playing: false })
-                    }
+                    max="1"
+                    step=".05"
+                    value={s.explode}
+                    onChange={(e) => s.set({ explode: +e.target.value })}
                   />
                 </label>
-                <button onClick={() => s.set({ time: 0, playing: false })}>
-                  Rewind
+                <select
+                  aria-label="Comparison scale"
+                  value={s.scale}
+                  onChange={(e) =>
+                    s.set({ scale: e.target.value as typeof s.scale })
+                  }
+                >
+                  <option value="normalized">
+                    Normalized conceptual height
+                  </option>
+                  <option disabled={!physical} value="physical">
+                    Published enclosure scale
+                  </option>
+                </select>
+                <button
+                  onClick={() =>
+                    document.fullscreenElement
+                      ? document.exitFullscreen()
+                      : document.documentElement.requestFullscreen()
+                  }
+                >
+                  Full screen
                 </button>
-                <button onClick={() => s.recover()}>Simulate recovery</button>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={s.linkedOverlays}
-                    onChange={(e) =>
-                      s.set({ linkedOverlays: e.target.checked })
+                <button
+                  disabled={s.fallback}
+                  onClick={async () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = 3840;
+                    canvas.height = 2160;
+                    const ctx = canvas.getContext("2d")!;
+                    const sides = s.screen === "compare" ? ["a", "b"] : ["a"];
+                    for (let i = 0; i < sides.length; i++) {
+                      const url = captureCatalogue[sides[i]]?.(
+                        3840 / sides.length,
+                        2160,
+                      );
+                      if (!url) continue;
+                      const img = new Image();
+                      img.src = url;
+                      await img.decode();
+                      ctx.drawImage(img, (i * 3840) / sides.length, 0);
                     }
-                  />
-                  Linked overlays
-                </label>
+                    const link = document.createElement("a");
+                    link.href = canvas.toDataURL("image/png");
+                    link.download = "signal-intelligence-4k-hardware.png";
+                    link.click();
+                  }}
+                >
+                  Export 4K hardware
+                </button>
               </div>
-              <div className="cat-telemetry">
-                {(s.screen === "compare" ? [a, b] : [a]).map((d) => {
-                  const t = catalogueSnapshot(
-                    d,
-                    s.replays[d.architectureId] ||
-                      blankReplay(d.architectureId),
-                    s.time,
-                  );
-                  return (
-                    <div key={d.architectureId}>
-                      <strong>{d.familyName}</strong>
-                      <span>
-                        {t.dieC.toFixed(1)} °C die ·{" "}
-                        {t.flowLmin === null
-                          ? "Air-cooled"
-                          : t.flowLmin.toFixed(0) + " L/min"}{" "}
-                        · {t.goodputPct.toFixed(1)}% synthetic goodput ·{" "}
-                        {t.reservePct.toFixed(0)}% reserve
-                      </span>
-                    </div>
-                  );
-                })}
+              <div className="metrics cat-telemetry">
+                {[
+                  [
+                    "USEFUL CAPACITY",
+                    snap.goodputPct.toFixed(1),
+                    "%",
+                    "Synthetic workload goodput",
+                  ],
+                  [
+                    "DEVICE JUNCTION",
+                    snap.dieC.toFixed(1),
+                    "°C",
+                    "Illustrative thermal response",
+                  ],
+                  [
+                    "SECONDARY FLOW",
+                    snap.flowLmin === null ? "Air" : snap.flowLmin.toFixed(0),
+                    snap.flowLmin === null ? "" : "L/min",
+                    d.cooling === "optional liquid"
+                      ? "Air baseline; optional liquid study"
+                      : "Selected architecture cooling",
+                  ],
+                  [
+                    "THERMAL HEADROOM",
+                    (95 - snap.dieC).toFixed(1),
+                    "°C",
+                    "Illustrative 95°C limit",
+                  ],
+                ].map(([label, value, unit, note]) => (
+                  <div key={label}>
+                    <small>{label}</small>
+                    <strong>
+                      {value}
+                      <em>{unit}</em>
+                    </strong>
+                    <span>{note}</span>
+                  </div>
+                ))}
               </div>
-            </section>
-            <aside className="cat-inspector">
+              <WorkbenchTimeline a={a} b={b} />
+            </main>
+            <aside className="cat-inspector inspector">
               <div className="cat-tabs">
                 {[
-                  "Explain",
-                  "Investigate",
+                  "Intelligence",
+                  "Evidence",
+                  "Investigation",
                   "Compare",
                   "L1–L12",
                   "Learn",
@@ -670,7 +682,11 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                   <button
                     key={t}
                     className={tab === t ? "active" : ""}
-                    onClick={() => setTab(t)}
+                    onClick={() => {
+                      setTab(t);
+                      if (t === "Investigation")
+                        s.set({ experience: "Diagnose", buildTime: false });
+                    }}
                   >
                     {t}
                   </button>
@@ -691,49 +707,42 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                   )}
                 </select>
               </label>
-              <h2>{d.familyName}</h2>
+              <div className="eyebrow">COMPONENT INTELLIGENCE</div>
+              <small data-testid="architecture-name">{d.familyName}</small>
+              <h2>{selected.name}</h2>
+              <code data-testid="catalogue-selected">{selected.id}</code>
               <p className="cat-status">{d.releaseStatus}</p>
-              {tab === "Explain" && (
+              {tab === "Intelligence" && (
                 <>
                   <div className="cat-selected">
                     <span className="eyebrow">SELECTED HARDWARE</span>
                     <h3>{selected.name}</h3>
-                    <code data-testid="catalogue-selected">{selected.id}</code>
+
                     <p>{selected.function}</p>
-                    <button
-                      onClick={() =>
-                        s.drill(
-                          selected.concept === "network"
-                            ? "topology"
-                            : ["power", "cooling", "service"].includes(
-                                  selected.concept,
-                                )
-                              ? "component"
-                              : selected.id.includes("/chip/") ||
-                                  selected.concept === "memory"
-                                ? "chip"
-                                : "tray",
-                        )
-                      }
-                    >
+                    <button onClick={() => s.drill(inspectionView(selected))}>
                       Inspect selected assembly
                     </button>
                   </div>
-                  <h3>Why this design?</h3>
-                  <p>{d.why}</p>
-                  {d.tradeoffs.map((t) => (
-                    <p key={t}>• {t}</p>
-                  ))}
-                  <h3>Illustrative signatures</h3>
-                  {selected.symptoms.map((t) => (
-                    <p key={t}>{t}</p>
-                  ))}
-                  <h3>Discriminating evidence</h3>
-                  {selected.tests.map((t) => (
-                    <p key={t}>{t}</p>
-                  ))}
-                  <p>{selected.containment}</p>
-                  <small>Owner: {selected.owner}</small>
+                  <p className="role-brief">
+                    {s.role} · Which independent evidence controls the release
+                    decision for this assembly?
+                  </p>
+                  <ComponentIntelligence
+                    card={intelligence}
+                    downstream={`${selected.concept} service and explicitly owned assembly descendants; communication links are reviewed separately.`}
+                    downstreamCount={downstream.length}
+                    onInvestigate={() => {
+                      setTab("Investigation");
+                      s.set({ experience: "Diagnose" });
+                    }}
+                  />
+                  <details>
+                    <summary>Why this architecture?</summary>
+                    <p>{d.why}</p>
+                    {d.tradeoffs.map((t) => (
+                      <p key={t}>{t}</p>
+                    ))}
+                  </details>
                   <details>
                     <summary>Accessible component navigator</summary>
                     <input
@@ -768,144 +777,34 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                   </details>
                 </>
               )}
-              {tab === "Investigate" && (
+              {tab === "Evidence" && (
                 <>
-                  <h3>Family-specific synthetic lab</h3>
-                  <select
-                    aria-label="Catalogue fault"
-                    value={replay.fault || ""}
-                    onChange={(e) => {
-                      if (e.target.value)
-                        s.inject(d.architectureId, e.target.value);
-                    }}
-                  >
-                    <option value="">Choose a fault to inject</option>
-                    {catalogueFaults
-                      .filter((f) => f.family === d.architectureId)
-                      .map((f) => (
-                        <option key={f.id} value={f.id}>
-                          {f.name}
-                        </option>
-                      ))}
-                  </select>
-                  <button
-                    disabled={!replay.fault}
-                    onClick={() =>
-                      s.set({
-                        replays: {
-                          ...s.replays,
-                          [d.architectureId]: blankReplay(d.architectureId),
-                        },
-                        playing: false,
-                      })
-                    }
-                  >
-                    Clear family incident
+                  <h3>Discriminating tests</h3>
+                  {intelligence.evidenceToCollect.map((t) => (
+                    <p key={t}>{t}</p>
+                  ))}
+                  <h3>Validation</h3>
+                  {intelligence.validationTests.map((t) => (
+                    <p key={t}>{t}</p>
+                  ))}
+                  <button onClick={() => setTab("L1–L12")}>
+                    Open owned gate
                   </button>
-                  {snap.fault && (
-                    <>
-                      <p>{snap.fault.signature}</p>
-                      <p>
-                        Scope: <strong>{snap.scope}</strong> ·{" "}
-                        {snap.affected.length} affected visual records
-                      </p>
-                      <p>
-                        Flow {snap.flowLmin?.toFixed(1) || "N/A"} L/min ·
-                        pressure {snap.pressureKpa?.toFixed(1) || "N/A"} kPa ·
-                        return {snap.returnC?.toFixed(1) || "N/A"} °C · retries{" "}
-                        {snap.retries}
-                      </p>
-                      {snap.fault.tests.map((t) => (
-                        <label key={t}>
-                          <input
-                            type="checkbox"
-                            checked={s.evidence.includes(t)}
-                            onChange={() =>
-                              s.set({
-                                evidence: s.evidence.includes(t)
-                                  ? s.evidence.filter((x) => x !== t)
-                                  : [...s.evidence, t],
-                              })
-                            }
-                          />
-                          {t}
-                        </label>
-                      ))}
-                      <label>
-                        Root-cause hypothesis
-                        <select
-                          aria-label="Catalogue hypothesis"
-                          value={s.hypothesis}
-                          onChange={(e) =>
-                            s.set({ hypothesis: e.target.value })
-                          }
-                        >
-                          <option value="">Choose after evidence</option>
-                          {snap.fault.hypotheses.map((h) => (
-                            <option key={h}>{h}</option>
-                          ))}
-                        </select>
-                      </label>
-                      <h3>Containment / prevention</h3>
-                      <p>{snap.fault.containment}</p>
-                      <p>{snap.fault.prevention}</p>
-                    </>
-                  )}
-                  <button
-                    onClick={() =>
-                      save("signal-intelligence-catalogue-replay.json", replay)
-                    }
-                  >
-                    Export catalogue replay
-                  </button>
-                  <label>
-                    Import catalogue replay
-                    <input
-                      aria-label="Import catalogue replay"
-                      type="file"
-                      accept=".json"
-                      onChange={async (e) => {
-                        try {
-                          const file = e.target.files?.[0];
-                          if (!file) return;
-                          if (file.size > 100000)
-                            throw Error("Replay exceeds 100 kB");
-                          const r = importCatalogueReplay(await file.text());
-                          s.choose(inspectorSide, r.family);
-                          s.set({ replays: { ...s.replays, [r.family]: r } });
-                          setMessage("Replay loaded locally");
-                        } catch (e) {
-                          setMessage((e as Error).message);
-                        }
-                      }}
-                    />
-                  </label>
-                  <button
-                    onClick={() =>
-                      save("signal-intelligence-catalogue-evidence.json", {
-                        architecture: d.architectureId,
-                        replay,
-                        time: s.time,
-                        telemetry: snap,
-                        evidence: s.evidence,
-                        hypothesis: s.hypothesis,
-                        sourceRefs: d.sourceRefs,
-                        synthetic: true,
-                      })
-                    }
-                  >
-                    Export incident evidence
-                  </button>
+                  <h3>Dependency scope</h3>
                   <p>
-                    Both sides share time, not a forced root cause. An air-only
-                    design has no equivalent liquid-loop failure; select its
-                    appropriate service objective independently.
-                  </p>
-                  <p>
-                    All thresholds and event chronologies are illustrative. No
-                    live controls or vendor failure-prevalence claim.
+                    {downstream.length} explicitly connected assembly/service
+                    descendants. Fabric topology does not imply a physical fault
+                    fan-out.
                   </p>
                 </>
+              )}
+              {tab === "Investigation" && (
+                <Investigation
+                  d={d}
+                  side={inspectorSide}
+                  save={save}
+                  onMessage={setMessage}
+                />
               )}
               {tab === "Compare" && (
                 <>
@@ -1052,7 +951,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
                 <LifecyclePanel
                   key={lifecycleKey(d)}
                   d={d}
-                  activeFault={!!snap.fault}
+                  activeFault={openIncident}
                   onExport={(data) =>
                     save(
                       `${d.architectureId}-${d.shape}-L1-L12-evidence.json`,
@@ -1220,7 +1119,7 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
               <p className="cat-disclosure">{d.disclosureBanner}</p>
               {message && <p role="status">{message}</p>}
             </aside>
-          </div>
+          </WorkbenchFrame>
         </>
       )}
       <footer>
@@ -1231,10 +1130,65 @@ export function Catalogue({ onClose }: { onClose: () => void }) {
         <button onClick={() => setDiagnostic(!diagnostic)}>
           Catalogue render audit
         </button>
-        <span>
-          Base family visual review: user ≥90/100 · child variants unscored
-        </span>
+        <span>4D workbench · component intelligence · L1–L12 · offline</span>
       </footer>
+      {settingsOpen && (
+        <div className="modal-backdrop">
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Settings / Import Better Rack Model"
+          >
+            <button onClick={() => setSettingsOpen(false)}>Close ×</button>
+            <h2>4D workspace settings</h2>
+            <label>
+              Role
+              <select
+                aria-label="Workspace role"
+                value={s.role}
+                onChange={(e) => s.set({ role: e.target.value })}
+              >
+                {[
+                  "NPI TPM",
+                  "Hardware engineer",
+                  "Site ops / SRE",
+                  "Manufacturing-quality lead",
+                ].map((role) => (
+                  <option key={role}>{role}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={s.challenge}
+                onChange={(e) =>
+                  s.set({
+                    challenge: e.target.checked,
+                    investigations: Object.fromEntries(
+                      Object.entries(s.investigations).map(([key, record]) => [
+                        key,
+                        { ...record, reveal: false },
+                      ]),
+                    ),
+                  })
+                }
+              />{" "}
+              Challenge diagnosis
+            </label>
+            <ModelImport
+              key={lifecycleKey(d)}
+              d={d}
+              onChange={() => {
+                setModelRevision(modelRevision + 1);
+                setSettingsOpen(false);
+                s.set({ focus: "rack" });
+              }}
+            />
+          </div>
+        </div>
+      )}
       {diagnostic && (
         <pre data-testid="catalogue-audit" className="cat-audit">
           {JSON.stringify(catalogueAudit, null, 2)}

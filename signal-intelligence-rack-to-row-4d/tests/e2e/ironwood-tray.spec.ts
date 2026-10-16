@@ -1,3 +1,4 @@
+import { screenshot, writeEvidence } from "../../scripts/artifacts.mjs";
 import { test, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import { audit, clickWorld } from "./hardware-helpers";
@@ -44,7 +45,7 @@ test("Ironwood tray exposes four physical TPU packages with stable diagnostics",
     "Ironwood TPU: two chiplets",
   );
   expect(errors).toEqual([]);
-  await fs.writeFile(
+  await writeEvidence(
     "evidence/v2/ironwood-tray-regression.json",
     JSON.stringify(
       {

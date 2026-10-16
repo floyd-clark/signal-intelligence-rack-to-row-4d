@@ -19,11 +19,10 @@
   "fpsSamples": [
     2,
     4,
-    3,
     3
   ],
   "quality": "Balanced",
-  "tick": 3,
+  "tick": 2,
   "graphEdges": 3284,
   "hardware": {
     "scope": "Rack cabinet / service equipment — original illustrative dimensions",
@@ -859,12 +858,12 @@
     },
     "camera": [
       6,
-      4.699999999999999,
+      4.700000000000001,
       7
     ],
     "target": [
       0,
-      1.9999957460084152,
+      1.999990889225367,
       0
     ],
     "quality": "Balanced",

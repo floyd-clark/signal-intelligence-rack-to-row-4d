@@ -559,3 +559,184 @@
 .cat-wide .cat-inspector {
   display: none;
 }
+/* Shared 4D workbench layout: catalogue families use the original three-panel shell. */
+.cat-unified header {
+  height: auto;
+  min-height: 80px;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 8px 18px;
+}
+.cat-unified header .brand {
+  margin-right: auto;
+}
+.cat-unified .cat-return {
+  margin-left: 0;
+}
+.cat-unified .notice {
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+}
+.cat-unified .cat-workspace {
+  grid-template-columns: 250px minmax(0, 1fr) 340px;
+  height: calc(100vh - 153px);
+  min-height: 690px;
+  overflow: hidden;
+}
+.cat-unified .cat-visual-area {
+  min-height: 0;
+  overflow: hidden;
+}
+.cat-unified .cat-scenes {
+  min-height: 180px;
+  overflow: hidden;
+}
+.cat-unified .cat-pane {
+  min-height: 0;
+}
+.cat-unified .cat-canvas {
+  min-height: 0;
+}
+.cat-unified .cat-inspector {
+  min-height: 0;
+  overflow-y: auto;
+}
+.cat-unified .cat-workbench-rail {
+  min-height: 0;
+  overflow-y: auto;
+}
+.cat-rail-scope {
+  display: block;
+  font-size: 10px;
+  color: #93adc6;
+  line-height: 1.5;
+  margin: 10px 0 16px;
+}
+.cat-unified .cat-workbench-rail .tree {
+  max-height: none;
+}
+.cat-unified .cat-workbench-rail .tree button {
+  width: 100%;
+}
+.cat-unified .cat-toolbar {
+  padding: 7px 12px;
+  gap: 6px;
+}
+.cat-unified .cat-toolbar button,
+.cat-unified .cat-toolbar select {
+  font-size: 10px;
+}
+.cat-unified .cat-telemetry {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 0;
+}
+.cat-unified .cat-telemetry strong {
+  display: block;
+  font-size: 25px;
+  line-height: 1.25;
+}
+.cat-unified .cat-telemetry span {
+  font-size: 9px;
+}
+.cat-unified .cat-telemetry > div {
+  padding: 10px 12px;
+}
+.cat-unified .cat-workbench-timeline {
+  padding: 8px 12px;
+  max-height: 265px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.cat-unified .cat-workbench-timeline .chart {
+  height: 50px;
+}
+.cat-unified .cat-scene-label {
+  top: 14px;
+  left: 16px;
+}
+.cat-unified .cat-scene-label strong {
+  font-size: 21px;
+}
+.cat-unified .cat-stage-buttons button {
+  padding: 5px 0;
+}
+.cat-unified .cat-assembly {
+  padding: 7px 12px;
+}
+.cat-unified .cat-flowbar {
+  padding: 6px 12px;
+}
+.cat-unified .cat-inspector h2 {
+  margin: 10px 0;
+}
+.cat-unified .cat-inspector code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #86bdf1;
+  font-size: 10px;
+}
+.cat-unified.panels-collapsed .cat-workspace {
+  grid-template-columns: 1fr;
+}
+.cat-unified.panels-collapsed .cat-inspector,
+.cat-unified.panels-collapsed .cat-workbench-rail {
+  display: none;
+}
+.cat-unified .cat-two .cat-scene-label strong {
+  font-size: 17px;
+}
+.cat-unified .cat-two .cat-scene-label small {
+  font-size: 10px;
+}
+.cat-unified .cat-two .cat-assembly > small {
+  display: none;
+}
+@media (max-width: 1400px) {
+  .cat-unified .cat-workspace {
+    grid-template-columns: 220px minmax(0, 1fr) 300px;
+    height: calc(100vh - 187px);
+  }
+  .cat-unified header .brand {
+    flex: 1 1 340px;
+  }
+}
+@media (max-width: 1000px) {
+  .cat-unified .cat-workspace {
+    height: auto;
+    grid-template-columns: 200px minmax(0, 1fr);
+    overflow: visible;
+  }
+  .cat-unified .cat-inspector {
+    grid-column: 1/-1;
+    max-height: none;
+  }
+  .cat-unified .cat-scenes {
+    min-height: 480px;
+  }
+  .cat-unified .cat-workbench-rail {
+    max-height: 1000px;
+  }
+}
+@media (max-width: 700px) {
+  .cat-unified .cat-workspace {
+    display: flex;
+    flex-direction: column;
+  }
+  .cat-unified .cat-workbench-rail {
+    max-height: 340px;
+  }
+  .cat-unified .cat-scenes {
+    flex-direction: column;
+  }
+  .cat-unified .cat-canvas {
+    min-height: 400px;
+  }
+  .cat-unified .cat-telemetry strong {
+    font-size: 19px;
+  }
+  .cat-unified .notice {
+    flex-direction: column;
+  }
+}
